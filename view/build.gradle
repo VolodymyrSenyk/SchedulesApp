@@ -41,4 +41,7 @@ dependencies {
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Dependency for Dagger module
+    implementation project(':model')
 }
