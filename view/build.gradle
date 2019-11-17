@@ -42,6 +42,9 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
-    // Dependency for Dagger module
+    // Dependencies for Dagger module
     implementation project(':model')
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
 }

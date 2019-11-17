@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.base.BaseRecyclerViewAdapter;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUI;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
-public class ShowPairsListAdapter extends BaseRecyclerViewAdapter<PairUI> {
+public class ShowPairsListAdapter extends BaseRecyclerViewAdapter<PairUi> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -8,16 +8,16 @@ import java.util.Comparator;
 import java.util.List;
 
 public class BaseListMapper<FROM, TO> {
-    private BaseMapper<FROM, TO> mapper;
+    private BaseDtoUiMapper<FROM, TO> mapper;
 
-    public BaseListMapper(@NotNull BaseMapper<FROM, TO> mapper) {
+    public BaseListMapper(@NotNull BaseDtoUiMapper<FROM, TO> mapper) {
         this.mapper = mapper;
     }
 
     public List<TO> convert(@NotNull List<FROM> list) {
         List<TO> convertedList = new ArrayList<>(list.size());
         for (FROM item : list) {
-            convertedList.add(mapper.convertTo(item));
+            convertedList.add(mapper.convertToDto(item));
         }
         return convertedList;
     }
