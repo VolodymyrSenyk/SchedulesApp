@@ -4,6 +4,13 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
+    android {
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
     defaultConfig {
         applicationId "com.senyk.volodymyr.schedulesapp"
         minSdkVersion rootProject.ext.minSdkVersion
