@@ -3,25 +3,19 @@ package com.senyk.volodymyr.schedulesapp.model.models.dto;
 import java.util.List;
 
 public class WeekDto {
-    private int id;
-    private int number;
+    private int ordinalNumber;
     private List<DayDto> days;
 
-    public int getId() {
-        return id;
-    }
-
-    public int getNumber() {
-        return number;
+    public int getOrdinalNumber() {
+        return ordinalNumber;
     }
 
     public List<DayDto> getDays() {
         return days;
     }
 
-    public WeekDto(int id, int number, List<DayDto> days) {
-        this.id = id;
-        this.number = number;
+    public WeekDto(int ordinalNumber, List<DayDto> days) {
+        this.ordinalNumber = ordinalNumber;
         this.days = days;
     }
 }

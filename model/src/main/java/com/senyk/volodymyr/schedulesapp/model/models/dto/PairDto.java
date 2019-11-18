@@ -3,22 +3,15 @@ package com.senyk.volodymyr.schedulesapp.model.models.dto;
 import com.senyk.volodymyr.schedulesapp.model.exceptions.PrivateConstructorEntranceException;
 import com.senyk.volodymyr.schedulesapp.model.models.enums.PairType;
 
-import java.util.Date;
-
 public class PairDto {
-    private int id;
-    private Date time;
+    private long time;
     private String name;
     private String teacher;
     private PairType type;
     private String place;
     private String additionalInfo;
 
-    public int getId() {
-        return id;
-    }
-
-    public Date getTime() {
+    public long getTime() {
         return time;
     }
 
@@ -52,20 +45,13 @@ public class PairDto {
 
     public class Builder {
 
-        private Builder() {
-            throw new PrivateConstructorEntranceException();
-        }
+        private Builder() {}
 
         public PairDto build() {
             return PairDto.this;
         }
 
-        public Builder setId(int id) {
-            PairDto.this.id = id;
-            return this;
-        }
-
-        public Builder setTime(Date time) {
+        public Builder setTime(long time) {
             PairDto.this.time = time;
             return this;
         }

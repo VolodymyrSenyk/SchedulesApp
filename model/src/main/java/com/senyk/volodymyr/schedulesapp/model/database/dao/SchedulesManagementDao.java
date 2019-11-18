@@ -6,22 +6,20 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.senyk.volodymyr.schedulesapp.model.models.entities.ScheduleEntity;
+import com.senyk.volodymyr.schedulesapp.model.exceptions.SQLiteQueryExecutingException;
 import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.DayDataEntity;
 import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.ScheduleDataEntity;
 import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.WeekDataEntity;
+
+import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
 @Dao
-public abstract class SchedulesDao {
-    @Query("SELECT * FROM schedules WHERE schedules.schedule_name = :scheduleName")
-    public abstract Single<ScheduleDataEntity> getScheduleDataByName(String scheduleName);
-
-    @Transaction
-    @Query("SELECT * FROM schedules WHERE schedules.schedule_name = :scheduleName")
-    public abstract Single<ScheduleEntity> getScheduleByName(String scheduleName);
+public abstract class SchedulesManagementDao {
+    @Query("SELECT * FROM schedules")
+    public abstract Single<List<ScheduleDataEntity>> getSchedulesList();
 
     @Transaction
     public Completable createNewSchedule(ScheduleDataEntity newSchedule) {
@@ -41,8 +39,12 @@ public abstract class SchedulesDao {
         return Completable.complete();
     }
 
+    public Completable deleteSchedule(String scheduleName) {
+        return delete(scheduleName) != 1 ? Completable.error(new SQLiteQueryExecutingException()) : Completable.complete();
+    }
+
     @Query("DELETE FROM schedules WHERE schedules.schedule_name = :scheduleName")
-    public abstract int deleteSchedule(String scheduleName);
+    public abstract int delete(String scheduleName);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract long insert(ScheduleDataEntity newSchedule);

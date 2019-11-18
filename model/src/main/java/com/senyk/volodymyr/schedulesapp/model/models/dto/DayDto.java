@@ -3,25 +3,19 @@ package com.senyk.volodymyr.schedulesapp.model.models.dto;
 import java.util.List;
 
 public class DayDto {
-    private int id;
-    private int dayOrdinal;
+    private int ordinalNumber;
     private List<PairDto> pairs;
 
-    public int getId() {
-        return id;
-    }
-
-    public int getDayOrdinal() {
-        return dayOrdinal;
+    public int getOrdinalNumber() {
+        return ordinalNumber;
     }
 
     public List<PairDto> getPairs() {
         return pairs;
     }
 
-    public DayDto(int id, int dayOrdinal, List<PairDto> pairs) {
-        this.id = id;
-        this.dayOrdinal = dayOrdinal;
+    public DayDto(int ordinalNumber, List<PairDto> pairs) {
+        this.ordinalNumber = ordinalNumber;
         this.pairs = pairs;
     }
 }

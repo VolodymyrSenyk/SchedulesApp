@@ -1,7 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.model.models.enums;
 
 public enum PairType {
-    NOT_STATET,
+    NOT_STATED,
     LECTION,
     PRACTICE,
     LABORATORY,
