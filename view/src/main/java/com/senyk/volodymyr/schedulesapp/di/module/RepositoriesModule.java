@@ -1,5 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.di.module;
 
+import android.content.SharedPreferences;
+
 import com.senyk.volodymyr.schedulesapp.model.database.SchedulesAppDatabase;
 import com.senyk.volodymyr.schedulesapp.model.mappers.base.EntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.DayMapper;
@@ -21,6 +23,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module(includes = {
+        SharedPreferencesModule.class,
         DatabasesModule.class,
         EntityDtoListsMappersModule.class
 })
@@ -47,8 +50,8 @@ public class RepositoriesModule {
 
     @Singleton
     @Provides
-    public UserSettingsRepository getUserSettingsRepository() {
-        return new SharedPreferencesUserSettingsRepository();
+    public UserSettingsRepository getUserSettingsRepository(SharedPreferences sharedPreferences) {
+        return new SharedPreferencesUserSettingsRepository(sharedPreferences);
     }
 
 }
