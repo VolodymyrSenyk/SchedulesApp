@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/schedulesManagerFragment">
+
+    <fragment
+        android:id="@+id/schedulesManagerFragment"
+        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.schedulesmanagement.SchedulesManagerFragment"
+        android:label="SchedulesManagerFragment">
+        <action
+            android:id="@+id/goToSchedule"
+            app:destination="@id/workWeekScheduleFragment" />
+        <action
+            android:id="@+id/createNewSchedule"
+            app:destination="@id/newScheduleCreatorFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newScheduleCreatorFragment"
+        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.schedulesmanagement.NewScheduleCreatorFragment"
+        android:label="NewScheduleCreatorFragment">
+        <argument
+            android:name="isSingleSchedule"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/goToNewSchedule"
+            app:destination="@id/workWeekScheduleFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popUpTo="@+id/schedulesManagerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workWeekScheduleFragment"
+        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.schedule.workweek.WorkWeekScheduleFragment"
+        android:label="WorkWeekScheduleFragment">
+        <argument
+            android:name="currentScheduleName"
+            app:argType="string" />
+    </fragment>
+
+</navigation>
