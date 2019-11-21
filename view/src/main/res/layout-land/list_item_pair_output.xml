@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorNotStated"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/pair_time_output"
+        style="@style/PairDataOutputFieldStyle"
+        android:layout_weight="1"
+        android:text="08:30" />
+
+    <TextView
+        android:id="@+id/pair_name_output"
+        style="@style/PairDataOutputFieldStyle"
+        android:layout_weight="3"
+        android:text="OOP" />
+
+    <TextView
+        android:id="@+id/pair_teacher_output"
+        style="@style/PairDataOutputFieldStyle"
+        android:layout_weight="3"
+        android:text="Ivanov" />
+
+    <TextView
+        android:id="@+id/pair_type_output"
+        style="@style/PairDataOutputFieldStyle"
+        android:layout_weight="2"
+        android:text="Not Stated" />
+
+    <TextView
+        android:id="@+id/pair_place_output"
+        style="@style/PairDataOutputFieldStyle"
+        android:layout_weight="1"
+        android:text="Y2 719" />
+
+</LinearLayout>

@@ -1,3 +1,46 @@
 <resources>
+    <!-- Screen titles -->
     <string name="app_name">SchedulesApp</string>
+    <string name="schedules_manager_screen_title">All Schedules</string>
+    <string name="new_schedule_creator_screen_title">New Schedule</string>
+    <string name="main_screen_title">Schedule</string>
+
+    <!-- Schedule data output -->
+    <string name="schedule_name_output"><b>Name:</b></string>
+    <string name="schedule_date_of_creation_output"><b>Created at:</b> %1$s</string>
+    <string name="schedule_is_saturday_working_output"><b>Saturday is working day</b></string>
+    <string name="schedule_is_num_denom_system_output"><b>Numerator/Denominator schedule</b></string>
+
+    <!-- Schedule data input -->
+    <string name="schedule_name_input">Schedule name:</string>
+    <string name="schedule_name_input_hint">Name of the new schedule</string>
+    <string name="schedule_is_saturday_working_input">Saturday is working day</string>
+    <string name="schedule_is_num_denom_system_input">Numerator/Denominator schedule</string>
+
+    <!-- Pair data input -->
+    <string name="pair_time_input_hint">Time</string>
+    <string name="pair_name_input_hint">Name</string>
+    <string name="pair_teacher_input_hint">Teacher</string>
+    <string-array name="pairs_types">
+        <item>Not stated</item>
+        <item>Lecture</item>
+        <item>Practice</item>
+        <item>Laboratory</item>
+        <item>Sport</item>
+    </string-array>
+    <string name="pair_place_input_hint">Place</string>
+    <string name="pair_additional_info_input_hint">Additional information</string>
+
+    <!-- Buttons -->
+    <string name="create_button">Create</string>
+    <string name="add_pair_button">Add one more pair</string>
+
+    <!-- Days of the week -->
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text sizes -->
+    <dimen name="title_text">24sp</dimen>
+    <dimen name="simple_text">18sp</dimen>
+
+    <!-- Icons sizes -->
+    <dimen name="icon_size">24dp</dimen>
+
+    <!-- Margins -->
+    <dimen name="margin_big">32dp</dimen>
+    <dimen name="margin_medium">24dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+
+    <!-- Paddings -->
+    <dimen name="padding_main">8dp</dimen>
+
+    <!-- Floating action button -->
+    <dimen name="fab_margins">32dp</dimen>
+
+    <!-- Pair data output -->
+    <dimen name="borders_width">1dp</dimen>
+
+</resources>

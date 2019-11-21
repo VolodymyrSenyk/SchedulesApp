@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!-- Main application style -->
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryInversed">#FFFFFF</color>
+    <color name="colorBackground">#808080</color>
+
+    <!-- Additional colors -->
+    <color name="colorTrue">#006400</color>
+    <color name="colorFalse">#8B0000</color>
+
+    <!-- Schedules list -->
+    <color name="colorCurrentSelectedSchedule">#FFD700</color>
+    <color name="colorCurrentDeselectedSchedule">#F0E68C</color>
+    <color name="colorSelectedSchedule">#00FFFF</color>
+    <color name="colorDeselectedSchedule">#C0C0C0</color>
+
+    <!-- Pairs types -->
+    <color name="colorLecture">#FFD700</color>
+    <color name="colorPractice">#9370DB</color>
+    <color name="colorLaboratory">#000000</color>
+    <color name="colorSport">#2E8B57</color>
+    <color name="colorNotStated">#C0C0C0</color>
+
 </resources>
