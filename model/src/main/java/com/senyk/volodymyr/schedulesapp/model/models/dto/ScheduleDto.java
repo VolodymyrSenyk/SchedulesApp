@@ -10,7 +10,7 @@ public class ScheduleDto {
         return name;
     }
 
-    public long getDataOfCreation() {
+    public long getDateOfCreation() {
         return createdAt;
     }
 

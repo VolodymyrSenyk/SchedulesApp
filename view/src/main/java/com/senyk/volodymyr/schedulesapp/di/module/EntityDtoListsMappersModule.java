@@ -1,6 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.di.module;
 
-import com.senyk.volodymyr.schedulesapp.model.mappers.base.EntityDtoListMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.EntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.PairMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.ScheduleMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.WeekMapper;

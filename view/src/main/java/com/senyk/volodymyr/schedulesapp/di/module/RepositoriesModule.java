@@ -3,8 +3,8 @@ package com.senyk.volodymyr.schedulesapp.di.module;
 import android.content.SharedPreferences;
 
 import com.senyk.volodymyr.schedulesapp.model.database.SchedulesAppDatabase;
-import com.senyk.volodymyr.schedulesapp.model.mappers.base.EntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.DayMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.EntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.ScheduleMapper;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
@@ -25,6 +25,7 @@ import dagger.Provides;
 @Module(includes = {
         SharedPreferencesModule.class,
         DatabasesModule.class,
+        EntityDtoListsMappersModule.class,
         EntityDtoListsMappersModule.class
 })
 public class RepositoriesModule {

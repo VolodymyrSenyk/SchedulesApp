@@ -10,7 +10,7 @@ public class PairMapper extends BaseEntityDtoMapper<PairDataEntity, PairDto> {
     public PairDto convertToDto(PairDataEntity entity) {
         PairType pairType;
         switch (entity.type) {
-            case 1: pairType = PairType.LECTION; break;
+            case 1: pairType = PairType.LECTURE; break;
             case 2: pairType = PairType.PRACTICE; break;
             case 3: pairType = PairType.LABORATORY; break;
             case 4: pairType = PairType.SPORT; break;
@@ -28,7 +28,7 @@ public class PairMapper extends BaseEntityDtoMapper<PairDataEntity, PairDto> {
         entity.time = dto.getTime();
         entity.teacher = dto.getTeacher();
         switch (dto.getType()) {
-            case LECTION: entity.type = 1; break;
+            case LECTURE: entity.type = 1; break;
             case PRACTICE: entity.type = 2; break;
             case LABORATORY: entity.type = 3; break;
             case SPORT: entity.type = 4; break;

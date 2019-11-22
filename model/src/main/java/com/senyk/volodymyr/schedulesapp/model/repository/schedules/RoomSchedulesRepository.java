@@ -3,7 +3,7 @@ package com.senyk.volodymyr.schedulesapp.model.repository.schedules;
 import com.senyk.volodymyr.schedulesapp.model.database.SchedulesAppDatabase;
 import com.senyk.volodymyr.schedulesapp.model.database.dao.PairsManagementDao;
 import com.senyk.volodymyr.schedulesapp.model.database.dao.SchedulesManagementDao;
-import com.senyk.volodymyr.schedulesapp.model.mappers.base.EntityDtoListMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.EntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.DayMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.ScheduleMapper;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.DayDto;

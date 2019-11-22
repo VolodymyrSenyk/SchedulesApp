@@ -14,7 +14,7 @@ public class ResourcesProviderModule {
     @Singleton
     @Provides
     public ResourcesProvider getResourcesProvider(Context context) {
-        return new ResourcesProvider(context.getResources());
+        return new ResourcesProvider(context);
     }
 
 }
