@@ -2,6 +2,9 @@ package com.senyk.volodymyr.schedulesapp.di.module;
 
 import androidx.lifecycle.ViewModel;
 
+import com.senyk.volodymyr.schedulesapp.di.module.helpers.ErrorsHandlerModule;
+import com.senyk.volodymyr.schedulesapp.di.module.helpers.ResourcesProviderModule;
+import com.senyk.volodymyr.schedulesapp.di.module.repository.RepositoriesModule;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;

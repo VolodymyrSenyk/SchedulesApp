@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.di.module;
+package com.senyk.volodymyr.schedulesapp.di.module.helpers;
 
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;

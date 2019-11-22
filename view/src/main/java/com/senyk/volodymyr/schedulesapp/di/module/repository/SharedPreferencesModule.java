@@ -1,8 +1,9 @@
-package com.senyk.volodymyr.schedulesapp.di.module;
+package com.senyk.volodymyr.schedulesapp.di.module.repository;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.senyk.volodymyr.schedulesapp.di.module.context.ContextModule;
 import com.senyk.volodymyr.schedulesapp.model.repository.usersettings.SchedulesAppSharedPreferencesContract;
 
 import javax.inject.Singleton;

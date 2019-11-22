@@ -125,4 +125,38 @@ public class ResourcesProvider {
         }
     }
 
+    public String getPairTypeByIndex(int typeIndex) {
+        return context.getResources().getStringArray(R.array.pairs_types)[typeIndex];
+    }
+
+    public int getPairsHolderColorByIndex(int typeIndex) {
+        switch (typeIndex) {
+            case 1:
+                return ContextCompat.getColor(context, R.color.colorLecture);
+            case 2:
+                return ContextCompat.getColor(context, R.color.colorPractice);
+            case 3:
+                return ContextCompat.getColor(context, R.color.colorLaboratory);
+            case 4:
+                return ContextCompat.getColor(context, R.color.colorSport);
+            default:
+                return ContextCompat.getColor(context, R.color.colorNotStated);
+        }
+    }
+
+    public int getPairTypeIndex(String type) {
+        String[] allTypes = context.getResources().getStringArray(R.array.pairs_types);
+        if (type.equals(allTypes[1])) {
+            return 1;
+        } else if (type.equals(allTypes[2])) {
+            return 2;
+        } else if (type.equals(allTypes[3])) {
+            return 3;
+        } else if (type.equals(allTypes[4])) {
+            return 4;
+        } else {
+            return 0;
+        }
+    }
+
 }

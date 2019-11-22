@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.di.module;
+package com.senyk.volodymyr.schedulesapp.di.module.context;
 
 import android.content.Context;
 

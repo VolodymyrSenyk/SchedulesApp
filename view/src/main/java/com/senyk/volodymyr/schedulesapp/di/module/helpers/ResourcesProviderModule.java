@@ -1,7 +1,8 @@
-package com.senyk.volodymyr.schedulesapp.di.module;
+package com.senyk.volodymyr.schedulesapp.di.module.helpers;
 
 import android.content.Context;
 
+import com.senyk.volodymyr.schedulesapp.di.module.context.ContextModule;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
 
 import javax.inject.Singleton;

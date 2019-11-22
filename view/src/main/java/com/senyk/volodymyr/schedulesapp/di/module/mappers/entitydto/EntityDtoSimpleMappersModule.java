@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.di.module;
+package com.senyk.volodymyr.schedulesapp.di.module.mappers.entitydto;
 
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.DayMapper;
 import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.PairMapper;

@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.senyk.volodymyr.schedulesapp.di.component.AppComponent;
 import com.senyk.volodymyr.schedulesapp.di.component.DaggerAppComponent;
-import com.senyk.volodymyr.schedulesapp.di.module.ContextModule;
+import com.senyk.volodymyr.schedulesapp.di.module.context.ContextModule;
 
 public class SchedulesApplication extends Application {
     private AppComponent appComponent;
