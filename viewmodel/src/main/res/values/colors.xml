@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Schedules list -->
+    <color name="colorCurrentSelectedSchedule">#FFD700</color>
+    <color name="colorCurrentDeselectedSchedule">#F0E68C</color>
+    <color name="colorSelectedSchedule">#00FFFF</color>
+    <color name="colorDeselectedSchedule">#C0C0C0</color>
+
+    <!-- Pairs types -->
+    <color name="colorLecture">#FFD700</color>
+    <color name="colorPractice">#9370DB</color>
+    <color name="colorLaboratory">#000000</color>
+    <color name="colorSport">#2E8B57</color>
+    <color name="colorNotStated">#C0C0C0</color>
+
+</resources>

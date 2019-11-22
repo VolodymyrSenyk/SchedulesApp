@@ -1,0 +1,26 @@
+<resources>
+    <!-- Schedule data output -->
+    <string name="schedule_date_of_creation_output"><b>Created at:</b> %1$d.%2$d.%3$d %4$d:%5$d</string>
+
+    <!-- Pair data output -->
+    <string name="pair_time_output">%1$d:%2$d</string>
+    <string-array name="pairs_types">
+        <item>Not stated</item>
+        <item>Lecture</item>
+        <item>Practice</item>
+        <item>Laboratory</item>
+        <item>Sport</item>
+    </string-array>
+
+    <!-- Errors output -->
+    <string name="error_message"><b>Error:</b> %1$s!</string>
+
+    <!-- Days of the week -->
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+
+</resources>
