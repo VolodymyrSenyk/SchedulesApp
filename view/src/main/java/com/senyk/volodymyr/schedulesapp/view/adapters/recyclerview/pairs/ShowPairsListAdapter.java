@@ -1,22 +1,19 @@
 package com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.pairs;
 
-import android.view.ViewGroup;
+import android.app.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.PairDataOutputAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.base.BaseRecyclerViewAdapter;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.PairOutput;
 
-public class ShowPairsListAdapter extends BaseRecyclerViewAdapter<PairUi> {
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+import java.util.List;
+
+public class ShowPairsListAdapter extends BaseRecyclerViewAdapter<PairOutput> {
+
+    public ShowPairsListAdapter(Activity activity, List<PairOutput> items) {
+        delegatesManager
+                .addDelegate(new PairDataOutputAdapterDelegate(activity));
+        setItems(items);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-    }
 }

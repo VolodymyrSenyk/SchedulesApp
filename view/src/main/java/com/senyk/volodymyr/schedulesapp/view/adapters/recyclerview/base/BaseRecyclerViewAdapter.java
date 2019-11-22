@@ -1,10 +1,10 @@
 package com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.base;
 
-import androidx.recyclerview.widget.RecyclerView;
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter;
 
 import java.util.List;
 
-public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter {
+public abstract class BaseRecyclerViewAdapter<T> extends ListDelegationAdapter<List<T>> {
     private List<T> itemsList;
 
     public void setItemsList(List<T> itemsList) {

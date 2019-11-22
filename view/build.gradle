@@ -42,6 +42,9 @@ dependencies {
     // ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
 
+    // Adapter delegates
+    implementation "com.hannesdorfmann:adapterdelegates4:$adapter_delegates_version"
+
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
