@@ -5,6 +5,11 @@
     <string name="new_schedule_creator_screen_title">New Schedule</string>
     <string name="main_screen_title">Schedule</string>
 
+    <!-- Main menu items -->
+    <string name="action_schedules_manager">Manager</string>
+    <string name="action_one_day_schedule">Daily</string>
+    <string name="action_whole_schedule">Whole</string>
+
     <!-- Schedule data output -->
     <string name="schedule_name_output"><b>Name:</b></string>
     <string name="schedule_is_saturday_working_output"><b>Saturday is working day</b></string>

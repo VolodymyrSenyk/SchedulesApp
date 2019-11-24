@@ -3,6 +3,17 @@
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
+
+    <style name="BottomNavigationItemInactive" parent="Widget.Design.BottomNavigationView">
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:textSize">@dimen/nav_item_inactive</item>
+    </style>
+
+    <style name="BottomNavigationItemActive" parent="Widget.Design.BottomNavigationView">
+        <item name="android:textColor">@color/colorPrimaryInversed</item>
+        <item name="android:textSize">@dimen/nav_item_active</item>
     </style>
 
     <style name="StandartToolbarStyle">
@@ -33,6 +44,10 @@
         <item name="android:layout_margin">@dimen/fab_margins</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+    </style>
+
+    <style name="ScreenTitleText" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">@dimen/title_text</item>
     </style>
 
     <style name="TitleText" parent="TextAppearance.AppCompat.Title">

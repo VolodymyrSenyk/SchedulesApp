@@ -36,8 +36,8 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-ui:$navigation_version"
 
     // ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
@@ -46,7 +46,7 @@ dependencies {
     implementation "com.hannesdorfmann:adapterdelegates4:$adapter_delegates_version"
 
     // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
     // Dagger
