@@ -4,13 +4,13 @@ import android.app.Activity;
 
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.PairDataOutputAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.base.BaseRecyclerViewAdapter;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.PairOutput;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 
 import java.util.List;
 
-public class ShowPairsListAdapter extends BaseRecyclerViewAdapter<PairOutput> {
+public class ShowPairsListAdapter extends BaseRecyclerViewAdapter<PrintableOnTheList> {
 
-    public ShowPairsListAdapter(Activity activity, List<PairOutput> items) {
+    public ShowPairsListAdapter(Activity activity, List<PrintableOnTheList> items) {
         delegatesManager
                 .addDelegate(new PairDataOutputAdapterDelegate(activity));
         setItems(items);

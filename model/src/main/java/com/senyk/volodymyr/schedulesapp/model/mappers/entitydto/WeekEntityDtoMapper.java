@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers;
+package com.senyk.volodymyr.schedulesapp.model.mappers.entitydto;
 
 import com.senyk.volodymyr.schedulesapp.model.mappers.base.BaseEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.WeekDto;
@@ -6,7 +6,7 @@ import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.WeekDat
 
 import java.util.Collections;
 
-public class WeekMapper extends BaseEntityDtoMapper<WeekDataEntity, WeekDto> {
+public class WeekEntityDtoMapper extends BaseEntityDtoMapper<WeekDataEntity, WeekDto> {
     @Override
     public WeekDto convertToDto(WeekDataEntity entity) {
         return new WeekDto(

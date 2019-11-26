@@ -1,9 +1,9 @@
 package com.senyk.volodymyr.schedulesapp.di.module.mappers.entitydto;
 
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.DayMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.PairMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.ScheduleMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.WeekMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.DayEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.PairEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.ScheduleEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.WeekEntityDtoMapper;
 
 import javax.inject.Singleton;
 
@@ -14,25 +14,25 @@ import dagger.Provides;
 public class EntityDtoSimpleMappersModule {
     @Singleton
     @Provides
-    public ScheduleMapper getScheduleMapper() {
-        return new ScheduleMapper();
+    public ScheduleEntityDtoMapper getScheduleMapper() {
+        return new ScheduleEntityDtoMapper();
     }
 
     @Singleton
     @Provides
-    public WeekMapper getWeekMapper() {
-        return new WeekMapper();
+    public WeekEntityDtoMapper getWeekMapper() {
+        return new WeekEntityDtoMapper();
     }
 
     @Singleton
     @Provides
-    public DayMapper getDayMapper() {
-        return new DayMapper();
+    public DayEntityDtoMapper getDayMapper() {
+        return new DayEntityDtoMapper();
     }
 
     @Singleton
     @Provides
-    public PairMapper getPairMapper() {
-        return new PairMapper();
+    public PairEntityDtoMapper getPairMapper() {
+        return new PairEntityDtoMapper();
     }
 }

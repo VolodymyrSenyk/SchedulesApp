@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.ScheduleOutput;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.models.schedules.output.ScheduleOutputItem;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
 import java.util.List;
 
-public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<ScheduleOutput>> {
+public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
     private LayoutInflater inflater;
 
     public ScheduleDataOutputAdapterDelegate(Activity activity) {
@@ -24,8 +24,8 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Sche
     }
 
     @Override
-    protected boolean isForViewType(@NonNull List<ScheduleOutput> items, int position) {
-        return items.get(position) instanceof ScheduleOutputItem;
+    protected boolean isForViewType(@NonNull List<PrintableOnTheList> items, int position) {
+        return items.get(position) instanceof ScheduleUi;
     }
 
     @NonNull
@@ -40,11 +40,11 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Sche
 
     @Override
     protected void onBindViewHolder(
-            @NonNull List<ScheduleOutput> items,
+            @NonNull List<PrintableOnTheList> items,
             int position,
             @NonNull RecyclerView.ViewHolder holder,
             @NonNull List<Object> payloads) {
-        ScheduleOutputItem item = (ScheduleOutputItem) items.get(position);
+        ScheduleUi item = (ScheduleUi) items.get(position);
         ScheduleDataOutputViewHolder viewHolder = (ScheduleDataOutputViewHolder) holder;
 
         viewHolder.scheduleName.setText(item.getName());

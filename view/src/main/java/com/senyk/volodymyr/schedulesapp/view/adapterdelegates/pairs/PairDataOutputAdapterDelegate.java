@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.PairOutput;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.models.pairs.output.PairOutputItem;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
 import java.util.List;
 
-public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<PairOutput>> {
+public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
     private LayoutInflater inflater;
 
     public PairDataOutputAdapterDelegate(Activity activity) {
@@ -24,8 +24,8 @@ public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<PairOutp
     }
 
     @Override
-    protected boolean isForViewType(@NonNull List<PairOutput> items, int position) {
-        return items.get(position) instanceof PairOutputItem;
+    protected boolean isForViewType(@NonNull List<PrintableOnTheList> items, int position) {
+        return items.get(position) instanceof PairUi;
     }
 
     @NonNull
@@ -40,11 +40,11 @@ public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<PairOutp
 
     @Override
     protected void onBindViewHolder(
-            @NonNull List<PairOutput> items,
+            @NonNull List<PrintableOnTheList> items,
             int position,
             @NonNull RecyclerView.ViewHolder holder,
             @NonNull List<Object> payloads) {
-        PairOutputItem item = (PairOutputItem) items.get(position);
+        PairUi item = (PairUi) items.get(position);
         PairDataOutputViewHolder viewHolder = (PairDataOutputViewHolder) holder;
 
         viewHolder.itemView.setBackgroundColor(item.getHolderColor());

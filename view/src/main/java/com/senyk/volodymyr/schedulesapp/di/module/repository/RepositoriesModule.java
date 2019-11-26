@@ -4,9 +4,9 @@ import android.content.SharedPreferences;
 
 import com.senyk.volodymyr.schedulesapp.di.module.mappers.entitydto.EntityDtoListsMappersModule;
 import com.senyk.volodymyr.schedulesapp.model.database.SchedulesAppDatabase;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.DayMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.EntityDtoListMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.ScheduleMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.DayEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.ScheduleEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtolist.GenericEntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.WeekDto;
@@ -33,11 +33,11 @@ public class RepositoriesModule {
     @Provides
     public SchedulesRepository getSchedulesRepository(
             SchedulesAppDatabase database,
-            ScheduleMapper scheduleMapper,
-            DayMapper dayMapper,
-            EntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
-            EntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper,
-            EntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper
+            ScheduleEntityDtoMapper scheduleMapper,
+            DayEntityDtoMapper dayMapper,
+            GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
+            GenericEntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper,
+            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper
     ) {
         return new RoomSchedulesRepository(
                 database,

@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.ScheduleCreationField;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.models.schedules.creation.ScheduleIsSaturdayWorkingCheckField;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.datainputfields.ScheduleIsSaturdayWorkingCheckField;
 
 import java.util.List;
 
-public class ScheduleInputWeekLengthAdapterDelegate extends AdapterDelegate<List<ScheduleCreationField>> {
+public class ScheduleInputWeekLengthAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
     private LayoutInflater inflater;
 
     public ScheduleInputWeekLengthAdapterDelegate(Activity activity) {
@@ -24,7 +24,7 @@ public class ScheduleInputWeekLengthAdapterDelegate extends AdapterDelegate<List
     }
 
     @Override
-    protected boolean isForViewType(@NonNull List<ScheduleCreationField> items, int position) {
+    protected boolean isForViewType(@NonNull List<PrintableOnTheList> items, int position) {
         return items.get(position) instanceof ScheduleIsSaturdayWorkingCheckField;
     }
 
@@ -40,7 +40,7 @@ public class ScheduleInputWeekLengthAdapterDelegate extends AdapterDelegate<List
 
     @Override
     protected void onBindViewHolder(
-            @NonNull List<ScheduleCreationField> items,
+            @NonNull List<PrintableOnTheList> items,
             int position,
             @NonNull RecyclerView.ViewHolder holder,
             @NonNull List<Object> payloads) {

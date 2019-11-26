@@ -3,9 +3,9 @@ package com.senyk.volodymyr.schedulesapp.model.repository.schedules;
 import com.senyk.volodymyr.schedulesapp.model.database.SchedulesAppDatabase;
 import com.senyk.volodymyr.schedulesapp.model.database.dao.PairsManagementDao;
 import com.senyk.volodymyr.schedulesapp.model.database.dao.SchedulesManagementDao;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.EntityDtoListMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.DayMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.ScheduleMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.DayEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.ScheduleEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtolist.GenericEntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.DayDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
@@ -25,19 +25,19 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     private SchedulesManagementDao schedulesManagementDao;
     private PairsManagementDao pairsManagementDao;
 
-    private ScheduleMapper scheduleMapper;
-    private DayMapper dayMapper;
-    private EntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper;
-    private EntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper;
-    private EntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper;
+    private ScheduleEntityDtoMapper scheduleMapper;
+    private DayEntityDtoMapper dayMapper;
+    private GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper;
+    private GenericEntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper;
+    private GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper;
 
     public RoomSchedulesRepository(
             SchedulesAppDatabase database,
-            ScheduleMapper scheduleMapper,
-            DayMapper dayMapper,
-            EntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
-            EntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper,
-            EntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper
+            ScheduleEntityDtoMapper scheduleMapper,
+            DayEntityDtoMapper dayMapper,
+            GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
+            GenericEntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper,
+            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper
     ) {
         this.schedulesManagementDao = database.getSchedulesManagementDao();
         this.pairsManagementDao = database.getPairsManagementDao();
@@ -52,7 +52,8 @@ public class RoomSchedulesRepository implements SchedulesRepository {
 
     @Override
     public Completable createNewSchedule(ScheduleDto schedule) {
-        return schedulesManagementDao.createNewSchedule(scheduleMapper.convertToEntity(schedule));
+        return Completable.fromCallable(() ->
+                schedulesManagementDao.createNewSchedule(scheduleMapper.convertToEntity(schedule)));
     }
 
     @Override
@@ -63,7 +64,8 @@ public class RoomSchedulesRepository implements SchedulesRepository {
 
     @Override
     public Completable deleteSchedule(final String scheduleName) {
-        return schedulesManagementDao.deleteSchedule(scheduleName);
+        return Completable.fromCallable(() ->
+                schedulesManagementDao.deleteSchedule(scheduleName));
     }
 
     @Override
@@ -71,7 +73,8 @@ public class RoomSchedulesRepository implements SchedulesRepository {
         DayEntity newSchedule = new DayEntity();
         newSchedule.day = dayMapper.convertToEntity(day);
         newSchedule.pairs = oneDayScheduleMapper.convertToEntities(day.getPairs());
-        return pairsManagementDao.updateSchedule(scheduleName, weekNumber, day.getOrdinalNumber(), newSchedule);
+        return Completable.fromCallable(() ->
+                pairsManagementDao.updateSchedule(scheduleName, weekNumber, day.getOrdinalNumber(), newSchedule));
     }
 
     @Override

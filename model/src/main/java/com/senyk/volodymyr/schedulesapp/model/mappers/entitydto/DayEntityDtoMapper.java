@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers;
+package com.senyk.volodymyr.schedulesapp.model.mappers.entitydto;
 
 import com.senyk.volodymyr.schedulesapp.model.mappers.base.BaseEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.DayDto;
@@ -6,7 +6,7 @@ import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.DayData
 
 import java.util.Collections;
 
-public class DayMapper extends BaseEntityDtoMapper<DayDataEntity, DayDto> {
+public class DayEntityDtoMapper extends BaseEntityDtoMapper<DayDataEntity, DayDto> {
     @Override
     public DayDto convertToDto(DayDataEntity entity) {
         return new DayDto(

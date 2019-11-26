@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.PairCreation;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.models.pairs.creation.PairCreationItem;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
 import java.util.List;
 
-public class PairDataInputAdapterDelegate extends AdapterDelegate<List<PairCreation>> {
+public class PairDataInputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
     private LayoutInflater inflater;
 
     public PairDataInputAdapterDelegate(Activity activity) {
@@ -25,8 +25,8 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<PairCreat
     }
 
     @Override
-    protected boolean isForViewType(@NonNull List<PairCreation> items, int position) {
-        return items.get(position) instanceof PairCreationItem;
+    protected boolean isForViewType(@NonNull List<PrintableOnTheList> items, int position) {
+        return items.get(position) instanceof PairUi;
     }
 
     @NonNull
@@ -41,17 +41,17 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<PairCreat
 
     @Override
     protected void onBindViewHolder(
-            @NonNull List<PairCreation> items,
+            @NonNull List<PrintableOnTheList> items,
             int position,
             @NonNull RecyclerView.ViewHolder holder,
             @NonNull List<Object> payloads) {
-        PairCreationItem item = (PairCreationItem) items.get(position);
+        PairUi item = (PairUi) items.get(position);
         PairDataInputViewHolder viewHolder = (PairDataInputViewHolder) holder;
 
         viewHolder.pairTime.setText(item.getTime());
         viewHolder.pairName.setText(item.getName());
         viewHolder.pairTeacher.setText(item.getTeacher());
-        viewHolder.pairType.setSelection(item.getType());
+     //   viewHolder.pairType.setSelection(item.getType());
         viewHolder.pairPlace.setText(item.getPlace());
         viewHolder.pairAdditionalInfo.setText(item.getAdditionalInfo());
     }

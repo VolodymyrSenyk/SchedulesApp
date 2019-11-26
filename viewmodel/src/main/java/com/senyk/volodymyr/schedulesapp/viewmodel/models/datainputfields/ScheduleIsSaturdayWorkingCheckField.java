@@ -1,8 +1,8 @@
-package com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.models.schedules.creation;
+package com.senyk.volodymyr.schedulesapp.viewmodel.models.datainputfields;
 
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.ScheduleCreationField;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 
-public class ScheduleIsSaturdayWorkingCheckField implements ScheduleCreationField {
+public class ScheduleIsSaturdayWorkingCheckField implements PrintableOnTheList {
     private boolean isChecked;
 
     public boolean isChecked() {

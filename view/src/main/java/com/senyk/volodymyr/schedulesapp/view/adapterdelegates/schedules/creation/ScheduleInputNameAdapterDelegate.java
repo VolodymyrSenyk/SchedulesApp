@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.markers.ScheduleCreationField;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.listsitems.models.schedules.creation.ScheduleNameInputField;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
+import com.senyk.volodymyr.schedulesapp.viewmodel.models.datainputfields.ScheduleNameInputField;
 
 import java.util.List;
 
-public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<ScheduleCreationField>> {
+public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
     private LayoutInflater inflater;
 
     public ScheduleInputNameAdapterDelegate(Activity activity) {
@@ -23,7 +23,7 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Sched
     }
 
     @Override
-    protected boolean isForViewType(@NonNull List<ScheduleCreationField> items, int position) {
+    protected boolean isForViewType(@NonNull List<PrintableOnTheList> items, int position) {
         return items.get(position) instanceof ScheduleNameInputField;
     }
 
@@ -39,7 +39,7 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Sched
 
     @Override
     protected void onBindViewHolder(
-            @NonNull List<ScheduleCreationField> items,
+            @NonNull List<PrintableOnTheList> items,
             int position,
             @NonNull RecyclerView.ViewHolder holder,
             @NonNull List<Object> payloads) {}

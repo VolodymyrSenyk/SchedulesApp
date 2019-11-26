@@ -1,9 +1,9 @@
 package com.senyk.volodymyr.schedulesapp.di.module.mappers.entitydto;
 
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.EntityDtoListMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.PairMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.ScheduleMapper;
-import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtomappers.WeekMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.PairEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.ScheduleEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydto.WeekEntityDtoMapper;
+import com.senyk.volodymyr.schedulesapp.model.mappers.entitydtolist.GenericEntityDtoListMapper;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.WeekDto;
@@ -20,19 +20,19 @@ import dagger.Provides;
 public class EntityDtoListsMappersModule {
     @Singleton
     @Provides
-    public EntityDtoListMapper<ScheduleDataEntity, ScheduleDto> getAllSchedulesListMapper(ScheduleMapper scheduleMapper) {
-        return new EntityDtoListMapper<>(scheduleMapper);
+    public GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> getAllSchedulesListMapper(ScheduleEntityDtoMapper scheduleMapper) {
+        return new GenericEntityDtoListMapper<>(scheduleMapper);
     }
 
     @Singleton
     @Provides
-    public EntityDtoListMapper<WeekDataEntity, WeekDto> getAllScheduleMapper(WeekMapper weekMapper) {
-        return new EntityDtoListMapper<>(weekMapper);
+    public GenericEntityDtoListMapper<WeekDataEntity, WeekDto> getAllScheduleMapper(WeekEntityDtoMapper weekMapper) {
+        return new GenericEntityDtoListMapper<>(weekMapper);
     }
 
     @Singleton
     @Provides
-    public EntityDtoListMapper<PairDataEntity, PairDto> getOneDayScheduleMapper(PairMapper pairMapper) {
-        return new EntityDtoListMapper<>(pairMapper);
+    public GenericEntityDtoListMapper<PairDataEntity, PairDto> getOneDayScheduleMapper(PairEntityDtoMapper pairMapper) {
+        return new GenericEntityDtoListMapper<>(pairMapper);
     }
 }

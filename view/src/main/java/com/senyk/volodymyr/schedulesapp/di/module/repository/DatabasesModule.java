@@ -21,8 +21,6 @@ public class DatabasesModule {
                 context,
                 SchedulesAppDatabase.class,
                 SchedulesAppDatabase.SCHEDULES_APP_DATABASE_NAME
-        )
-                .build();
+        ).build();
     }
-
 }

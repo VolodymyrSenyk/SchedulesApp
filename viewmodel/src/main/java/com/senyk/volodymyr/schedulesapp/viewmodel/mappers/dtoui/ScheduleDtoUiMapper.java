@@ -1,14 +1,20 @@
-package com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouimappers;
+package com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui;
 
 import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.base.BaseDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
-public class ScheduleMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi> {
+public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi> {
+    private static final int NORMAL_WEEK_LENGTH = 5;
+    private static final int WEEK_LENGTH_WITH_SAT = 6;
+
+    private static final int NORMAL_NUM_OF_WEEK_TYPES = 1;
+    private static final int NUM_OF_WEEK_TYPES_NUM_DENOM = 2;
+
     private ResourcesProvider resourcesProvider;
 
-    public ScheduleMapper(ResourcesProvider resourcesProvider) {
+    public ScheduleDtoUiMapper(ResourcesProvider resourcesProvider) {
         this.resourcesProvider = resourcesProvider;
     }
 
@@ -17,10 +23,8 @@ public class ScheduleMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi> {
         ScheduleUi uiModel = new ScheduleUi(
                 dto.getName(),
                 resourcesProvider.getDateOfCreation(dto.getDateOfCreation()),
-                dto.getNumberOfDays() == 6,
-                dto.getNumberOfWeeks() == 2,
-                false,
-                false
+                dto.getNumberOfDays() == WEEK_LENGTH_WITH_SAT,
+                dto.getNumberOfWeeks() == NUM_OF_WEEK_TYPES_NUM_DENOM
         );
         uiModel.setScheduleHolderColor(resourcesProvider.getScheduleHolderColor(uiModel));
         return uiModel;
@@ -29,10 +33,9 @@ public class ScheduleMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi> {
     @Override
     public ScheduleDto convertToDto(ScheduleUi uiModel) {
         return new ScheduleDto(
-            uiModel.getName(),
-                resourcesProvider.getDateOfCreation(uiModel.getDateOfCreation()),
-                uiModel.isSaturdayWorking() ? 6 : 5,
-                uiModel.isNumDenomSystem() ? 2 : 1
+                uiModel.getName(),
+                uiModel.isSaturdayWorking() ? WEEK_LENGTH_WITH_SAT : NORMAL_WEEK_LENGTH,
+                uiModel.isNumDenomSystem() ? NUM_OF_WEEK_TYPES_NUM_DENOM : NORMAL_NUM_OF_WEEK_TYPES
         );
     }
 }

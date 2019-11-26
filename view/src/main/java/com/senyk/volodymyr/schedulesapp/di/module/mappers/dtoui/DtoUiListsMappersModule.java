@@ -1,29 +1,36 @@
 package com.senyk.volodymyr.schedulesapp.di.module.mappers.dtoui;
 
+import com.senyk.volodymyr.schedulesapp.di.module.helpers.ResourcesProviderModule;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
-import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
-import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouimappers.DtoUiListMapper;
-import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouimappers.PairMapper;
-import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouimappers.ScheduleMapper;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.PairDtoUiMapper;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.GenericDtoUiListMapper;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.SchedulesDtoUiListMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = DtoUiSimpleMappersModule.class)
+@Module(includes = {
+        DtoUiSimpleMappersModule.class,
+        ResourcesProviderModule.class
+})
 public class DtoUiListsMappersModule {
     @Singleton
     @Provides
-    public DtoUiListMapper<ScheduleDto, ScheduleUi> getAllSchedulesListMapper(ScheduleMapper scheduleMapper) {
-        return new DtoUiListMapper<>(scheduleMapper);
+    public SchedulesDtoUiListMapper getAllSchedulesListMapper(
+            ScheduleDtoUiMapper scheduleMapper,
+            ResourcesProvider resourcesProvider
+    ) {
+        return new SchedulesDtoUiListMapper(scheduleMapper, resourcesProvider);
     }
 
     @Singleton
     @Provides
-    public DtoUiListMapper<PairDto, PairUi> getOneDayScheduleMapper(PairMapper pairMapper) {
-        return new DtoUiListMapper<>(pairMapper);
+    public GenericDtoUiListMapper<PairDto, PairUi> getOneDayScheduleMapper(PairDtoUiMapper pairMapper) {
+        return new GenericDtoUiListMapper<>(pairMapper);
     }
 }

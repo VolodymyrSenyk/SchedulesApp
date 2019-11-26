@@ -1,14 +1,14 @@
-package com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouimappers;
+package com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui;
 
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.base.BaseDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
-public class PairMapper extends BaseDtoUiMapper<PairDto, PairUi> {
+public class PairDtoUiMapper extends BaseDtoUiMapper<PairDto, PairUi> {
     private ResourcesProvider resourcesProvider;
 
-    public PairMapper(ResourcesProvider resourcesProvider) {
+    public PairDtoUiMapper(ResourcesProvider resourcesProvider) {
         this.resourcesProvider = resourcesProvider;
     }
 
