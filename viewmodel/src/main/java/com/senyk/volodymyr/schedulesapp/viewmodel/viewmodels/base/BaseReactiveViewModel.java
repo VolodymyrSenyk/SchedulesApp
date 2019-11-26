@@ -8,8 +8,6 @@ import io.reactivex.disposables.CompositeDisposable;
 public abstract class BaseReactiveViewModel extends BaseViewModel {
     protected final CompositeDisposable compositeDisposable;
 
-    public SingleEventLiveData<String> message;
-
     public BaseReactiveViewModel(ErrorsHandler errorsHandler) {
         super(errorsHandler);
         this.compositeDisposable = new CompositeDisposable();

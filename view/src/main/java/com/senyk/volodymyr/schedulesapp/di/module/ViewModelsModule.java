@@ -3,16 +3,18 @@ package com.senyk.volodymyr.schedulesapp.di.module;
 import androidx.lifecycle.ViewModel;
 
 import com.senyk.volodymyr.schedulesapp.di.module.helpers.ErrorsHandlerModule;
-import com.senyk.volodymyr.schedulesapp.di.module.helpers.ResourcesProviderModule;
+import com.senyk.volodymyr.schedulesapp.di.module.mappers.dtoui.DtoUiListsMappersModule;
+import com.senyk.volodymyr.schedulesapp.di.module.mappers.uilistupdater.UiListUpdatersModule;
 import com.senyk.volodymyr.schedulesapp.di.module.repository.RepositoriesModule;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.factories.ViewModelFactory;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.navigation.RedirectViewModule;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.DayScheduleViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.NewScheduleCreatorViewModel;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.SchedulesManagerViewModule;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.SchedulesManagerViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesAppSharedViewModel;
 
 import java.lang.annotation.ElementType;
@@ -29,9 +31,10 @@ import dagger.Provides;
 import dagger.multibindings.IntoMap;
 
 @Module(includes = {
-        ResourcesProviderModule.class,
         ErrorsHandlerModule.class,
-        RepositoriesModule.class
+        RepositoriesModule.class,
+        DtoUiListsMappersModule.class,
+        UiListUpdatersModule.class
 })
 public class ViewModelsModule {
     @Target(ElementType.METHOD)
@@ -49,15 +52,8 @@ public class ViewModelsModule {
     @Provides
     @IntoMap
     @ViewModelKey(SchedulesAppSharedViewModel.class)
-    ViewModel bindSchedulesAppSharedViewModel(ErrorsHandler errorsHandler) {
-        return new SchedulesAppSharedViewModel(errorsHandler);
-    }
-
-    @Provides
-    @IntoMap
-    @ViewModelKey(RedirectViewModule.class)
-    ViewModel bindRedirectViewModule(ErrorsHandler errorsHandler, UserSettingsRepository repository) {
-        return new RedirectViewModule(errorsHandler, repository);
+    ViewModel bindSharedViewModel() {
+        return new SchedulesAppSharedViewModel();
     }
 
     @Provides
@@ -70,15 +66,26 @@ public class ViewModelsModule {
     @Provides
     @IntoMap
     @ViewModelKey(NewScheduleCreatorViewModel.class)
-    ViewModel bindNewScheduleCreatorViewModel(ErrorsHandler errorsHandler, SchedulesRepository repository) {
-        return new NewScheduleCreatorViewModel(errorsHandler, repository);
+    ViewModel bindNewScheduleCreatorViewModel(
+            ErrorsHandler errorsHandler,
+            SchedulesRepository schedulesRepository,
+            UserSettingsRepository userSettingsRepository,
+            ResourcesProvider resourcesProvider,
+            ScheduleDtoUiMapper scheduleMapper) {
+        return new NewScheduleCreatorViewModel(
+                errorsHandler,
+                schedulesRepository,
+                userSettingsRepository,
+                resourcesProvider,
+                scheduleMapper
+        );
     }
 
     @Provides
     @IntoMap
-    @ViewModelKey(SchedulesManagerViewModule.class)
+    @ViewModelKey(SchedulesManagerViewModel.class)
     ViewModel bindSchedulesManagerViewModule(ErrorsHandler errorsHandler, SchedulesRepository repository) {
-        return new SchedulesManagerViewModule(errorsHandler, repository);
+        return new SchedulesManagerViewModel(errorsHandler, repository);
     }
 
 }

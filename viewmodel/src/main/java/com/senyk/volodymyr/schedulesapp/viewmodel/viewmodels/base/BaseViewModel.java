@@ -8,7 +8,7 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.SingleEventLiveData;
 public abstract class BaseViewModel extends ViewModel {
     protected final ErrorsHandler errorsHandler;
 
-    public SingleEventLiveData<String> message;
+    public SingleEventLiveData<String> message = new SingleEventLiveData<>();
 
     public BaseViewModel(ErrorsHandler errorsHandler) {
         this.errorsHandler = errorsHandler;
