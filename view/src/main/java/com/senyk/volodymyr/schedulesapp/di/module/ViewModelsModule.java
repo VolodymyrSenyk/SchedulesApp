@@ -70,13 +70,11 @@ public class ViewModelsModule {
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
             UserSettingsRepository userSettingsRepository,
-            ResourcesProvider resourcesProvider,
             ScheduleDtoUiMapper scheduleMapper) {
         return new NewScheduleCreatorViewModel(
                 errorsHandler,
                 schedulesRepository,
                 userSettingsRepository,
-                resourcesProvider,
                 scheduleMapper
         );
     }

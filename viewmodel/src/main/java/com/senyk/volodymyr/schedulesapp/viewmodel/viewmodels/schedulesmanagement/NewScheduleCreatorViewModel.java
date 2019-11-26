@@ -33,7 +33,6 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
 
     private final SchedulesRepository schedulesRepository;
     private final UserSettingsRepository userSettingsRepository;
-    private final ResourcesProvider resourcesProvider;
     private final ScheduleDtoUiMapper scheduleMapper;
 
     private List<String> existSchedules;
@@ -67,12 +66,10 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
             ErrorsHandler errorsHandler,
             SchedulesRepository repository,
             UserSettingsRepository userSettingsRepository,
-            ResourcesProvider resourcesProvider,
             ScheduleDtoUiMapper scheduleMapper) {
         super(errorsHandler);
         this.schedulesRepository = repository;
         this.userSettingsRepository = userSettingsRepository;
-        this.resourcesProvider = resourcesProvider;
         this.scheduleMapper = scheduleMapper;
     }
 
