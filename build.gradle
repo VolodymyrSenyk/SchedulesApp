@@ -2,14 +2,16 @@
 
 buildscript {
     ext.gradle_version = '3.5.2'
+    ext.nav_safe_args_version = '1.0.0'
 
     repositories {
         google()
         jcenter()
-        
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$nav_safe_args_version"
     }
 }
 
@@ -17,7 +19,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
     }
 }
 

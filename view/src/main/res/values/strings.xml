@@ -6,8 +6,8 @@
     <string name="main_screen_title">Schedule</string>
 
     <!-- Main menu items -->
-    <string name="action_schedules_manager">Manager</string>
-    <string name="action_one_day_schedule">Daily</string>
+    <string name="action_schedules_manager">Management</string>
+    <string name="action_one_day_schedule">Detailed</string>
     <string name="action_whole_schedule">Whole</string>
 
     <!-- Schedule data output -->
