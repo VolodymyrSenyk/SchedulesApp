@@ -11,9 +11,10 @@
     <string name="action_whole_schedule">Whole</string>
 
     <!-- Schedule data output -->
-    <string name="schedule_name_output"><b>Name:</b></string>
-    <string name="schedule_is_saturday_working_output"><b>Saturday is working day</b></string>
-    <string name="schedule_is_num_denom_system_output"><b>Numerator/Denominator schedule</b></string>
+    <string name="schedule_name_output">Name:</string>
+    <string name="schedule_date_of_creation_output">Created at: %1$s</string>
+    <string name="schedule_is_saturday_working_output">Saturday is working day</string>
+    <string name="schedule_is_num_denom_system_output">Numerator/Denominator schedule</string>
 
     <!-- Schedule data input -->
     <string name="schedule_name_input">Schedule name:</string>

@@ -1,7 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.viewmodel.helpers;
 
 public class ErrorsHandler {
-    private ResourcesProvider resourcesProvider;
+    private final ResourcesProvider resourcesProvider;
 
     public ErrorsHandler(ResourcesProvider resourcesProvider) {
         this.resourcesProvider = resourcesProvider;

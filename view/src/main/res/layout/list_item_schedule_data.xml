@@ -20,6 +20,7 @@
         android:id="@+id/schedule_name_field"
         style="@style/SimpleTextFieldStyle"
         android:layout_width="0dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/schedule_date_of_creation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/schedule_name_label"
@@ -51,9 +52,20 @@
         android:drawableEnd="@drawable/ic_true"
         android:drawableRight="@drawable/ic_true"
         android:text="@string/schedule_is_num_denom_system_output"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/delete_schedule_bottom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schedule_is_sat_working" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_schedule_bottom_button"
+        style="@style/StandartBottomButtonStyle"
+        android:layout_margin="@dimen/margin_small"
+        app:icon="@drawable/ic_delete"
+        app:iconGravity="textStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_is_num_denom_system" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

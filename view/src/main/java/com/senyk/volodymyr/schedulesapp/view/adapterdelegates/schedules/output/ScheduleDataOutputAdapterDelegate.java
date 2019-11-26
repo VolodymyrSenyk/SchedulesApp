@@ -1,26 +1,30 @@
 package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.schedules.output;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
+import com.senyk.volodymyr.schedulesapp.view.listeners.SchedulesClickListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
 import java.util.List;
 
 public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
-    private LayoutInflater inflater;
+    private final LayoutInflater inflater;
+    private final SchedulesClickListener clickListener;
 
-    public ScheduleDataOutputAdapterDelegate(Activity activity) {
-        this.inflater = activity.getLayoutInflater();
+    public ScheduleDataOutputAdapterDelegate(Fragment fragment) {
+        this.inflater = fragment.getLayoutInflater();
+        this.clickListener = (SchedulesClickListener) fragment;
     }
 
     @Override
@@ -48,7 +52,12 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
         ScheduleDataOutputViewHolder viewHolder = (ScheduleDataOutputViewHolder) holder;
 
         viewHolder.scheduleName.setText(item.getName());
-        viewHolder.scheduleName.setText(item.getDateOfCreation());
+        viewHolder.scheduleDateOfCreation.setText(
+                viewHolder.scheduleDateOfCreation.getContext().getString(
+                        R.string.schedule_date_of_creation_output,
+                        item.getDateOfCreation()
+                )
+        );
         if (item.isSaturdayWorking()) {
             viewHolder.scheduleIsSaturdayWorking.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_true, 0);
         } else {
@@ -59,6 +68,13 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
         } else {
             viewHolder.scheduleIsNumDenomSystem.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_false, 0);
         }
+
+        viewHolder.itemView.setBackgroundColor(item.getScheduleHolderColor());
+
+        viewHolder.itemView.setOnClickListener(view ->
+                clickListener.scheduleClicked(viewHolder.scheduleName.getText().toString()));
+        viewHolder.deleteScheduleButton.setOnClickListener(view ->
+                clickListener.scheduleDeleteClicked(viewHolder.scheduleName.getText().toString()));
     }
 
     static class ScheduleDataOutputViewHolder extends RecyclerView.ViewHolder {
@@ -66,6 +82,7 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
         TextView scheduleDateOfCreation;
         TextView scheduleIsSaturdayWorking;
         TextView scheduleIsNumDenomSystem;
+        MaterialButton deleteScheduleButton;
 
         ScheduleDataOutputViewHolder(View view) {
             super(view);
@@ -73,6 +90,7 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
             scheduleDateOfCreation = view.findViewById(R.id.schedule_date_of_creation);
             scheduleIsSaturdayWorking = view.findViewById(R.id.schedule_is_sat_working);
             scheduleIsNumDenomSystem = view.findViewById(R.id.schedule_is_num_denom_system);
+            deleteScheduleButton = view.findViewById(R.id.delete_schedule_bottom_button);
         }
     }
 

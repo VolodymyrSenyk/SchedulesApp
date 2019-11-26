@@ -5,13 +5,14 @@ import android.content.Context;
 import androidx.core.content.ContextCompat;
 
 import com.senyk.volodymyr.schedulesapp.model.models.enums.PairType;
+import com.senyk.volodymyr.schedulesapp.model.models.enums.PairTypeEnumContract;
 import com.senyk.volodymyr.schedulesapp.viewmodel.R;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
 import java.util.Calendar;
 
 public class ResourcesProvider {
-    private Context context;
+    private final Context context;
 
     public ResourcesProvider(Context context) {
         this.context = context;
@@ -19,6 +20,14 @@ public class ResourcesProvider {
 
     public String getErrorMessage(String errorMessage) {
         return context.getString(R.string.error_message, errorMessage);
+    }
+
+    public String getFieldLimitReachedErrorMessage() {
+        return context.getString(R.string.field_limit_reached_error_message);
+    }
+
+    public String getScheduleExistsErrorMessage() {
+        return context.getString(R.string.schedule_exists_error_message);
     }
 
     public String getPairTime(long time) {
@@ -43,27 +52,27 @@ public class ResourcesProvider {
         String[] allTypes = context.getResources().getStringArray(R.array.pairs_types);
         switch (type) {
             case LECTURE:
-                return allTypes[1];
+                return allTypes[PairTypeEnumContract.LECTURE_TYPE_INDEX];
             case PRACTICE:
-                return allTypes[2];
+                return allTypes[PairTypeEnumContract.PRACTICE_TYPE_INDEX];
             case LABORATORY:
-                return allTypes[3];
+                return allTypes[PairTypeEnumContract.LABORATORY_TYPE_INDEX];
             case SPORT:
-                return allTypes[4];
+                return allTypes[PairTypeEnumContract.SPORT_TYPE_INDEX];
             default:
-                return allTypes[0];
+                return allTypes[PairTypeEnumContract.NOT_STATED_TYPE_INDEX];
         }
     }
 
     public PairType getPairType(String type) {
         String[] allTypes = context.getResources().getStringArray(R.array.pairs_types);
-        if (type.equals(allTypes[1])) {
+        if (type.equals(allTypes[PairTypeEnumContract.LECTURE_TYPE_INDEX])) {
             return PairType.LECTURE;
-        } else if (type.equals(allTypes[2])) {
+        } else if (type.equals(allTypes[PairTypeEnumContract.PRACTICE_TYPE_INDEX])) {
             return PairType.PRACTICE;
-        } else if (type.equals(allTypes[3])) {
+        } else if (type.equals(allTypes[PairTypeEnumContract.LABORATORY_TYPE_INDEX])) {
             return PairType.LABORATORY;
-        } else if (type.equals(allTypes[4])) {
+        } else if (type.equals(allTypes[PairTypeEnumContract.SPORT_TYPE_INDEX])) {
             return PairType.SPORT;
         } else {
             return PairType.NOT_STATED;
@@ -89,13 +98,21 @@ public class ResourcesProvider {
         Calendar timeCalendar = Calendar.getInstance();
         timeCalendar.setTimeInMillis(date);
         return context.getString(
-                R.string.schedule_date_of_creation_output,
-                timeCalendar.get(Calendar.DAY_OF_MONTH),
-                timeCalendar.get(Calendar.MONTH),
-                timeCalendar.get(Calendar.YEAR),
-                timeCalendar.get(Calendar.HOUR_OF_DAY),
-                timeCalendar.get(Calendar.MINUTE)
+                R.string.schedule_date_of_creation_form,
+                formatNums(timeCalendar.get(Calendar.DAY_OF_MONTH) + ""),
+                formatNums(timeCalendar.get(Calendar.MONTH) + 1 + ""),
+                timeCalendar.get(Calendar.YEAR) + "",
+                formatNums(timeCalendar.get(Calendar.HOUR_OF_DAY) + ""),
+                formatNums(timeCalendar.get(Calendar.MINUTE) + "")
         );
+    }
+
+    private String formatNums(String number) {
+        int numsCount = 2;
+        if (number.length() < numsCount) {
+            number = "0" + number;
+        }
+        return number;
     }
 
     public long getDateOfCreation(String date) {
@@ -131,13 +148,13 @@ public class ResourcesProvider {
 
     public int getPairsHolderColorByIndex(int typeIndex) {
         switch (typeIndex) {
-            case 1:
+            case PairTypeEnumContract.LECTURE_TYPE_INDEX:
                 return ContextCompat.getColor(context, R.color.colorLecture);
-            case 2:
+            case PairTypeEnumContract.PRACTICE_TYPE_INDEX:
                 return ContextCompat.getColor(context, R.color.colorPractice);
-            case 3:
+            case PairTypeEnumContract.LABORATORY_TYPE_INDEX:
                 return ContextCompat.getColor(context, R.color.colorLaboratory);
-            case 4:
+            case PairTypeEnumContract.SPORT_TYPE_INDEX:
                 return ContextCompat.getColor(context, R.color.colorSport);
             default:
                 return ContextCompat.getColor(context, R.color.colorNotStated);
@@ -146,16 +163,16 @@ public class ResourcesProvider {
 
     public int getPairTypeIndex(String type) {
         String[] allTypes = context.getResources().getStringArray(R.array.pairs_types);
-        if (type.equals(allTypes[1])) {
-            return 1;
-        } else if (type.equals(allTypes[2])) {
-            return 2;
-        } else if (type.equals(allTypes[3])) {
-            return 3;
-        } else if (type.equals(allTypes[4])) {
-            return 4;
+        if (type.equals(allTypes[PairTypeEnumContract.LECTURE_TYPE_INDEX])) {
+            return PairTypeEnumContract.LECTURE_TYPE_INDEX;
+        } else if (type.equals(allTypes[PairTypeEnumContract.PRACTICE_TYPE_INDEX])) {
+            return PairTypeEnumContract.PRACTICE_TYPE_INDEX;
+        } else if (type.equals(allTypes[PairTypeEnumContract.LABORATORY_TYPE_INDEX])) {
+            return PairTypeEnumContract.LABORATORY_TYPE_INDEX;
+        } else if (type.equals(allTypes[PairTypeEnumContract.SPORT_TYPE_INDEX])) {
+            return PairTypeEnumContract.SPORT_TYPE_INDEX;
         } else {
-            return 0;
+            return PairTypeEnumContract.NOT_STATED_TYPE_INDEX;
         }
     }
 

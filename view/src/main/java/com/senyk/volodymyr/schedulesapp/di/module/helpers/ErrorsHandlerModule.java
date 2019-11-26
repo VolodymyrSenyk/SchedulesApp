@@ -15,5 +15,4 @@ public class ErrorsHandlerModule {
     public ErrorsHandler getErrorsHandler(ResourcesProvider resourcesProvider) {
         return new ErrorsHandler(resourcesProvider);
     }
-
 }

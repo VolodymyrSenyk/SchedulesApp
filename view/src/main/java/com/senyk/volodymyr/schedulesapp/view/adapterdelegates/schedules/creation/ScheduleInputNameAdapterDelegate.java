@@ -1,25 +1,34 @@
 package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.schedules.creation;
 
-import android.app.Activity;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.TextChangeListener;
+import com.senyk.volodymyr.schedulesapp.view.listeners.NewScheduleNameFieldListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.datainputfields.ScheduleNameInputField;
 
 import java.util.List;
 
 public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
-    private LayoutInflater inflater;
+    private static final int MAX_LENGTH = 60;
 
-    public ScheduleInputNameAdapterDelegate(Activity activity) {
-        this.inflater = activity.getLayoutInflater();
+    private final LayoutInflater inflater;
+    private final NewScheduleNameFieldListener fieldFillListener;
+
+    public ScheduleInputNameAdapterDelegate(Fragment fragment) {
+        this.inflater = fragment.getLayoutInflater();
+        this.fieldFillListener = (NewScheduleNameFieldListener) fragment;
     }
 
     @Override
@@ -30,7 +39,7 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Print
     @NonNull
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return new ScheduleNameInputFieldViewHolder(this.inflater.inflate(
+        return new ScheduleInputNameAdapterDelegate.ScheduleNameInputFieldViewHolder(this.inflater.inflate(
                 R.layout.input_field_schedule_name,
                 parent,
                 false
@@ -42,11 +51,36 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Print
             @NonNull List<PrintableOnTheList> items,
             int position,
             @NonNull RecyclerView.ViewHolder holder,
-            @NonNull List<Object> payloads) {}
+            @NonNull List<Object> payloads) {
+        ScheduleNameInputFieldViewHolder viewHolder = (ScheduleNameInputFieldViewHolder) holder;
+        viewHolder.scheduleNameView.addTextChangedListener(new TextChangeListener() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().length() == MAX_LENGTH) {
+                    viewHolder.scheduleNameLayout.setError(
+                            viewHolder.scheduleNameLayout.getContext().getString(R.string.field_limit_reached_error_message)
+                    );
+                } else {
+                    viewHolder.scheduleNameLayout.setError("");
+                }
+                if (editable.toString().length() > 0) {
+                    fieldFillListener.scheduleNameFieldFilled();
+                } else {
+                    fieldFillListener.scheduleNameFieldCleared();
+                }
+                ((ScheduleNameInputField)items.get(position)).setName(editable.toString());
+            }
+        });
+    }
 
     static class ScheduleNameInputFieldViewHolder extends RecyclerView.ViewHolder {
+        private TextInputLayout scheduleNameLayout;
+        private TextInputEditText scheduleNameView;
+
         ScheduleNameInputFieldViewHolder(View view) {
             super(view);
+            this.scheduleNameLayout = view.findViewById(R.id.new_schedule_name_layout);
+            this.scheduleNameView = view.findViewById(R.id.new_schedule_name);
         }
     }
 

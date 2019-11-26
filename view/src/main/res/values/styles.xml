@@ -87,4 +87,19 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="HintInputTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:textSize">@dimen/simple_text</item>
+    </style>
+
+    <style name="ErrorTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorError</item>
+        <item name="android:textSize">@dimen/simple_text</item>
+    </style>
+
+    <style name="AlertDialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/colorPrimaryInversed</item>
+    </style>
+
 </resources>

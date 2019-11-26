@@ -1,6 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.schedules;
 
-import android.app.Activity;
+import androidx.fragment.app.Fragment;
 
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.schedules.creation.ScheduleInputNameAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.schedules.creation.ScheduleInputWeekLengthAdapterDelegate;
@@ -11,13 +11,11 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import java.util.List;
 
 public class ScheduleCreationAdapter extends BaseRecyclerViewAdapter<PrintableOnTheList> {
-
-    public ScheduleCreationAdapter(Activity activity, List<PrintableOnTheList> items) {
+    public ScheduleCreationAdapter(Fragment fragment, List<PrintableOnTheList> items) {
         delegatesManager
-                .addDelegate(new ScheduleInputNameAdapterDelegate(activity))
-                .addDelegate(new ScheduleInputWeekLengthAdapterDelegate(activity))
-                .addDelegate(new ScheduleInputWeeksCountAdapterDelegate(activity));
+                .addDelegate(new ScheduleInputNameAdapterDelegate(fragment))
+                .addDelegate(new ScheduleInputWeekLengthAdapterDelegate(fragment))
+                .addDelegate(new ScheduleInputWeeksCountAdapterDelegate(fragment));
         setItems(items);
     }
-
 }

@@ -51,7 +51,7 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
         viewHolder.pairTime.setText(item.getTime());
         viewHolder.pairName.setText(item.getName());
         viewHolder.pairTeacher.setText(item.getTeacher());
-     //   viewHolder.pairType.setSelection(item.getType());
+    //    viewHolder.pairType.setSelection(item.getType());
         viewHolder.pairPlace.setText(item.getPlace());
         viewHolder.pairAdditionalInfo.setText(item.getAdditionalInfo());
     }

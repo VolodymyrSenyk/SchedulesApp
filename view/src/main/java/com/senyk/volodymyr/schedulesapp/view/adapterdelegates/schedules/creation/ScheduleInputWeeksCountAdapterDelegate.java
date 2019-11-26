@@ -1,12 +1,12 @@
 package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.schedules.creation;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckedTextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
@@ -19,8 +19,8 @@ import java.util.List;
 public class ScheduleInputWeeksCountAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
     private LayoutInflater inflater;
 
-    public ScheduleInputWeeksCountAdapterDelegate(Activity activity) {
-        this.inflater = activity.getLayoutInflater();
+    public ScheduleInputWeeksCountAdapterDelegate(Fragment fragment) {
+        this.inflater = fragment.getLayoutInflater();
     }
 
     @Override
@@ -44,13 +44,23 @@ public class ScheduleInputWeeksCountAdapterDelegate extends AdapterDelegate<List
             int position,
             @NonNull RecyclerView.ViewHolder holder,
             @NonNull List<Object> payloads) {
-        ((CheckedTextView) holder.itemView)
-                .setChecked(((ScheduleIsNumDenomSystemCheckField) items.get(position)).isChecked());
+        ScheduleWeeksCountViewHolder viewHolder = (ScheduleWeeksCountViewHolder) holder;
+        viewHolder.isNumDenomSystemView.setOnClickListener(view -> {
+            if (viewHolder.isNumDenomSystemView.isChecked()) {
+                viewHolder.isNumDenomSystemView.setChecked(false);
+            } else {
+                viewHolder.isNumDenomSystemView.setChecked(true);
+            }
+            ((ScheduleIsNumDenomSystemCheckField)items.get(position)).setChecked(viewHolder.isNumDenomSystemView.isChecked());
+        });
     }
 
     static class ScheduleWeeksCountViewHolder extends RecyclerView.ViewHolder {
+        private AppCompatCheckedTextView isNumDenomSystemView;
+
         ScheduleWeeksCountViewHolder(View view) {
             super(view);
+            this.isNumDenomSystemView = view.findViewById(R.id.new_schedule_is_num_denom_system);
         }
     }
 

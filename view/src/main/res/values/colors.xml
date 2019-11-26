@@ -8,5 +8,6 @@
     <!-- Additional colors -->
     <color name="colorTrue">#006400</color>
     <color name="colorFalse">#8B0000</color>
+    <color name="colorError">#FF0000</color>
 
 </resources>

@@ -17,5 +17,4 @@ public class ResourcesProviderModule {
     public ResourcesProvider getResourcesProvider(Context context) {
         return new ResourcesProvider(context);
     }
-
 }

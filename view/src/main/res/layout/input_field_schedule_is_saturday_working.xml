@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.AppCompatCheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/new_schedule_name_layout"
+    android:id="@+id/new_schedule_is_sat_working"
     style="@style/SimpleTextFieldStyle"
     android:background="@color/colorPrimaryInversed"
     android:checkMark="?android:attr/textCheckMark"

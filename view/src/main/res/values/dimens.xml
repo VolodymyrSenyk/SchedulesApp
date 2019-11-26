@@ -19,7 +19,7 @@
     <dimen name="padding_main">8dp</dimen>
 
     <!-- Floating action button -->
-    <dimen name="fab_margins">32dp</dimen>
+    <dimen name="fab_margins">16dp</dimen>
 
     <!-- Pair data output -->
     <dimen name="borders_width">1dp</dimen>

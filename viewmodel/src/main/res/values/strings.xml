@@ -1,6 +1,6 @@
 <resources>
     <!-- Schedule data output -->
-    <string name="schedule_date_of_creation_output"><b>Created at:</b> %1$d.%2$d.%3$d %4$d:%5$d</string>
+    <string name="schedule_date_of_creation_form">%1$s.%2$s.%3$s %4$s:%5$s</string>
 
     <!-- Pair data output -->
     <string name="pair_time_output">%1$d:%2$d</string>
@@ -14,6 +14,8 @@
 
     <!-- Errors output -->
     <string name="error_message"><b>Error:</b> %1$s!</string>
+    <string name="field_limit_reached_error_message">Maximum input length reached!</string>
+    <string name="schedule_exists_error_message">Schedule with such name already exists!</string>
 
     <!-- Days of the week -->
     <string name="monday">Monday</string>

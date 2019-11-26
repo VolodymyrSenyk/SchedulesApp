@@ -7,13 +7,16 @@
     android:background="@color/colorPrimaryInversed"
     android:hint="@string/schedule_name_input_hint"
     android:paddingStart="@dimen/padding_main"
+    android:paddingTop="@dimen/padding_main"
     android:paddingEnd="@dimen/padding_main"
     android:textColorHint="@color/colorBackground"
-    app:errorEnabled="true">
+    app:errorEnabled="true"
+    app:errorTextAppearance="@style/ErrorTextAppearance"
+    app:hintTextAppearance="@style/HintInputTextAppearance">
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.senyk.volodymyr.schedulesapp.view.customviews.CustomTextInputField
         android:id="@+id/new_schedule_name"
         style="@style/PairDataInputFieldStyle"
-        android:maxLength="30" />
+        android:maxLength="60" />
 
 </com.google.android.material.textfield.TextInputLayout>
