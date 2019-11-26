@@ -48,4 +48,21 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
 
+    <!-- Dialogs -->
+    <string name="answer_yes">Yes</string>
+    <string name="answer_no">No</string>
+    <string name="answer_ok">OK</string>
+    <string name="schedule_swap_dialog_title">Swap schedule</string>
+    <string name="schedule_swap_dialog_message">
+        The current schedule will be replaced by the selected one. Confirm action?
+    </string>
+    <string name="schedule_delete_dialog_title">Delete schedule</string>
+    <string name="schedule_delete_dialog_message">
+        The selected schedule will be deleted. Confirm action?
+    </string>
+    <string name="schedule_exists_dialog_title">Error</string>
+    <string name="schedule_exists_dialog_message">
+        The schedule with the same name is already exists.
+    </string>
+
 </resources>
