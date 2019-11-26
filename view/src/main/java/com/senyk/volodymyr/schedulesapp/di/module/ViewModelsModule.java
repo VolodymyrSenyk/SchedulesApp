@@ -9,8 +9,9 @@ import com.senyk.volodymyr.schedulesapp.di.module.repository.RepositoriesModule;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
-import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.SchedulesDtoUiListMapper;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.uilistupdater.SchedulesUiListUpdater;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.factories.ViewModelFactory;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.DayScheduleViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.NewScheduleCreatorViewModel;
@@ -82,8 +83,20 @@ public class ViewModelsModule {
     @Provides
     @IntoMap
     @ViewModelKey(SchedulesManagerViewModel.class)
-    ViewModel bindSchedulesManagerViewModule(ErrorsHandler errorsHandler, SchedulesRepository repository) {
-        return new SchedulesManagerViewModel(errorsHandler, repository);
+    ViewModel bindSchedulesManagerViewModel(
+            ErrorsHandler errorsHandler,
+            SchedulesRepository schedulesRepository,
+            UserSettingsRepository userSettingsRepository,
+            SchedulesDtoUiListMapper schedulesMapper,
+            SchedulesUiListUpdater schedulesListChanger
+    ) {
+        return new SchedulesManagerViewModel(
+                errorsHandler,
+                schedulesRepository,
+                userSettingsRepository,
+                schedulesMapper,
+                schedulesListChanger
+        );
     }
 
 }
