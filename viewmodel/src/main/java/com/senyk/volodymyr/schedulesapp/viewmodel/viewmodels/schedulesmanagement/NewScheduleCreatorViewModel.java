@@ -43,7 +43,7 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
 
     private MutableLiveData<String> currentScheduleName = new MutableLiveData<>();
     private MutableLiveData<List<PrintableOnTheList>> inputFields = new MutableLiveData<>();
-    private MutableLiveData<Boolean> goToSchedule = new MutableLiveData<>();
+    private MutableLiveData<Boolean> goToSchedule = new SingleEventLiveData<>();
     private MutableLiveData<Boolean> showScheduleExistsWarning = new SingleEventLiveData<>();
 
     public LiveData<String> getCurrentScheduleName() {

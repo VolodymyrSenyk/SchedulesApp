@@ -6,7 +6,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Scree not implemented yet"
+        android:text="Screen not implemented yet"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
+
 </FrameLayout>
