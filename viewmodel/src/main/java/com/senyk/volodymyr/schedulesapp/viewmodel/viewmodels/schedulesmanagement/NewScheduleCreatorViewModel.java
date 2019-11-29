@@ -9,7 +9,6 @@ import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
-import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.SingleEventLiveData;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;

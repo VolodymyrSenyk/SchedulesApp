@@ -14,9 +14,10 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.SchedulesDto
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.uilistupdater.SchedulesUiListUpdater;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.factories.ViewModelFactory;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.DayScheduleViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.WeekViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.NewScheduleCreatorViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.SchedulesManagerViewModel;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesAppSharedViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -52,9 +53,9 @@ public class ViewModelsModule {
 
     @Provides
     @IntoMap
-    @ViewModelKey(SchedulesAppSharedViewModel.class)
-    ViewModel bindSharedViewModel() {
-        return new SchedulesAppSharedViewModel();
+    @ViewModelKey(SchedulesNavigationSharedViewModel.class)
+    ViewModel bindSchedulesNavigationSharedViewModel() {
+        return new SchedulesNavigationSharedViewModel();
     }
 
     @Provides
@@ -96,6 +97,21 @@ public class ViewModelsModule {
                 userSettingsRepository,
                 schedulesMapper,
                 schedulesListChanger
+        );
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(WeekViewModel.class)
+    ViewModel bindWeekViewModel(
+            ErrorsHandler errorsHandler,
+            SchedulesRepository schedulesRepository,
+            SchedulesDtoUiListMapper schedulesMapper
+    ) {
+        return new WeekViewModel(
+                errorsHandler,
+                schedulesRepository,
+                schedulesMapper
         );
     }
 

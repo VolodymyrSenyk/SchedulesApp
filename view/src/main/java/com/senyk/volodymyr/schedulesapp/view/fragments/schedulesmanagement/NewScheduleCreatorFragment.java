@@ -25,7 +25,7 @@ import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.WarningClick
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
 import com.senyk.volodymyr.schedulesapp.view.listeners.NewScheduleNameFieldListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.NewScheduleCreatorViewModel;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesAppSharedViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 import java.util.ArrayList;
 
@@ -33,7 +33,7 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
     private static final int DIALOG_FRAGMENT_REQUEST_CODE = 1;
 
     private NewScheduleCreatorViewModel viewModel;
-    private SchedulesAppSharedViewModel sharedViewModel;
+    private SchedulesNavigationSharedViewModel sharedViewModel;
 
     private ScheduleCreationAdapter scheduleCreationAdapter;
 
@@ -51,10 +51,10 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.viewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
+        this.viewModel = ViewModelProviders.of(this, this.viewModelFactory)
                 .get(NewScheduleCreatorViewModel.class);
         this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
-                .get(SchedulesAppSharedViewModel.class);
+                .get(SchedulesNavigationSharedViewModel.class);
 
         if (this.getArguments() != null) {
             args = NewScheduleCreatorFragmentArgs.fromBundle(this.getArguments());

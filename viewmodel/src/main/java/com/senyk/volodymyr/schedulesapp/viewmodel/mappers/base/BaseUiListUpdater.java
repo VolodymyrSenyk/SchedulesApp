@@ -1,7 +1,5 @@
 package com.senyk.volodymyr.schedulesapp.viewmodel.mappers.base;
 
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

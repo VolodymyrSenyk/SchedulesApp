@@ -41,12 +41,20 @@
     <string name="add_pair_button">Add one more pair</string>
 
     <!-- Days of the week -->
-    <string name="monday">Monday</string>
-    <string name="tuesday">Tuesday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="thursday">Thursday</string>
-    <string name="friday">Friday</string>
-    <string name="saturday">Saturday</string>
+    <string-array name="days_of_the_week">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
+
+    <!-- Weeks -->
+    <string-array name="weeks_names">
+        <item>Numerator</item>
+        <item>Denominator</item>
+    </string-array>
 
     <!-- Dialogs -->
     <string name="answer_yes">Yes</string>
@@ -63,6 +71,10 @@
     <string name="schedule_exists_dialog_title">Error</string>
     <string name="schedule_exists_dialog_message">
         The schedule with the same name is already exists.
+    </string>
+
+    <string name="debug_schedules_navigation" translatable="false">
+        %1$s of the week number %2$d
     </string>
 
 </resources>

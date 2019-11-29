@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +24,7 @@ import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.DialogClickL
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
 import com.senyk.volodymyr.schedulesapp.view.listeners.SchedulesClickListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.SchedulesManagerViewModel;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesAppSharedViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 import java.util.ArrayList;
 
@@ -33,7 +32,7 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
     private static final int DIALOG_FRAGMENT_REQUEST_CODE = 1;
 
     private SchedulesManagerViewModel viewModel;
-    private SchedulesAppSharedViewModel sharedViewModel;
+    private SchedulesNavigationSharedViewModel sharedViewModel;
 
     private SchedulesOutputAdapter schedulesListAdapter;
 
@@ -46,10 +45,10 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.viewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
+        this.viewModel = ViewModelProviders.of(this, this.viewModelFactory)
                 .get(SchedulesManagerViewModel.class);
         this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
-                .get(SchedulesAppSharedViewModel.class);
+                .get(SchedulesNavigationSharedViewModel.class);
 
         viewModel.isAppStart = sharedViewModel.isAppInit();
 
@@ -75,7 +74,6 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         dataList.setLayoutManager(layoutManager);
         dataList.setAdapter(schedulesListAdapter);
-        dataList.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         FloatingActionButton addButton = view.findViewById(R.id.add_new_schedule_button);
         addButton.setOnClickListener(view12 -> NavHostFragment.findNavController(SchedulesManagerFragment.this)

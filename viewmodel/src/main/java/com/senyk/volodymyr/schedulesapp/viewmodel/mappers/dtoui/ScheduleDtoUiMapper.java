@@ -6,11 +6,11 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.base.BaseDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
 public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi> {
-    private static final int NORMAL_WEEK_LENGTH = 5;
-    private static final int WEEK_LENGTH_WITH_SAT = 6;
+    public static final int NORMAL_WEEK_LENGTH = 5;
+    public static final int WEEK_LENGTH_WITH_SAT = 6;
 
-    private static final int NORMAL_NUM_OF_WEEK_TYPES = 1;
-    private static final int NUM_OF_WEEK_TYPES_NUM_DENOM = 2;
+    public static final int NORMAL_NUM_OF_WEEK_TYPES = 1;
+    public static final int NUM_OF_WEEK_TYPES_NUM_DENOM = 2;
 
     private ResourcesProvider resourcesProvider;
 
