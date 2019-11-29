@@ -100,6 +100,7 @@ public class WeekScheduleFragment extends BaseFragment {
                     }
                     viewPager.setAdapter(adapter);
                     tabLayout.setupWithViewPager(viewPager);
+                    viewPager.setCurrentItem(sharedViewModel.initNavigationIndexes(daysCount));
                 });
 
         this.viewModel.message
@@ -108,13 +109,5 @@ public class WeekScheduleFragment extends BaseFragment {
                         message,
                         Toast.LENGTH_LONG
                 ).show());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Should be call of the GetCurrentDayOfTheWeek() method
-        sharedViewModel.setCurrentDayIndex(0);
-        sharedViewModel.setCurrentWeekIndex(0);
     }
 }
