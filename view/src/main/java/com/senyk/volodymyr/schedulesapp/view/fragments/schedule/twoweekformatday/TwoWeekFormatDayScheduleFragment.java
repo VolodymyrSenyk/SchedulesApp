@@ -22,6 +22,7 @@ public class TwoWeekFormatDayScheduleFragment extends BaseFragment {
     private static final String DAY_ORDINAL_BUNDLE_KEY = "Day ordinal number bundle key";
 
     private SchedulesNavigationSharedViewModel sharedViewModel;
+
     private ViewPager viewPager;
 
     public static TwoWeekFormatDayScheduleFragment newInstance(String scheduleName, int dayOrdinal) {
@@ -42,6 +43,7 @@ public class TwoWeekFormatDayScheduleFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
                 .get(SchedulesNavigationSharedViewModel.class);
 
@@ -64,5 +66,21 @@ public class TwoWeekFormatDayScheduleFragment extends BaseFragment {
         }
         this.viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.viewPager.setCurrentItem(
+                sharedViewModel.getCurrentWeekIndex()
+        );
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.sharedViewModel.saveCurrentWeekIndex(
+                this.viewPager.getCurrentItem()
+        );
     }
 }

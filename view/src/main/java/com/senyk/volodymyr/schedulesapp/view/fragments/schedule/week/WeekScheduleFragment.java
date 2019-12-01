@@ -40,12 +40,12 @@ public class WeekScheduleFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
                 .get(SchedulesNavigationSharedViewModel.class);
         this.sharedViewModel.setAppInitFinished();
         this.viewModel = ViewModelProviders.of(this, this.viewModelFactory)
                 .get(WeekViewModel.class);
-        this.viewModel.loadScheduleData(sharedViewModel.getCurrentScheduleName());
 
         setView(view);
         addObservers();
@@ -57,6 +57,24 @@ public class WeekScheduleFragment extends BaseFragment {
                         requireActivity().finish();
                     }
                 });
+
+        this.viewModel.loadScheduleData(sharedViewModel.getCurrentScheduleName());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        /*this.viewPager.setCurrentItem(
+                sharedViewModel.getCurrentDayIndex()
+        );*/
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.sharedViewModel.saveCurrentDayIndex(
+                this.viewPager.getCurrentItem()
+        );
     }
 
     private void setView(View view) {
@@ -96,6 +114,9 @@ public class WeekScheduleFragment extends BaseFragment {
                     }
                     viewPager.setAdapter(adapter);
                     tabLayout.setupWithViewPager(viewPager);
+                    viewPager.setCurrentItem(
+                            sharedViewModel.getCurrentDayIndex()
+                    );
                 });
 
         this.viewModel.message
