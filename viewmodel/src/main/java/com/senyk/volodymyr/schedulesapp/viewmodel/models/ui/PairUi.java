@@ -4,6 +4,7 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 
 public class PairUi implements PrintableOnTheList {
     private String time;
+    private long timeInMillis;
     private String name;
     private String teacher;
     private String type;
@@ -17,6 +18,14 @@ public class PairUi implements PrintableOnTheList {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public long getTimeInMillis() {
+        return this.timeInMillis;
+    }
+
+    public void setTimeInMillis(long timeInMillis) {
+        this.timeInMillis = timeInMillis;
     }
 
     public String getName() {
@@ -67,10 +76,12 @@ public class PairUi implements PrintableOnTheList {
         this.holderColor = holderColor;
     }
 
-    public PairUi() {}
+    public PairUi() {
+    }
 
-    public PairUi(String time, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {
+    public PairUi(String time, long timeInMillis, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {
         this.time = time;
+        this.timeInMillis = timeInMillis;
         this.name = name;
         this.teacher = teacher;
         this.type = type;
@@ -79,4 +90,31 @@ public class PairUi implements PrintableOnTheList {
         this.holderColor = holderColor;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + this.time.hashCode();
+        result = prime * result + this.name.hashCode();
+        result = prime * result + this.teacher.hashCode();
+        result = prime * result + this.type.hashCode();
+        result = prime * result + this.place.hashCode();
+        result = prime * result + this.additionalInfo.hashCode();
+        result = prime * result + this.holderColor;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        PairUi other = (PairUi) obj;
+        return this.time.equals(other.time) &&
+                this.teacher.equals(other.teacher) &&
+                this.type.equals(other.type) &&
+                this.place.equals(other.place) &&
+                this.additionalInfo.equals(other.additionalInfo) &&
+                this.holderColor == other.holderColor;
+    }
 }

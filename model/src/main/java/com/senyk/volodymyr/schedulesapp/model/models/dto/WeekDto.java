@@ -7,11 +7,11 @@ public class WeekDto {
     private List<DayDto> days;
 
     public int getOrdinalNumber() {
-        return ordinalNumber;
+        return this.ordinalNumber;
     }
 
     public List<DayDto> getDays() {
-        return days;
+        return this.days;
     }
 
     public WeekDto(int ordinalNumber, List<DayDto> days) {

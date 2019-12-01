@@ -7,19 +7,19 @@ public class ScheduleDto {
     private int numberOfWeeks;
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public long getDateOfCreation() {
-        return createdAt;
+        return this.createdAt;
     }
 
     public int getNumberOfDays() {
-        return numberOfDays;
+        return this.numberOfDays;
     }
 
     public int getNumberOfWeeks() {
-        return numberOfWeeks;
+        return this.numberOfWeeks;
     }
 
     public ScheduleDto(String name, int numberOfDays, int numberOfWeeks) {

@@ -40,7 +40,9 @@ public abstract class SchedulesManagementDao {
     }
 
     public Completable deleteSchedule(String scheduleName) {
-        return delete(scheduleName) != 1 ? Completable.error(new SQLiteQueryExecutingException()) : Completable.complete();
+        return delete(scheduleName) != 1 ?
+                Completable.error(new SQLiteQueryExecutingException("More than one schedule deleted")) :
+                Completable.complete();
     }
 
     @Query("DELETE FROM schedules WHERE schedules.schedule_name = :scheduleName")

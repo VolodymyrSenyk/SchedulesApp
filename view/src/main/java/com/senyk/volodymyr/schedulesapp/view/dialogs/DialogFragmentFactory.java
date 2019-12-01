@@ -11,6 +11,7 @@ import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.DialogClickL
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.DialogFragmentClickListener;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.WarningClickListener;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.creator.CurrentScheduleSwapDialogCreator;
+import com.senyk.volodymyr.schedulesapp.view.dialogs.creator.MaxCountOfPairsWarningCreator;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.creator.ScheduleDeletingDialogCreator;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.creator.ScheduleExistsWarningCreator;
 import com.senyk.volodymyr.schedulesapp.view.exceptions.NoSuchDialogFragmentClassException;
@@ -69,6 +70,9 @@ public class DialogFragmentFactory extends DialogFragment {
                             .createDialog(requireContext());
                 case DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING:
                     return new ScheduleExistsWarningCreator((WarningClickListener) onClickListener)
+                            .createDialog(requireContext());
+                case DialogFragmentsTypes.MAX_COUNT_OF_PAIRS_REACHED_WARNING:
+                    return new MaxCountOfPairsWarningCreator((WarningClickListener) onClickListener)
                             .createDialog(requireContext());
                 default:
                     throw new NoSuchDialogFragmentClassException();

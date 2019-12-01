@@ -7,11 +7,11 @@ public class DayDto {
     private List<PairDto> pairs;
 
     public int getOrdinalNumber() {
-        return ordinalNumber;
+        return this.ordinalNumber;
     }
 
     public List<PairDto> getPairs() {
-        return pairs;
+        return this.pairs;
     }
 
     public DayDto(int ordinalNumber, List<PairDto> pairs) {

@@ -1,6 +1,5 @@
 package com.senyk.volodymyr.schedulesapp.di.module.mappers.dtoui;
 
-import com.senyk.volodymyr.schedulesapp.di.module.helpers.ResourcesProviderModule;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.PairDtoUiMapper;
@@ -14,10 +13,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = {
-        DtoUiSimpleMappersModule.class,
-        ResourcesProviderModule.class
-})
+@Module(includes = DtoUiSimpleMappersModule.class)
 public class DtoUiListsMappersModule {
     @Singleton
     @Provides

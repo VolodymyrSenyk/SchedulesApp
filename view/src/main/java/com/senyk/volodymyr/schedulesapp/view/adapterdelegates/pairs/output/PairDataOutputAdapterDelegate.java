@@ -1,13 +1,12 @@
-package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs;
+package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.output;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
@@ -17,11 +16,11 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
 import java.util.List;
 
-public class PairDataInputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
-    private LayoutInflater inflater;
+public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
+    private final LayoutInflater inflater;
 
-    public PairDataInputAdapterDelegate(Activity activity) {
-        this.inflater = activity.getLayoutInflater();
+    public PairDataOutputAdapterDelegate(Fragment fragment) {
+        this.inflater = fragment.getLayoutInflater();
     }
 
     @Override
@@ -32,8 +31,8 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
     @NonNull
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return new PairDataInputAdapterDelegate.PairDataInputViewHolder(this.inflater.inflate(
-                R.layout.list_item_pair_input,
+        return new PairDataOutputAdapterDelegate.PairDataOutputViewHolder(this.inflater.inflate(
+                R.layout.list_item_pair_output,
                 parent,
                 false
         ));
@@ -46,32 +45,31 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
             @NonNull RecyclerView.ViewHolder holder,
             @NonNull List<Object> payloads) {
         PairUi item = (PairUi) items.get(position);
-        PairDataInputViewHolder viewHolder = (PairDataInputViewHolder) holder;
+        PairDataOutputViewHolder viewHolder = (PairDataOutputViewHolder) holder;
+
+        viewHolder.itemView.setBackgroundColor(item.getHolderColor());
 
         viewHolder.pairTime.setText(item.getTime());
         viewHolder.pairName.setText(item.getName());
         viewHolder.pairTeacher.setText(item.getTeacher());
-    //    viewHolder.pairType.setSelection(item.getType());
+        viewHolder.pairType.setText(item.getType());
         viewHolder.pairPlace.setText(item.getPlace());
-        viewHolder.pairAdditionalInfo.setText(item.getAdditionalInfo());
     }
 
-    static class PairDataInputViewHolder extends RecyclerView.ViewHolder {
+    static class PairDataOutputViewHolder extends RecyclerView.ViewHolder {
         TextView pairTime;
         TextView pairName;
         TextView pairTeacher;
-        Spinner pairType;
+        TextView pairType;
         TextView pairPlace;
-        TextView pairAdditionalInfo;
 
-        PairDataInputViewHolder(View view) {
+        PairDataOutputViewHolder(View view) {
             super(view);
-            pairTime = view.findViewById(R.id.pair_time_input);
-            pairName = view.findViewById(R.id.pair_name_input);
-            pairTeacher = view.findViewById(R.id.pair_teacher_input);
+            pairTime = view.findViewById(R.id.pair_time_output);
+            pairName = view.findViewById(R.id.pair_name_output);
+            pairTeacher = view.findViewById(R.id.pair_teacher_output);
             pairType = view.findViewById(R.id.pair_type_output);
-            pairPlace = view.findViewById(R.id.pair_place_input);
-            pairAdditionalInfo = view.findViewById(R.id.pair_additional_info_input);
+            pairPlace = view.findViewById(R.id.pair_place_output);
         }
     }
 

@@ -1,6 +1,5 @@
 package com.senyk.volodymyr.schedulesapp.model.models.dto;
 
-import com.senyk.volodymyr.schedulesapp.model.exceptions.PrivateConstructorEntranceException;
 import com.senyk.volodymyr.schedulesapp.model.models.enums.PairType;
 
 public class PairDto {
@@ -35,17 +34,14 @@ public class PairDto {
         return additionalInfo;
     }
 
-    private PairDto() {
-        throw new PrivateConstructorEntranceException();
-    }
-
     public static Builder getBuilder() {
         return new PairDto().new Builder();
     }
 
     public class Builder {
 
-        private Builder() {}
+        private Builder() {
+        }
 
         public PairDto build() {
             return PairDto.this;

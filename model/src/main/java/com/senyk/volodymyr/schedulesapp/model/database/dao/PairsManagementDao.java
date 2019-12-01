@@ -64,5 +64,4 @@ public abstract class PairsManagementDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract long insert(PairDataEntity pair);
-
 }

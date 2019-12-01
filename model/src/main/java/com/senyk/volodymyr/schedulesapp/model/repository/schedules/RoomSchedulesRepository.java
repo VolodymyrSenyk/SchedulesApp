@@ -28,7 +28,7 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     private ScheduleEntityDtoMapper scheduleMapper;
     private DayEntityDtoMapper dayMapper;
     private GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper;
-    private GenericEntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper;
+    private GenericEntityDtoListMapper<WeekDataEntity, WeekDto> fullScheduleMapper;
     private GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper;
 
     public RoomSchedulesRepository(
@@ -46,7 +46,7 @@ public class RoomSchedulesRepository implements SchedulesRepository {
         this.dayMapper = dayMapper;
 
         this.allSchedulesListMapper = allSchedulesListMapper;
-        this.allScheduleMapper = allScheduleMapper;
+        this.fullScheduleMapper = allScheduleMapper;
         this.oneDayScheduleMapper = oneDayScheduleMapper;
     }
 
@@ -86,6 +86,6 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     @Override
     public Single<List<WeekDto>> getFullSchedule(final String scheduleName) {
         return pairsManagementDao.getScheduleByName(scheduleName)
-                .map(entity -> allScheduleMapper.convertToDtos(entity.weeks));
+                .map(entity -> fullScheduleMapper.convertToDtos(entity.weeks));
     }
 }

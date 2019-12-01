@@ -3,11 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginBottom="@dimen/margin_small"
     android:background="@color/colorNotStated"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:padding="@dimen/padding_main"
     android:theme="@style/PairDataInputFieldTheme">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/delete_pair_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/pair_name_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_cancel">
+
+    </androidx.appcompat.widget.AppCompatImageButton>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pair_time_input_layout"
@@ -16,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/pair_place_input_layout"
         app:layout_constraintEnd_toStartOf="@id/pair_name_input_layout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/delete_pair_button">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pair_time_input"
@@ -29,10 +46,29 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pair_name_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/pair_teacher_input_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pair_time_input_layout"
+        app:layout_constraintTop_toBottomOf="@id/delete_pair_button"
+        app:layout_constraintWidth_percent=".8">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pair_name_input"
+            style="@style/PairDataInputFieldStyle"
+            android:hint="@string/pair_name_input_hint"
+            android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
+            android:maxLength="30" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pair_place_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/pair_additional_info_input_layout"
+        android:layout_marginBottom="@dimen/margin_small"
+        app:layout_constraintBottom_toTopOf="@+id/pair_type_input_spinner"
         app:layout_constraintEnd_toStartOf="@id/pair_teacher_input_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pair_time_input_layout">
@@ -47,28 +83,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pair_name_input_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/pair_teacher_input_layout"
-        app:layout_constraintEnd_toStartOf="@+id/pair_type_input_spinner"
-        app:layout_constraintStart_toEndOf="@id/pair_time_input_layout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pair_name_input"
-            style="@style/PairDataInputFieldStyle"
-            android:hint="@string/pair_name_input_hint"
-            android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
-            android:maxLength="30" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pair_teacher_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/pair_additional_info_input_layout"
+        app:layout_constraintBottom_toTopOf="@+id/pair_type_input_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pair_place_input_layout"
         app:layout_constraintTop_toBottomOf="@+id/pair_name_input_layout"
@@ -86,16 +104,14 @@
         android:id="@+id/pair_type_input_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/padding_main"
         android:background="@android:drawable/btn_dropdown"
         android:backgroundTint="@color/colorPrimaryInversed"
         android:entries="@array/pairs_types"
         app:layout_constraintBottom_toTopOf="@+id/pair_additional_info_input_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pair_name_input_layout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145"
-        app:layout_constraintWidth_percent=".3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pair_teacher_input_layout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pair_additional_info_input_layout"
@@ -104,7 +120,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pair_place_input_layout">
+        app:layout_constraintTop_toBottomOf="@+id/pair_type_input_spinner">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pair_additional_info_input"

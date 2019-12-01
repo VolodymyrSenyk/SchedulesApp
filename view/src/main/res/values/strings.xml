@@ -35,6 +35,7 @@
     </string-array>
     <string name="pair_place_input_hint">Place</string>
     <string name="pair_additional_info_input_hint">Additional information</string>
+    <string name="pair_output_no_pairs">No pairs at that day</string>
 
     <!-- Buttons -->
     <string name="create_button">Create</string>
@@ -72,9 +73,9 @@
     <string name="schedule_exists_dialog_message">
         The schedule with the same name is already exists.
     </string>
-
-    <string name="debug_schedules_navigation" translatable="false">
-        %1$s of the week number %2$d
+    <string name="max_pairs_count_reached_dialog_title">Warning</string>
+    <string name="max_pairs_count_reached_message">
+        Max count of pairs reached.
     </string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.viewmodel.helpers;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 
 import androidx.core.content.ContextCompat;
 
@@ -22,34 +23,24 @@ public class ResourcesProvider {
         return context.getString(R.string.error_message, errorMessage);
     }
 
-    public String getFieldLimitReachedErrorMessage() {
-        return context.getString(R.string.field_limit_reached_error_message);
-    }
-
-    public String getScheduleExistsErrorMessage() {
-        return context.getString(R.string.schedule_exists_error_message);
-    }
-
     public String getPairTime(long time) {
-        Calendar timeCalendar = Calendar.getInstance();
-        timeCalendar.setTimeInMillis(time);
-        return context.getString(
-                R.string.pair_time_output,
-                timeCalendar.get(Calendar.HOUR_OF_DAY),
-                timeCalendar.get(Calendar.MINUTE)
+        if (time == 0) {
+            return "";
+        }
+        Calendar dateAndTime = Calendar.getInstance();
+        dateAndTime.setTimeInMillis(time);
+        return DateUtils.formatDateTime(
+                context,
+                dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_TIME
         );
-    }
-
-    public long getPairTime(String time) {
-        String[] timeArray = time.split("[:]");
-        Calendar timeCalendar = Calendar.getInstance();
-        timeCalendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-        timeCalendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-        return timeCalendar.getTimeInMillis();
     }
 
     public String getPairType(PairType type) {
         String[] allTypes = context.getResources().getStringArray(R.array.pairs_types);
+        if (type == null) {
+            return allTypes[PairTypeEnumContract.NOT_STATED_TYPE_INDEX];
+        }
         switch (type) {
             case LECTURE:
                 return allTypes[PairTypeEnumContract.LECTURE_TYPE_INDEX];
@@ -80,6 +71,9 @@ public class ResourcesProvider {
     }
 
     public int getPairsHolderColor(PairType type) {
+        if (type == null) {
+            return ContextCompat.getColor(context, R.color.colorNotStated);
+        }
         switch (type) {
             case LECTURE:
                 return ContextCompat.getColor(context, R.color.colorLecture);
@@ -88,6 +82,21 @@ public class ResourcesProvider {
             case LABORATORY:
                 return ContextCompat.getColor(context, R.color.colorLaboratory);
             case SPORT:
+                return ContextCompat.getColor(context, R.color.colorSport);
+            default:
+                return ContextCompat.getColor(context, R.color.colorNotStated);
+        }
+    }
+
+    public int getPairsHolderColorByIndex(int typeIndex) {
+        switch (typeIndex) {
+            case PairTypeEnumContract.LECTURE_TYPE_INDEX:
+                return ContextCompat.getColor(context, R.color.colorLecture);
+            case PairTypeEnumContract.PRACTICE_TYPE_INDEX:
+                return ContextCompat.getColor(context, R.color.colorPractice);
+            case PairTypeEnumContract.LABORATORY_TYPE_INDEX:
+                return ContextCompat.getColor(context, R.color.colorLaboratory);
+            case PairTypeEnumContract.SPORT_TYPE_INDEX:
                 return ContextCompat.getColor(context, R.color.colorSport);
             default:
                 return ContextCompat.getColor(context, R.color.colorNotStated);
@@ -115,19 +124,6 @@ public class ResourcesProvider {
         return number;
     }
 
-    public long getDateOfCreation(String date) {
-        String[] dateTimeArray = date.split("[ ]");
-        String[] dateArray = dateTimeArray[0].split("[.]");
-        String[] timeArray = dateTimeArray[1].split("[:]");
-        Calendar timeCalendar = Calendar.getInstance();
-        timeCalendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateArray[0]));
-        timeCalendar.set(Calendar.MONTH, Integer.parseInt(dateArray[1]));
-        timeCalendar.set(Calendar.YEAR, Integer.parseInt(dateArray[2]));
-        timeCalendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-        timeCalendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-        return timeCalendar.getTimeInMillis();
-    }
-
     public int getScheduleHolderColor(ScheduleUi schedule) {
         if (schedule.isCurrent() && schedule.isSelected()) {
             return ContextCompat.getColor(context, R.color.colorCurrentSelectedSchedule);
@@ -144,21 +140,6 @@ public class ResourcesProvider {
 
     public String getPairTypeByIndex(int typeIndex) {
         return context.getResources().getStringArray(R.array.pairs_types)[typeIndex];
-    }
-
-    public int getPairsHolderColorByIndex(int typeIndex) {
-        switch (typeIndex) {
-            case PairTypeEnumContract.LECTURE_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorLecture);
-            case PairTypeEnumContract.PRACTICE_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorPractice);
-            case PairTypeEnumContract.LABORATORY_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorLaboratory);
-            case PairTypeEnumContract.SPORT_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorSport);
-            default:
-                return ContextCompat.getColor(context, R.color.colorNotStated);
-        }
     }
 
     public int getPairTypeIndex(String type) {
