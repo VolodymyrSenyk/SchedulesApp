@@ -52,7 +52,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <com.senyk.volodymyr.schedulesapp.view.customviews.NonSwipeableViewPager
         android:id="@+id/week_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

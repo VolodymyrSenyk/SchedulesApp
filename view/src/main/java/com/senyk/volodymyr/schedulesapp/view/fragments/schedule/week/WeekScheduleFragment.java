@@ -48,7 +48,7 @@ public class WeekScheduleFragment extends BaseFragment {
         this.viewModel.loadScheduleData(sharedViewModel.getCurrentScheduleName());
 
         setView(view);
-        addObservers();
+        addObservers(savedInstanceState != null);
 
         requireActivity().getOnBackPressedDispatcher()
                 .addCallback(this.getViewLifecycleOwner(), new OnBackPressedCallback(true) {
@@ -84,7 +84,7 @@ public class WeekScheduleFragment extends BaseFragment {
         });
     }
 
-    private void addObservers() {
+    private void addObservers(boolean isAfterConfigurationChange) {
         this.viewModel.getScheduleData()
                 .observe(this.getViewLifecycleOwner(), schedule -> {
                     adapter = new SimpleTabAdapter(requireActivity().getSupportFragmentManager());
@@ -100,7 +100,11 @@ public class WeekScheduleFragment extends BaseFragment {
                     }
                     viewPager.setAdapter(adapter);
                     tabLayout.setupWithViewPager(viewPager);
-                    viewPager.setCurrentItem(sharedViewModel.initNavigationIndexes(daysCount));
+                    if (!isAfterConfigurationChange) {
+                        viewPager.setCurrentItem(sharedViewModel.initNavigationIndexes(daysCount));
+                    } else if (sharedViewModel.getCurrentScheduleIndexes().getValue() != null){
+                        viewPager.setCurrentItem(sharedViewModel.getCurrentScheduleIndexes().getValue().second);
+                    }
                 });
 
         this.viewModel.message
