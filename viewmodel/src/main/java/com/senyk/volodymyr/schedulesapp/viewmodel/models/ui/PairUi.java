@@ -77,6 +77,12 @@ public class PairUi implements PrintableOnTheList {
     }
 
     public PairUi() {
+        this.time = "";
+        this.name = "";
+        this.teacher = "";
+        this.type = "";
+        this.place = "";
+        this.additionalInfo = "";
     }
 
     public PairUi(String time, long timeInMillis, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {

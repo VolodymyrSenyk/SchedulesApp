@@ -18,8 +18,20 @@ import com.senyk.volodymyr.schedulesapp.view.fragments.schedule.day.DayScheduleF
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 public class TwoWeekFormatDayScheduleFragment extends BaseFragment {
+    private static final String SCHEDULE_NAME_BUNDLE_KEY = "Schedule name bundle key";
+    private static final String DAY_ORDINAL_BUNDLE_KEY = "Day ordinal number bundle key";
+
     private SchedulesNavigationSharedViewModel sharedViewModel;
     private ViewPager viewPager;
+
+    public static TwoWeekFormatDayScheduleFragment newInstance(String scheduleName, int dayOrdinal) {
+        TwoWeekFormatDayScheduleFragment newFragment = new TwoWeekFormatDayScheduleFragment();
+        Bundle args = new Bundle();
+        args.putString(SCHEDULE_NAME_BUNDLE_KEY, scheduleName);
+        args.putInt(DAY_ORDINAL_BUNDLE_KEY, dayOrdinal);
+        newFragment.setArguments(args);
+        return newFragment;
+    }
 
     @Nullable
     @Override
@@ -37,41 +49,20 @@ public class TwoWeekFormatDayScheduleFragment extends BaseFragment {
         TabLayout tabLayout = view.findViewById(R.id.days_tabs);
         SimpleTabAdapter adapter = new SimpleTabAdapter(getChildFragmentManager());
         String[] weeksNames = getResources().getStringArray(R.array.weeks_names);
-        for (String weekName : weeksNames) {
-            adapter.addFragment(new DayScheduleFragment(), weekName);
+        Bundle args = getArguments();
+        if (args != null) {
+            for (int i = 0; i < weeksNames.length; i++) {
+                adapter.addFragment(
+                        DayScheduleFragment.newInstance(
+                                args.getString(SCHEDULE_NAME_BUNDLE_KEY),
+                                i + 1,
+                                args.getInt(DAY_ORDINAL_BUNDLE_KEY)
+                        ),
+                        weeksNames[i]
+                );
+            }
         }
         this.viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-        this.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                sharedViewModel.setCurrentWeekIndex(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (sharedViewModel.getCurrentScheduleIndexes().getValue() != null) {
-            this.viewPager.setCurrentItem(sharedViewModel.getCurrentScheduleIndexes().getValue().first);
-        } else {
-            this.viewPager.setCurrentItem(0);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        this.sharedViewModel.setCurrentWeekIndex(viewPager.getCurrentItem());
     }
 }

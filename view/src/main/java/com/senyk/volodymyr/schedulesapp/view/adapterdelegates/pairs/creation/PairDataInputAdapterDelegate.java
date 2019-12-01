@@ -104,7 +104,6 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View selectedItemView, int position, long id) {
                 item.setType(resourcesProvider.getPairTypeByIndex(position));
-                item.setHolderColor(resourcesProvider.getPairsHolderColorByIndex(position));
             }
 
             @Override

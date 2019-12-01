@@ -1,6 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.view.activities;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +21,13 @@ public class SchedulesAppMainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.host_fragment);
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_nav_view);
         NavigationUI.setupWithNavController(bottomNavigation, navController);
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if(destination.getId() == R.id.newScheduleCreatorFragment) {
+                bottomNavigation.setVisibility(View.GONE);
+            } else {
+                bottomNavigation.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

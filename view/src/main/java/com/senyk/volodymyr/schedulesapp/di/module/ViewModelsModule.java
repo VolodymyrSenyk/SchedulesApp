@@ -10,7 +10,6 @@ import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
-import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.PairDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.GenericDtoUiListMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.SchedulesDtoUiListMapper;
@@ -68,13 +67,11 @@ public class ViewModelsModule {
     ViewModel bindDayScheduleViewModel(
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
-            GenericDtoUiListMapper<PairDto, PairUi> pairDtoUiUiListMapper,
-            PairDtoUiMapper pairDtoUiMapper) {
+            GenericDtoUiListMapper<PairDto, PairUi> pairDtoUiUiListMapper) {
         return new DayScheduleViewModel(
                 errorsHandler,
                 schedulesRepository,
-                pairDtoUiUiListMapper,
-                pairDtoUiMapper
+                pairDtoUiUiListMapper
         );
     }
 

@@ -48,7 +48,7 @@ public class WeekScheduleFragment extends BaseFragment {
         this.viewModel.loadScheduleData(sharedViewModel.getCurrentScheduleName());
 
         setView(view);
-        addObservers(savedInstanceState != null);
+        addObservers();
 
         requireActivity().getOnBackPressedDispatcher()
                 .addCallback(this.getViewLifecycleOwner(), new OnBackPressedCallback(true) {
@@ -65,26 +65,9 @@ public class WeekScheduleFragment extends BaseFragment {
         view.findViewById(R.id.next_button).setVisibility(View.GONE);
         this.viewPager = view.findViewById(R.id.week_pager);
         this.tabLayout = view.findViewById(R.id.week_tabs);
-
-        this.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                sharedViewModel.setCurrentDayIndex(position);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                sharedViewModel.setCurrentDayIndex(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
-    private void addObservers(boolean isAfterConfigurationChange) {
+    private void addObservers() {
         this.viewModel.getScheduleData()
                 .observe(this.getViewLifecycleOwner(), schedule -> {
                     adapter = new SimpleTabAdapter(requireActivity().getSupportFragmentManager());
@@ -93,18 +76,26 @@ public class WeekScheduleFragment extends BaseFragment {
                             schedule.isSaturdayWorking() ? ScheduleDtoUiMapper.WEEK_LENGTH_WITH_SAT : ScheduleDtoUiMapper.NORMAL_WEEK_LENGTH;
                     for (int i = 0; i < daysCount; i++) {
                         if (schedule.isNumDenomSystem()) {
-                            adapter.addFragment(new TwoWeekFormatDayScheduleFragment(), daysOfTheWeek[i]);
+                            adapter.addFragment(
+                                    TwoWeekFormatDayScheduleFragment.newInstance(
+                                            schedule.getName(),
+                                            i + 1
+                                    ),
+                                    daysOfTheWeek[i]
+                            );
                         } else {
-                            adapter.addFragment(new DayScheduleFragment(), daysOfTheWeek[i]);
+                            adapter.addFragment(
+                                    DayScheduleFragment.newInstance(
+                                            schedule.getName(),
+                                            1,
+                                            i + 1
+                                    ),
+                                    daysOfTheWeek[i]
+                            );
                         }
                     }
                     viewPager.setAdapter(adapter);
                     tabLayout.setupWithViewPager(viewPager);
-                    if (!isAfterConfigurationChange) {
-                        viewPager.setCurrentItem(sharedViewModel.initNavigationIndexes(daysCount));
-                    } else if (sharedViewModel.getCurrentScheduleIndexes().getValue() != null){
-                        viewPager.setCurrentItem(sharedViewModel.getCurrentScheduleIndexes().getValue().second);
-                    }
                 });
 
         this.viewModel.message
