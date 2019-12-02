@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Screen titles -->
+    <string name="app_name">Расписания</string>
+    <string name="schedules_manager_screen_title">Все расписания</string>
+    <string name="new_schedule_creator_screen_title">Новое расписание</string>
+    <string name="main_screen_title">Расписание</string>
+    <string name="whole_schedule_screen_title">Полное расписание</string>
+
+    <!-- Main menu items -->
+    <string name="action_schedules_manager">Переключение</string>
+    <string name="action_one_day_schedule">Подробное</string>
+    <string name="action_whole_schedule">Полное</string>
+
+    <!-- Days of the week -->
+    <string-array name="days_of_the_week">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+    </string-array>
+
+    <!-- Weeks -->
+    <string-array name="weeks_names">
+        <item>Числитель</item>
+        <item>Знаменатель</item>
+    </string-array>
+
+    <!-- Schedule data output -->
+    <string name="schedule_date_of_creation_output">Создано %1$s</string>
+    <string name="schedule_is_saturday_working_output">Суббота является рабочим днём</string>
+    <string name="schedule_is_num_denom_system_output">Расписание по системе \"числитель/знаменатель\"</string>
+
+    <!-- Schedule data input -->
+    <string name="schedule_name_input_hint">Название расписания</string>
+    <string name="schedule_is_saturday_working_input">Суббота является рабочим днём</string>
+    <string name="schedule_is_num_denom_system_input">Расписание по системе \"числитель/знаменатель\"</string>
+
+    <!-- Pair data input -->
+    <string name="pair_time_input_hint">Время</string>
+    <string name="pair_name_input_hint">Предмет</string>
+    <string name="pair_teacher_input_hint">Преподаватель</string>
+    <string-array name="pairs_types">
+        <item>Не установлено</item>
+        <item>Лекция</item>
+        <item>Практика</item>
+        <item>Лабораторная</item>
+        <item>Физ.-ра</item>
+    </string-array>
+    <string name="pair_place_input_hint">Аудитория</string>
+    <string name="pair_additional_info_input_hint">Дополнительная информация</string>
+
+    <!-- Pair data output -->
+    <string name="pair_output_no_pairs">Пар на этот день нет</string>
+
+    <!-- Buttons -->
+    <string name="create_button">Создать</string>
+
+    <!-- Dialogs -->
+    <string name="answer_yes">Да</string>
+    <string name="answer_no">Нет</string>
+    <string name="answer_ok">ОК</string>
+    <string name="swap_schedules_dialog_title">Заменить расписание?</string>
+    <string name="swap_schedules_dialog_message">Выбранное расписание будет установлено в качестве текущего</string>
+    <string name="delete_schedule_dialog_title">Удалить расписание?</string>
+    <string name="delete_schedule_dialog_message">Расписание будет безвозвратно удалено</string>
+    <string name="schedule_exists_dialog_title">Уже существует</string>
+    <string name="schedule_exists_dialog_message">Расписание с таким же названием уже существует</string>
+
+</resources>
