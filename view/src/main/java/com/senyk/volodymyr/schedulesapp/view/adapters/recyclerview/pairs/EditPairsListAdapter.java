@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.models.enums.PairType;
-import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.creation.NewPairCreationAdapterDelegate;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.creation.NewPairAddingAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.creation.PairDataInputAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.PairDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
@@ -21,9 +21,9 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
 
     public EditPairsListAdapter(Fragment fragment, PairDtoUiMapper pairMapper) {
         super(new DiffPrintableOnTheList());
-        delegatesManager
+        this.delegatesManager
                 .addDelegate(new PairDataInputAdapterDelegate(fragment))
-                .addDelegate(new NewPairCreationAdapterDelegate(fragment));
+                .addDelegate(new NewPairAddingAdapterDelegate(fragment));
         setItems(new ArrayList<>());
         this.pairMapper = pairMapper;
     }
@@ -31,8 +31,7 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
     public void setPairsList(List<PairUi> items) {
         List<PrintableOnTheList> convertedList = new ArrayList<>(items.size());
         convertedList.addAll(items);
-        convertedList.add(new PrintableOnTheList() {
-        });
+        convertedList.add(new PrintableOnTheList() {});
         super.setItems(convertedList);
     }
 
@@ -62,8 +61,7 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
                 "",
                 PairType.NOT_STATED,
                 "",
-                ""
-        )));
+                "")));
         this.setItems(extendedList);
     }
 
@@ -87,23 +85,15 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
     static class DiffPrintableOnTheList extends DiffUtil.ItemCallback<PrintableOnTheList> {
         @Override
         public boolean areItemsTheSame(@NonNull PrintableOnTheList oldItem, @NonNull PrintableOnTheList newItem) {
-            if (oldItem.getClass() != newItem.getClass()) {
-                return false;
-            }
-            if (oldItem.getClass() != PairUi.class && newItem.getClass() != PairUi.class) {
-                return true;
-            }
+            if (oldItem.getClass() != newItem.getClass()) return false;
+            if (oldItem.getClass() != PairUi.class && newItem.getClass() != PairUi.class) return true;
             return ((PairUi) oldItem).getId() == ((PairUi) newItem).getId();
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull PrintableOnTheList oldItem, @NonNull PrintableOnTheList newItem) {
-            if (!(oldItem instanceof PairUi && newItem instanceof PairUi)) {
-                return false;
-            }
-            PairUi oldPair = (PairUi) oldItem;
-            PairUi newPair = (PairUi) newItem;
-            return oldPair.equals(newPair);
+            if (!(oldItem instanceof PairUi && newItem instanceof PairUi)) return true;
+            return ((PairUi)oldItem).equals((PairUi)newItem);
         }
     }
 }

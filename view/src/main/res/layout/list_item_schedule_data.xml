@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/list_item"
+    android:background="@drawable/list_item_simple"
     android:padding="@dimen/padding_main"
     android:orientation="vertical">
 

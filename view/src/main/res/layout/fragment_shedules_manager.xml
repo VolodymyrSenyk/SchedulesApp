@@ -29,8 +29,6 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_new_schedule_button"
         style="@style/StandartFABStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

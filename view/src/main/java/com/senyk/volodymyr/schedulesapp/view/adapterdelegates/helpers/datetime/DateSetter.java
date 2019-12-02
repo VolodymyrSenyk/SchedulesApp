@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers;
+package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.datetime;
 
 import android.app.DatePickerDialog;
 import android.text.format.DateUtils;

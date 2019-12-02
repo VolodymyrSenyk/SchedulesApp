@@ -35,8 +35,7 @@ public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<Printabl
         return new PairDataOutputAdapterDelegate.PairDataOutputViewHolder(this.inflater.inflate(
                 R.layout.list_item_pair_output,
                 parent,
-                false
-        ));
+                false));
     }
 
     @Override
@@ -64,20 +63,19 @@ public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<Printabl
     }
 
     static class PairDataOutputViewHolder extends RecyclerView.ViewHolder {
-        TextView pairTime;
-        TextView pairName;
-        TextView pairTeacher;
-        TextView pairType;
-        TextView pairPlace;
+        private TextView pairTime;
+        private TextView pairName;
+        private TextView pairTeacher;
+        private TextView pairType;
+        private TextView pairPlace;
 
         PairDataOutputViewHolder(View view) {
             super(view);
-            pairTime = view.findViewById(R.id.pair_time_output);
-            pairName = view.findViewById(R.id.pair_name_output);
-            pairTeacher = view.findViewById(R.id.pair_teacher_output);
-            pairType = view.findViewById(R.id.pair_type_output);
-            pairPlace = view.findViewById(R.id.pair_place_output);
+            this.pairTime = view.findViewById(R.id.pair_time_output);
+            this.pairName = view.findViewById(R.id.pair_name_output);
+            this.pairTeacher = view.findViewById(R.id.pair_teacher_output);
+            this.pairType = view.findViewById(R.id.pair_type_output);
+            this.pairPlace = view.findViewById(R.id.pair_place_output);
         }
     }
-
 }

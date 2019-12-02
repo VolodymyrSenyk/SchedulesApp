@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.day;
+package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.senyk.volodymyr.schedulesapp.R;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners.PairsClickListener;
 import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.pairs.EditPairsListAdapter;
 import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.pairs.ShowPairsListAdapter;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.WarningClickListener;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
-import com.senyk.volodymyr.schedulesapp.view.listeners.PairsClickListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.resourcesproviders.PairsMappingResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.PairDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.DayUi;
@@ -27,9 +27,7 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement.OneDayScheduleViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
-import java.util.ArrayList;
-
-public class DayScheduleFragment extends BaseFragment implements PairsClickListener, WarningClickListener {
+public class OneDayScheduleFragment extends BaseFragment implements PairsClickListener, WarningClickListener {
     private static final String SCHEDULE_NAME_BUNDLE_KEY = "Schedule name bundle key";
     private static final String WEEK_ORDINAL_BUNDLE_KEY = "Week ordinal number bundle key";
     private static final String DAY_ORDINAL_BUNDLE_KEY = "Day ordinal number bundle key";
@@ -46,8 +44,8 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
     private int weekOrdinal;
     private int dayOrdinal;
 
-    public static DayScheduleFragment newInstance(String scheduleName, int weekOrdinal, int dayOrdinal) {
-        DayScheduleFragment newFragment = new DayScheduleFragment();
+    public static OneDayScheduleFragment newInstance(String scheduleName, int weekOrdinal, int dayOrdinal) {
+        OneDayScheduleFragment newFragment = new OneDayScheduleFragment();
         Bundle args = new Bundle();
         args.putString(SCHEDULE_NAME_BUNDLE_KEY, scheduleName);
         args.putInt(WEEK_ORDINAL_BUNDLE_KEY, weekOrdinal);
@@ -59,7 +57,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_day_schedule, container, false);
+        return inflater.inflate(R.layout.fragment_one_day_schedule, container, false);
     }
 
     @Override
@@ -111,19 +109,18 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
         pairsListView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         this.pairsList = pairsListView;
 
-        this.showPairsListAdapter = new ShowPairsListAdapter(this, new ArrayList<>());
-        this.editPairsListAdapter = new EditPairsListAdapter(this, new PairDtoUiMapper(new PairsMappingResourcesProvider(requireContext())));
+        this.showPairsListAdapter = new ShowPairsListAdapter(this);
+        this.editPairsListAdapter = new EditPairsListAdapter(
+                this,
+                new PairDtoUiMapper(new PairsMappingResourcesProvider(requireContext())));
     }
 
     private void addObservers() {
-        viewModel.getMessage()
-                .observe(this.getViewLifecycleOwner(), message -> Toast.makeText(
-                        requireContext(),
-                        message,
-                        Toast.LENGTH_LONG
-                ).show());
+        this.viewModel.getMessage()
+                .observe(this.getViewLifecycleOwner(), message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show());
 
-        viewModel.isEditMode()
+        this.viewModel.isEditMode()
                 .observe(this.getViewLifecycleOwner(), isEditMode -> {
                             if (isEditMode) {
                                 setEditMode();
@@ -133,13 +130,13 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
                         }
                 );
 
-        viewModel.getScheduleForOneDay()
+        this.viewModel.getScheduleForOneDay()
                 .observe(this.getViewLifecycleOwner(), scheduleForOneDay -> {
                     if (scheduleForOneDay.getWeekOrdinal() == this.weekOrdinal &&
                             scheduleForOneDay.getOrdinal() == this.dayOrdinal) {
-                        showPairsListAdapter.setUiItems(scheduleForOneDay.getPairs());
-                        editPairsListAdapter.setPairsList(scheduleForOneDay.getPairs());
-                        sharedViewModel.setIsLoading(false);
+                        this.showPairsListAdapter.setUiItems(scheduleForOneDay.getPairs());
+                        this.editPairsListAdapter.setPairsList(scheduleForOneDay.getPairs());
+                        this.sharedViewModel.setIsLoading(false);
                     }
                 });
     }
@@ -156,13 +153,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
         this.editSaveButton.setOnClickListener(view ->
                 viewModel.updateScheduleForOneDay(
                         this.scheduleName,
-                        new DayUi(
-                                this.dayOrdinal,
-                                this.weekOrdinal,
-                                this.editPairsListAdapter.getPairsList()
-                        )
-                )
-        );
+                        new DayUi(this.dayOrdinal, this.weekOrdinal, this.editPairsListAdapter.getPairsList())));
 
         this.pairsList.setAdapter(this.editPairsListAdapter);
     }

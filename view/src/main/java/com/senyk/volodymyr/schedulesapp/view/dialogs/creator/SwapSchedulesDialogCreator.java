@@ -9,33 +9,29 @@ import com.senyk.volodymyr.schedulesapp.view.dialogs.DialogFragmentsTypes;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.builder.AlertDialogBuilder;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.DialogClickListener;
 
-public class ScheduleDeletingDialogCreator implements DialogCreator {
+public class SwapSchedulesDialogCreator implements DialogCreator {
     private DialogClickListener listener;
-    private String scheduleName;
 
-    public ScheduleDeletingDialogCreator(DialogClickListener listener, String scheduleName) {
+    public SwapSchedulesDialogCreator(DialogClickListener listener) {
         this.listener = listener;
-        this.scheduleName = scheduleName;
     }
 
     @Override
     public AlertDialog createDialog(Context context) {
         return new AlertDialogBuilder(context)
-                .addTitle(context.getString(R.string.schedule_delete_dialog_title))
+                .addTitle(context.getString(R.string.swap_schedules_dialog_title))
                 .addIcon(R.drawable.ic_warning)
-                .addMessage(context.getString(R.string.schedule_delete_dialog_message))
-                .addPositiveButton(
-                        context.getString(R.string.answer_yes),
-                        (dialogInterface, i) -> listener.onPositiveButtonClick(
-                                DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG,
-                                scheduleName
-                        ))
+                .addMessage(context.getString(R.string.swap_schedules_dialog_message))
                 .addNegativeButton(
                         context.getString(R.string.answer_no),
                         (dialogInterface, i) -> listener.onNegativeButtonClick(
-                                DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG,
-                                ""
-                        ))
+                                DialogFragmentsTypes.SWAP_SCHEDULES_DIALOG,
+                                ""))
+                .addPositiveButton(
+                        context.getString(R.string.answer_yes),
+                        (dialogInterface, i) -> listener.onPositiveButtonClick(
+                                DialogFragmentsTypes.SWAP_SCHEDULES_DIALOG,
+                                ""))
                 .build();
     }
 }

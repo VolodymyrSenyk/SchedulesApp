@@ -16,8 +16,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.TextChangeListener;
-import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.TimeSetter;
-import com.senyk.volodymyr.schedulesapp.view.listeners.PairsClickListener;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.datetime.TimeSetter;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners.PairsClickListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.resourcesproviders.PairsMappingResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
@@ -46,8 +46,7 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
         return new PairDataInputAdapterDelegate.PairDataInputViewHolder(this.inflater.inflate(
                 R.layout.list_item_pair_input,
                 parent,
-                false
-        ));
+                false));
     }
 
     @Override
@@ -125,24 +124,23 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
     }
 
     static class PairDataInputViewHolder extends RecyclerView.ViewHolder {
-        TextInputEditText pairTime;
-        TextInputEditText pairName;
-        TextInputEditText pairTeacher;
-        Spinner pairType;
-        TextInputEditText pairPlace;
-        TextInputEditText pairAdditionalInfo;
-        AppCompatImageButton deletePairButton;
+        private TextInputEditText pairTime;
+        private TextInputEditText pairName;
+        private TextInputEditText pairTeacher;
+        private Spinner pairType;
+        private TextInputEditText pairPlace;
+        private TextInputEditText pairAdditionalInfo;
+        private AppCompatImageButton deletePairButton;
 
         PairDataInputViewHolder(View view) {
             super(view);
-            pairTime = view.findViewById(R.id.pair_time_input);
-            pairName = view.findViewById(R.id.pair_name_input);
-            pairTeacher = view.findViewById(R.id.pair_teacher_input);
-            pairType = view.findViewById(R.id.pair_type_input_spinner);
-            pairPlace = view.findViewById(R.id.pair_place_input);
-            pairAdditionalInfo = view.findViewById(R.id.pair_additional_info_input);
-            deletePairButton = view.findViewById(R.id.delete_pair_button);
+            this.pairTime = view.findViewById(R.id.pair_time_input);
+            this.pairName = view.findViewById(R.id.pair_name_input);
+            this.pairTeacher = view.findViewById(R.id.pair_teacher_input);
+            this.pairType = view.findViewById(R.id.pair_type_input_spinner);
+            this.pairPlace = view.findViewById(R.id.pair_place_input);
+            this.pairAdditionalInfo = view.findViewById(R.id.pair_additional_info_input);
+            this.deletePairButton = view.findViewById(R.id.delete_pair_button);
         }
     }
-
 }

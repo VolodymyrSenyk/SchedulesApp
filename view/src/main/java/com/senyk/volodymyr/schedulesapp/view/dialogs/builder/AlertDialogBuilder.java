@@ -19,22 +19,22 @@ public class AlertDialogBuilder {
     }
 
     public AlertDialogBuilder addTitle(String title) {
-        builder.setTitle(title);
+        this.builder.setTitle(title);
         return this;
     }
 
     public AlertDialogBuilder addMessage(String message) {
-        builder.setMessage(message);
+        this.builder.setMessage(message);
         return this;
     }
 
     public AlertDialogBuilder addPositiveButton(String text, DialogInterface.OnClickListener listener) {
-        builder.setPositiveButton(text, listener);
+        this.builder.setPositiveButton(text, listener);
         return this;
     }
 
     public AlertDialogBuilder addNegativeButton(String text, DialogInterface.OnClickListener listener) {
-        builder.setNegativeButton(text, listener);
+        this.builder.setNegativeButton(text, listener);
         return this;
     }
 
@@ -44,7 +44,7 @@ public class AlertDialogBuilder {
     }
 
     public AlertDialogBuilder addIcon(int iconId) {
-        builder.setIcon(iconId);
+        this.builder.setIcon(iconId);
         return this;
     }
 }

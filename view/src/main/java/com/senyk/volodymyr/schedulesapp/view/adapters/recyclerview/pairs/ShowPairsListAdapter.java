@@ -12,19 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowPairsListAdapter extends ListDelegationAdapter<List<PrintableOnTheList>> {
-    public ShowPairsListAdapter(Fragment fragment, List<PrintableOnTheList> items) {
-        delegatesManager
+    public ShowPairsListAdapter(Fragment fragment) {
+        this.delegatesManager
                 .addDelegate(new PairDataOutputAdapterDelegate(fragment))
                 .addDelegate(new PairOutputEmptyStateAdapterDelegate(fragment));
-        setItems(items);
+        setItems(new ArrayList<>());
     }
 
     public void setUiItems(List<PairUi> items) {
         List<PrintableOnTheList> convertedList = new ArrayList<>(items.size());
         convertedList.addAll(items);
         if (convertedList.isEmpty()) {
-            convertedList.add(new PrintableOnTheList() {
-            });
+            convertedList.add(new PrintableOnTheList() {});
         }
         super.setItems(convertedList);
     }

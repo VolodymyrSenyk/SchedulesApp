@@ -18,12 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.senyk.volodymyr.schedulesapp.R;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners.SchedulesClickListener;
 import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.schedules.SchedulesOutputAdapter;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.DialogFragmentFactory;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.DialogFragmentsTypes;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.DialogClickListener;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
-import com.senyk.volodymyr.schedulesapp.view.listeners.SchedulesClickListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.SchedulesManagerViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
@@ -46,6 +46,7 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         this.viewModel = ViewModelProviders.of(this, this.viewModelFactory)
                 .get(SchedulesManagerViewModel.class);
         this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
@@ -65,13 +66,15 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
                     }
                 });
 
-        this.viewModel.loadSchedules();
         this.sharedViewModel.setIsLoading(true);
+        this.viewModel.loadSchedules();
     }
 
     private void setView(View view) {
         ((TextView) view.findViewById(R.id.screen_title)).setText(R.string.schedules_manager_screen_title);
+
         view.findViewById(R.id.next_button).setVisibility(View.GONE);
+
         AppCompatImageButton cancelButton = view.findViewById(R.id.back_button);
         cancelButton.setImageResource(R.drawable.ic_back);
         cancelButton.setOnClickListener(view1 -> NavHostFragment.findNavController(this)
@@ -129,25 +132,25 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
     }
 
     private void showSchedulesSwapDialog() {
-        DialogFragmentFactory dialogFactory = DialogFragmentFactory.newInstance(DialogFragmentsTypes.CURRENT_SCHEDULE_SWAP_DIALOG);
+        DialogFragmentFactory dialogFactory = DialogFragmentFactory.newInstance(DialogFragmentsTypes.SWAP_SCHEDULES_DIALOG);
         dialogFactory.setTargetFragment(this, DIALOG_FRAGMENT_REQUEST_CODE);
-        dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.CURRENT_SCHEDULE_SWAP_DIALOG);
+        dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.SWAP_SCHEDULES_DIALOG);
     }
 
     private void showDeleteScheduleDialog(String clickedScheduleName) {
         DialogFragmentFactory dialogFactory =
-                DialogFragmentFactory.newInstance(DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG, clickedScheduleName);
+                DialogFragmentFactory.newInstance(DialogFragmentsTypes.DELETE_SCHEDULE_DIALOG, clickedScheduleName);
         dialogFactory.setTargetFragment(this, DIALOG_FRAGMENT_REQUEST_CODE);
-        dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG);
+        dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.DELETE_SCHEDULE_DIALOG);
     }
 
     @Override
     public void onPositiveButtonClick(String dialogType, String additionalData) {
         switch (dialogType) {
-            case DialogFragmentsTypes.CURRENT_SCHEDULE_SWAP_DIALOG:
+            case DialogFragmentsTypes.SWAP_SCHEDULES_DIALOG:
                 this.viewModel.swapSchedules();
                 break;
-            case DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG:
+            case DialogFragmentsTypes.DELETE_SCHEDULE_DIALOG:
                 this.viewModel.deleteSchedule(additionalData);
                 break;
         }

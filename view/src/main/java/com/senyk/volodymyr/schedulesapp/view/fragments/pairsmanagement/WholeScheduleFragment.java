@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.alldays;
+package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,11 +11,11 @@ import androidx.annotation.Nullable;
 import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
 
-public class AllDaysScheduleFragment extends BaseFragment {
+public class WholeScheduleFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_all_days_schedule, container, false);
+        return inflater.inflate(R.layout.fragment_whole_schedule, container, false);
     }
 
     @Override

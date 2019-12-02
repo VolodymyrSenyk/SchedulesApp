@@ -19,8 +19,6 @@
         android:id="@+id/edit_save_button"
         style="@style/StandartFABStyle"
         android:layout_gravity="bottom|end"
-        android:background="@color/colorPrimaryInversed"
-        android:baselineAlignBottom="true"
         app:srcCompat="@drawable/ic_edit" />
 
 </FrameLayout>

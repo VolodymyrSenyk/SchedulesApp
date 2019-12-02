@@ -34,8 +34,7 @@ public class ScheduleInputWeeksCountAdapterDelegate extends AdapterDelegate<List
         return new ScheduleInputWeeksCountAdapterDelegate.ScheduleWeeksCountViewHolder(this.inflater.inflate(
                 R.layout.input_field_schedule_is_num_denom_system,
                 parent,
-                false
-        ));
+                false));
     }
 
     @Override
@@ -63,5 +62,4 @@ public class ScheduleInputWeeksCountAdapterDelegate extends AdapterDelegate<List
             this.isNumDenomSystemView = view.findViewById(R.id.new_schedule_is_num_denom_system);
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.listeners;
+package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners;
 
 public interface NewScheduleNameFieldListener {
     void scheduleNameFieldFilled();

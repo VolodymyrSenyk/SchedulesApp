@@ -11,7 +11,7 @@
         android:label="SchedulesManagerFragment">
         <action
             android:id="@+id/goToSchedule"
-            app:destination="@id/workWeekScheduleFragment" />
+            app:destination="@id/studyWeekFragment" />
         <action
             android:id="@+id/createNewSchedule"
             app:destination="@id/newScheduleCreatorFragment" />
@@ -26,19 +26,19 @@
             app:argType="boolean" />
         <action
             android:id="@+id/goToNewSchedule"
-            app:destination="@id/workWeekScheduleFragment"
+            app:destination="@id/studyWeekFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:popUpTo="@+id/schedulesManagerFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/workWeekScheduleFragment"
-        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.week.WeekScheduleFragment"
+        android:id="@+id/studyWeekFragment"
+        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.StudyWeekFragment"
         android:label="WorkWeekScheduleFragment"/>
     <fragment
-        android:id="@+id/allDaysScheduleFragment"
-        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.alldays.AllDaysScheduleFragment"
+        android:id="@+id/wholeScheduleFragment"
+        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.WholeScheduleFragment"
         android:label="fragment_all_days_schedule"
-        tools:layout="@layout/fragment_all_days_schedule" />
+        tools:layout="@layout/fragment_whole_schedule" />
 
 </navigation>

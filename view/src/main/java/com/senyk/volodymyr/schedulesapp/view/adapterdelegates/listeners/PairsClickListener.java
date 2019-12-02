@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.listeners;
+package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners;
 
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 

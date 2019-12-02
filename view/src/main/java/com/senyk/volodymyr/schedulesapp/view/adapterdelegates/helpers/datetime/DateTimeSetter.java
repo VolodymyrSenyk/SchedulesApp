@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers;
+package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.datetime;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -22,5 +22,4 @@ public abstract class DateTimeSetter {
     }
 
     protected abstract void setDialog();
-
 }

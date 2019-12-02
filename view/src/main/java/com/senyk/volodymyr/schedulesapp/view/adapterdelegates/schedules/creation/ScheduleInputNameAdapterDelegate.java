@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.TextChangeListener;
-import com.senyk.volodymyr.schedulesapp.view.listeners.NewScheduleNameFieldListener;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners.NewScheduleNameFieldListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.datainputfields.ScheduleNameInputField;
 
@@ -39,8 +39,7 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Print
         return new ScheduleInputNameAdapterDelegate.ScheduleNameInputFieldViewHolder(this.inflater.inflate(
                 R.layout.input_field_schedule_name,
                 parent,
-                false
-        ));
+                false));
     }
 
     @Override
@@ -71,5 +70,4 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Print
             this.scheduleNameView = view.findViewById(R.id.new_schedule_name);
         }
     }
-
 }

@@ -33,8 +33,7 @@ public class PairOutputEmptyStateAdapterDelegate extends AdapterDelegate<List<Pr
         return new PairOutputEmptyStateAdapterDelegate.PairDataOutputEmptyStateViewHolder(this.inflater.inflate(
                 R.layout.list_item_pair_output_empty_state,
                 parent,
-                false
-        ));
+                false));
     }
 
     @Override
@@ -50,5 +49,4 @@ public class PairOutputEmptyStateAdapterDelegate extends AdapterDelegate<List<Pr
             super(view);
         }
     }
-
 }

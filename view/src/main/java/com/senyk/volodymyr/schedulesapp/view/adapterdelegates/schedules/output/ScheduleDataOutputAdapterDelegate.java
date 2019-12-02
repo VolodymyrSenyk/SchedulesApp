@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
-import com.senyk.volodymyr.schedulesapp.view.listeners.SchedulesClickListener;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners.SchedulesClickListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
@@ -53,27 +53,23 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
         ScheduleDataOutputViewHolder viewHolder = (ScheduleDataOutputViewHolder) holder;
 
         viewHolder.scheduleName.setText(item.getName());
-        viewHolder.scheduleDateOfCreation.setText(
-                viewHolder.scheduleDateOfCreation.getContext().getString(
-                        R.string.schedule_date_of_creation_output,
-                        item.getDateOfCreation()
-                )
-        );
+        viewHolder.scheduleDateOfCreation.setText(viewHolder.scheduleDateOfCreation.getContext()
+                .getString(R.string.schedule_date_of_creation_output, item.getDateOfCreation()));
+
         if (!item.isSaturdayWorking()) {
             viewHolder.scheduleIsSaturdayWorking.setVisibility(View.GONE);
         }
         if (!item.isNumDenomSystem()) {
             viewHolder.scheduleIsNumDenomSystem.setVisibility(View.GONE);
         }
+
         if (item.isCurrent()) {
             if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                 viewHolder.itemView.setBackgroundDrawable(
-                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.selected_list_item)
-                );
+                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.list_item_selected));
             } else {
                 viewHolder.itemView.setBackground(
-                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.selected_list_item)
-                );
+                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.list_item_selected));
             }
         }
 
@@ -84,20 +80,19 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
     }
 
     static class ScheduleDataOutputViewHolder extends RecyclerView.ViewHolder {
-        TextView scheduleName;
-        TextView scheduleDateOfCreation;
-        TextView scheduleIsSaturdayWorking;
-        TextView scheduleIsNumDenomSystem;
-        MaterialButton deleteScheduleButton;
+        private TextView scheduleName;
+        private TextView scheduleDateOfCreation;
+        private TextView scheduleIsSaturdayWorking;
+        private TextView scheduleIsNumDenomSystem;
+        private MaterialButton deleteScheduleButton;
 
         ScheduleDataOutputViewHolder(View view) {
             super(view);
-            scheduleName = view.findViewById(R.id.schedule_name_field);
-            scheduleDateOfCreation = view.findViewById(R.id.schedule_date_of_creation);
-            scheduleIsSaturdayWorking = view.findViewById(R.id.schedule_is_sat_working);
-            scheduleIsNumDenomSystem = view.findViewById(R.id.schedule_is_num_denom_system);
-            deleteScheduleButton = view.findViewById(R.id.delete_schedule_bottom_button);
+            this.scheduleName = view.findViewById(R.id.schedule_name_field);
+            this.scheduleDateOfCreation = view.findViewById(R.id.schedule_date_of_creation);
+            this.scheduleIsSaturdayWorking = view.findViewById(R.id.schedule_is_sat_working);
+            this.scheduleIsNumDenomSystem = view.findViewById(R.id.schedule_is_num_denom_system);
+            this.deleteScheduleButton = view.findViewById(R.id.delete_schedule_bottom_button);
         }
     }
-
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ScheduleCreationAdapter extends ListDelegationAdapter<List<PrintableOnTheList>> {
     public ScheduleCreationAdapter(Fragment fragment, List<PrintableOnTheList> items) {
-        delegatesManager
+        this.delegatesManager
                 .addDelegate(new ScheduleInputNameAdapterDelegate(fragment))
                 .addDelegate(new ScheduleInputWeekLengthAdapterDelegate(fragment))
                 .addDelegate(new ScheduleInputWeeksCountAdapterDelegate(fragment));

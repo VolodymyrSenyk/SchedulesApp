@@ -18,12 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.senyk.volodymyr.schedulesapp.R;
+import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.listeners.NewScheduleNameFieldListener;
 import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.schedules.ScheduleCreationAdapter;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.DialogFragmentFactory;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.DialogFragmentsTypes;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.WarningClickListener;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
-import com.senyk.volodymyr.schedulesapp.view.listeners.NewScheduleNameFieldListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.NewScheduleCreatorViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
@@ -85,7 +85,7 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
         AppCompatImageButton cancelButton = view.findViewById(R.id.back_button);
         cancelButton.setImageResource(R.drawable.ic_cancel);
         cancelButton.setOnClickListener(view1 -> {
-            if (args.getIsSingleSchedule()) {
+            if (this.args.getIsSingleSchedule()) {
                 requireActivity().finish();
             } else {
                 NavHostFragment.findNavController(NewScheduleCreatorFragment.this)
@@ -137,9 +137,9 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
 
     private void showScheduleExistsDialog() {
         DialogFragmentFactory dialogFactory =
-                DialogFragmentFactory.newInstance(DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING);
+                DialogFragmentFactory.newInstance(DialogFragmentsTypes.SCHEDULE_EXISTS_ERROR);
         dialogFactory.setTargetFragment(this, DIALOG_FRAGMENT_REQUEST_CODE);
-        dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING);
+        dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.SCHEDULE_EXISTS_ERROR);
     }
 
     @Override

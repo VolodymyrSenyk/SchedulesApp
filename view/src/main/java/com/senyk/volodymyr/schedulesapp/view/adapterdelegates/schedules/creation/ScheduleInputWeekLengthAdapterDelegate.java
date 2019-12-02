@@ -34,8 +34,7 @@ public class ScheduleInputWeekLengthAdapterDelegate extends AdapterDelegate<List
         return new ScheduleInputWeekLengthAdapterDelegate.ScheduleInputWeekLengthViewHolder(this.inflater.inflate(
                 R.layout.input_field_schedule_is_saturday_working,
                 parent,
-                false
-        ));
+                false));
     }
 
     @Override
@@ -63,5 +62,4 @@ public class ScheduleInputWeekLengthAdapterDelegate extends AdapterDelegate<List
             this.isSatWorkingView = view.findViewById(R.id.new_schedule_is_sat_working);
         }
     }
-
 }

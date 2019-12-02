@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/list_item"
+    android:background="@drawable/list_item_simple"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:padding="@dimen/padding_main"
@@ -25,7 +25,7 @@
             android:focusable="false"
             android:hint="@string/pair_time_input_hint"
             android:inputType="time"
-            android:maxLength="5" />
+            android:maxLines="2" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,7 +44,9 @@
             style="@style/PairDataInputFieldStyle"
             android:hint="@string/pair_name_input_hint"
             android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:maxLines="2" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +65,9 @@
             android:hint="@string/pair_place_input_hint"
             android:inputType="textShortMessage|textMultiLine|textCapSentences"
             android:maxLength="10"
+            android:maxLines="2"
             android:textColor="@color/colorPrimary" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -81,7 +85,9 @@
             style="@style/PairDataInputFieldStyle"
             android:hint="@string/pair_teacher_input_hint"
             android:inputType="textMultiLine|textPersonName|textCapWords"
-            android:maxLength="30" />
+            android:maxLength="30"
+            android:maxLines="2" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
@@ -111,7 +117,8 @@
             style="@style/PairDataInputFieldStyle"
             android:hint="@string/pair_additional_info_input_hint"
             android:inputType="textLongMessage|textMultiLine|textCapSentences"
-            android:maxLength="500" />
+            android:maxLength="500"
+            android:maxLines="6" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -120,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_margin="@dimen/margin_small"
-        android:background="@drawable/button"
+        android:background="@drawable/button_rounded"
         android:padding="@dimen/padding_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

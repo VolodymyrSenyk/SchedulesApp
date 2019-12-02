@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.week;
+package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,20 +16,18 @@ import com.google.android.material.tabs.TabLayout;
 import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.adapters.viewpager.SimpleTabAdapter;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
-import com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.day.DayScheduleFragment;
-import com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.twoweekformatday.TwoWeekFormatDayScheduleFragment;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement.StudyWeekViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
-public class WeekScheduleFragment extends BaseFragment {
+public class StudyWeekFragment extends BaseFragment {
     private SchedulesNavigationSharedViewModel sharedViewModel;
     private StudyWeekViewModel viewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_week, container, false);
+        return inflater.inflate(R.layout.fragment_study_week, container, false);
     }
 
     private SimpleTabAdapter adapter;
@@ -56,9 +54,7 @@ public class WeekScheduleFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        this.sharedViewModel.saveCurrentDayIndex(
-                this.viewPager.getCurrentItem()
-        );
+        this.sharedViewModel.saveCurrentDayIndex(this.viewPager.getCurrentItem());
     }
 
     private void setView(View view) {
@@ -73,35 +69,27 @@ public class WeekScheduleFragment extends BaseFragment {
     private void addObservers() {
         this.viewModel.getScheduleData()
                 .observe(this.getViewLifecycleOwner(), schedule -> {
-                    adapter = new SimpleTabAdapter(requireActivity().getSupportFragmentManager());
+                    this.adapter = new SimpleTabAdapter(requireActivity().getSupportFragmentManager());
                     String[] daysOfTheWeek = getResources().getStringArray(R.array.days_of_the_week);
-                    int daysCount =
-                            schedule.isSaturdayWorking() ? ScheduleDtoUiMapper.WEEK_LENGTH_WITH_SAT : ScheduleDtoUiMapper.NORMAL_WEEK_LENGTH;
+                    int daysCount = schedule.isSaturdayWorking() ?
+                            ScheduleDtoUiMapper.WEEK_LENGTH_WITH_SAT :
+                            ScheduleDtoUiMapper.NORMAL_WEEK_LENGTH;
                     for (int i = 0; i < daysCount; i++) {
                         if (schedule.isNumDenomSystem()) {
-                            adapter.addFragment(
-                                    TwoWeekFormatDayScheduleFragment.newInstance(
-                                            schedule.getName(),
-                                            i + 1
-                                    ),
-                                    daysOfTheWeek[i]
-                            );
+                            this.adapter.addFragment(
+                                    NumDenomScheduleFragment
+                                            .newInstance(schedule.getName(), i + 1),
+                                    daysOfTheWeek[i]);
                         } else {
-                            adapter.addFragment(
-                                    DayScheduleFragment.newInstance(
-                                            schedule.getName(),
-                                            1,
-                                            i + 1
-                                    ),
-                                    daysOfTheWeek[i]
-                            );
+                            this.adapter.addFragment(
+                                    OneDayScheduleFragment
+                                            .newInstance(schedule.getName(), 1, i + 1),
+                                    daysOfTheWeek[i]);
                         }
                     }
-                    viewPager.setAdapter(adapter);
-                    tabLayout.setupWithViewPager(viewPager);
-                    viewPager.setCurrentItem(
-                            sharedViewModel.getCurrentDayIndex()
-                    );
+                    this.viewPager.setAdapter(this.adapter);
+                    this.tabLayout.setupWithViewPager(this.viewPager);
+                    this.viewPager.setCurrentItem(this.sharedViewModel.getCurrentDayIndex());
                 });
 
         this.sharedViewModel.isLoading()
@@ -114,10 +102,7 @@ public class WeekScheduleFragment extends BaseFragment {
                 });
 
         this.viewModel.getMessage()
-                .observe(this.getViewLifecycleOwner(), message -> Toast.makeText(
-                        requireContext(),
-                        message,
-                        Toast.LENGTH_LONG
-                ).show());
+                .observe(this.getViewLifecycleOwner(), message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show());
     }
 }

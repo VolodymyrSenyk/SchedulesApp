@@ -15,7 +15,7 @@ import java.util.List;
 public class SchedulesOutputAdapter extends AsyncListDifferDelegationAdapter<PrintableOnTheList> {
     public SchedulesOutputAdapter(Fragment fragment, List<PrintableOnTheList> items) {
         super(new DiffPrintableOnTheList());
-        delegatesManager
+        this.delegatesManager
                 .addDelegate(new ScheduleDataOutputAdapterDelegate(fragment));
         setItems(items);
     }
@@ -29,23 +29,16 @@ public class SchedulesOutputAdapter extends AsyncListDifferDelegationAdapter<Pri
     static class DiffPrintableOnTheList extends DiffUtil.ItemCallback<PrintableOnTheList> {
         @Override
         public boolean areItemsTheSame(@NonNull PrintableOnTheList oldItem, @NonNull PrintableOnTheList newItem) {
-            if (oldItem.getClass() != newItem.getClass()) {
-                return false;
-            }
-            if (!(oldItem instanceof ScheduleUi && newItem instanceof ScheduleUi)) {
-                return false;
-            }
+            if (oldItem.getClass() != newItem.getClass()) return false;
+            if (oldItem.getClass() != ScheduleUi.class && newItem.getClass() != ScheduleUi.class)
+                return true;
             return ((ScheduleUi) oldItem).getName().equals(((ScheduleUi) newItem).getName());
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull PrintableOnTheList oldItem, @NonNull PrintableOnTheList newItem) {
-            if (!(oldItem instanceof ScheduleUi && newItem instanceof ScheduleUi)) {
-                return false;
-            }
-            ScheduleUi oldSchedule = (ScheduleUi) oldItem;
-            ScheduleUi newSchedule = (ScheduleUi) newItem;
-            return oldSchedule.equals(newSchedule);
+            if (!(oldItem instanceof ScheduleUi && newItem instanceof ScheduleUi)) return true;
+            return ((ScheduleUi) oldItem).equals((ScheduleUi) newItem);
         }
     }
 }

@@ -18,7 +18,7 @@
     <!-- Paddings -->
     <dimen name="padding_main">8dp</dimen>
 
-    <!-- Floating action button -->
+    <!-- Floating action button_rounded -->
     <dimen name="fab_margins">16dp</dimen>
 
     <!-- Pair data output -->

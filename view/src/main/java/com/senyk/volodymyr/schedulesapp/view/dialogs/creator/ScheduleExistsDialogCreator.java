@@ -9,10 +9,10 @@ import com.senyk.volodymyr.schedulesapp.view.dialogs.DialogFragmentsTypes;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.builder.AlertDialogBuilder;
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.WarningClickListener;
 
-public class ScheduleExistsWarningCreator implements DialogCreator {
+public class ScheduleExistsDialogCreator implements DialogCreator {
     private WarningClickListener listener;
 
-    public ScheduleExistsWarningCreator(WarningClickListener listener) {
+    public ScheduleExistsDialogCreator(WarningClickListener listener) {
         this.listener = listener;
     }
 
@@ -24,7 +24,7 @@ public class ScheduleExistsWarningCreator implements DialogCreator {
                 .addMessage(context.getString(R.string.schedule_exists_dialog_message))
                 .addNeutralButton(
                         context.getString(R.string.answer_ok),
-                        (dialogInterface, i) -> listener.onNeutralButtonClick(DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING))
+                        (dialogInterface, i) -> listener.onNeutralButtonClick(DialogFragmentsTypes.SCHEDULE_EXISTS_ERROR))
                 .build();
     }
 }
