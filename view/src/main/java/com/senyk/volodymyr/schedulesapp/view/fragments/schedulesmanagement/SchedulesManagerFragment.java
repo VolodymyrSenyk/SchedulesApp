@@ -51,7 +51,7 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
         this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
                 .get(SchedulesNavigationSharedViewModel.class);
 
-        viewModel.isAppStart = sharedViewModel.isAppInit();
+        this.viewModel.setSkipSchedulesDataOutput(this.sharedViewModel.isAppInit());
 
         setView(view);
         addObservers();
@@ -65,8 +65,8 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
                     }
                 });
 
-        viewModel.loadSchedules();
-        sharedViewModel.setIsLoading(true);
+        this.viewModel.loadSchedules();
+        this.sharedViewModel.setIsLoading(true);
     }
 
     private void setView(View view) {
@@ -74,62 +74,53 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
         view.findViewById(R.id.next_button).setVisibility(View.GONE);
         AppCompatImageButton cancelButton = view.findViewById(R.id.back_button);
         cancelButton.setImageResource(R.drawable.ic_back);
-        cancelButton.setOnClickListener(view1 -> NavHostFragment.findNavController(SchedulesManagerFragment.this)
+        cancelButton.setOnClickListener(view1 -> NavHostFragment.findNavController(this)
                 .navigate(SchedulesManagerFragmentDirections.goToSchedule()));
 
-        schedulesListAdapter = new SchedulesOutputAdapter(this, new ArrayList<>());
+        this.schedulesListAdapter = new SchedulesOutputAdapter(this, new ArrayList<>());
         RecyclerView dataList = view.findViewById(R.id.all_schedules_list);
         dataList.setHasFixedSize(true);
         dataList.setNestedScrollingEnabled(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         dataList.setLayoutManager(layoutManager);
-        dataList.setAdapter(schedulesListAdapter);
+        dataList.setAdapter(this.schedulesListAdapter);
 
         FloatingActionButton addButton = view.findViewById(R.id.add_new_schedule_button);
-        addButton.setOnClickListener(view12 -> NavHostFragment.findNavController(SchedulesManagerFragment.this)
+        addButton.setOnClickListener(view12 -> NavHostFragment.findNavController(this)
                 .navigate(SchedulesManagerFragmentDirections.createNewSchedule(false)));
     }
 
     private void addObservers() {
-        viewModel.isNoSchedules()
-                .observe(this.getViewLifecycleOwner(), isNoSchedules -> {
-                    if (isNoSchedules != null && isNoSchedules) {
+        this.viewModel.isNoSchedules()
+                .observe(this.getViewLifecycleOwner(), isNoSchedules ->
                         NavHostFragment.findNavController(SchedulesManagerFragment.this)
-                                .navigate(SchedulesManagerFragmentDirections.createNewSchedule(true));
-                    }
-                });
+                                .navigate(SchedulesManagerFragmentDirections.createNewSchedule(true)));
 
-        viewModel.getCurrentScheduleName()
+        this.viewModel.getCurrentScheduleName()
                 .observe(this.getViewLifecycleOwner(), scheduleName ->
-                        sharedViewModel.setCurrentScheduleName(scheduleName));
+                        this.sharedViewModel.setCurrentScheduleName(scheduleName));
 
-        viewModel.getSchedulesOutputList()
-                .observe(requireActivity(), schedules -> schedulesListAdapter.setUiItems(schedules));
+        this.viewModel.getSchedulesOutputList()
+                .observe(requireActivity(), schedules ->
+                        this.schedulesListAdapter.setUiItems(schedules));
 
-        viewModel.needToShowSchedule()
+        this.viewModel.goToSchedule()
                 .observe(this.getViewLifecycleOwner(), currentScheduleName ->
                         NavHostFragment.findNavController(SchedulesManagerFragment.this)
-                                .navigate(SchedulesManagerFragmentDirections.goToSchedule())
-                );
+                                .navigate(SchedulesManagerFragmentDirections.goToSchedule()));
 
-        viewModel.needToShowConfirmSwapDialog()
-                .observe(this.getViewLifecycleOwner(), needToShow -> {
-                    if (needToShow) {
-                        showSchedulesSwapDialog();
-                    }
-                });
+        this.viewModel.needToShowConfirmSwapDialog()
+                .observe(this.getViewLifecycleOwner(), needToShow ->
+                        showSchedulesSwapDialog());
 
-        viewModel.message
-                .observe(this.getViewLifecycleOwner(), message -> Toast.makeText(
-                        requireContext(),
-                        message,
-                        Toast.LENGTH_LONG
-                ).show());
+        this.viewModel.getMessage()
+                .observe(this.getViewLifecycleOwner(), message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show());
     }
 
     @Override
     public void scheduleClicked(String clickedScheduleName) {
-        viewModel.scheduleSelected(clickedScheduleName);
+        this.viewModel.scheduleSelected(clickedScheduleName);
     }
 
     @Override
@@ -139,16 +130,14 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
 
     private void showSchedulesSwapDialog() {
         DialogFragmentFactory dialogFactory = DialogFragmentFactory.newInstance(DialogFragmentsTypes.CURRENT_SCHEDULE_SWAP_DIALOG);
-        dialogFactory.setTargetFragment(SchedulesManagerFragment.this, DIALOG_FRAGMENT_REQUEST_CODE);
+        dialogFactory.setTargetFragment(this, DIALOG_FRAGMENT_REQUEST_CODE);
         dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.CURRENT_SCHEDULE_SWAP_DIALOG);
     }
 
     private void showDeleteScheduleDialog(String clickedScheduleName) {
-        DialogFragmentFactory dialogFactory = DialogFragmentFactory.newInstance(
-                DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG,
-                clickedScheduleName
-        );
-        dialogFactory.setTargetFragment(SchedulesManagerFragment.this, DIALOG_FRAGMENT_REQUEST_CODE);
+        DialogFragmentFactory dialogFactory =
+                DialogFragmentFactory.newInstance(DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG, clickedScheduleName);
+        dialogFactory.setTargetFragment(this, DIALOG_FRAGMENT_REQUEST_CODE);
         dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG);
     }
 
@@ -156,13 +145,12 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
     public void onPositiveButtonClick(String dialogType, String additionalData) {
         switch (dialogType) {
             case DialogFragmentsTypes.CURRENT_SCHEDULE_SWAP_DIALOG:
-                viewModel.managementFinished();
+                this.viewModel.swapSchedules();
                 break;
             case DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG:
-                viewModel.deleteSchedule(additionalData);
+                this.viewModel.deleteSchedule(additionalData);
                 break;
         }
-
     }
 
     @Override

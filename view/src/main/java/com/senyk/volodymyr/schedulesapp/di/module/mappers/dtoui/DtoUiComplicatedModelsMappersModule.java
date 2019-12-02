@@ -14,7 +14,7 @@ import dagger.Provides;
 public class DtoUiComplicatedModelsMappersModule {
     @Singleton
     @Provides
-    public DayDtoUiMapper getOneDayScheduleMapper(GenericDtoUiListMapper<PairDto, PairUi> pairsMapper) {
+    DayDtoUiMapper getOneDayScheduleMapper(GenericDtoUiListMapper<PairDto, PairUi> pairsMapper) {
         return new DayDtoUiMapper(pairsMapper);
     }
 }

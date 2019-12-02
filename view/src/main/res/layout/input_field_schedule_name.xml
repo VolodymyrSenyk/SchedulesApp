@@ -19,6 +19,7 @@
     <com.senyk.volodymyr.schedulesapp.view.customviews.CustomTextInputField
         android:id="@+id/new_schedule_name"
         style="@style/PairDataInputFieldStyle"
-        android:maxLength="60" />
+        android:maxLength="60"
+        android:maxLines="4" />
 
 </com.google.android.material.textfield.TextInputLayout>

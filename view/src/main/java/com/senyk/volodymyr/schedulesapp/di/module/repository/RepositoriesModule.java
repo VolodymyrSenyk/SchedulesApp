@@ -31,28 +31,25 @@ import dagger.Provides;
 public class RepositoriesModule {
     @Singleton
     @Provides
-    public SchedulesRepository getSchedulesRepository(
+    SchedulesRepository getSchedulesRepository(
             SchedulesAppDatabase database,
             ScheduleEntityDtoMapper scheduleMapper,
             DayEntityDtoMapper dayMapper,
             GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
             GenericEntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper,
-            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper
-    ) {
+            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper) {
         return new RoomSchedulesRepository(
                 database,
                 scheduleMapper,
                 dayMapper,
                 allSchedulesListMapper,
                 allScheduleMapper,
-                oneDayScheduleMapper
-        );
+                oneDayScheduleMapper);
     }
 
     @Singleton
     @Provides
-    public UserSettingsRepository getUserSettingsRepository(SharedPreferences sharedPreferences) {
+    UserSettingsRepository getUserSettingsRepository(SharedPreferences sharedPreferences) {
         return new SharedPreferencesUserSettingsRepository(sharedPreferences);
     }
-
 }

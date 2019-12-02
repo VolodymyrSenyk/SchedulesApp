@@ -14,25 +14,25 @@ import dagger.Provides;
 public class EntityDtoSimpleMappersModule {
     @Singleton
     @Provides
-    public ScheduleEntityDtoMapper getScheduleMapper() {
+    ScheduleEntityDtoMapper getScheduleMapper() {
         return new ScheduleEntityDtoMapper();
     }
 
     @Singleton
     @Provides
-    public WeekEntityDtoMapper getWeekMapper() {
+    WeekEntityDtoMapper getWeekMapper() {
         return new WeekEntityDtoMapper();
     }
 
     @Singleton
     @Provides
-    public DayEntityDtoMapper getDayMapper() {
+    DayEntityDtoMapper getDayMapper() {
         return new DayEntityDtoMapper();
     }
 
     @Singleton
     @Provides
-    public PairEntityDtoMapper getPairMapper() {
+    PairEntityDtoMapper getPairMapper() {
         return new PairEntityDtoMapper();
     }
 }

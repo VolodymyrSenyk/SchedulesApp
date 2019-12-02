@@ -3,7 +3,9 @@ package com.senyk.volodymyr.schedulesapp.di.module.helpers;
 import android.content.Context;
 
 import com.senyk.volodymyr.schedulesapp.di.module.context.ContextModule;
-import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.resourcesproviders.ApplicationResourcesProvider;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.resourcesproviders.PairsMappingResourcesProvider;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.resourcesproviders.SchedulesMappingResourcesProvider;
 
 import javax.inject.Singleton;
 
@@ -14,7 +16,19 @@ import dagger.Provides;
 public class ResourcesProviderModule {
     @Singleton
     @Provides
-    public ResourcesProvider getResourcesProvider(Context context) {
-        return new ResourcesProvider(context);
+    ApplicationResourcesProvider getApplicationResourcesProvider(Context context) {
+        return new ApplicationResourcesProvider(context);
+    }
+
+    @Singleton
+    @Provides
+    PairsMappingResourcesProvider getPairsMappingResourcesProvider(Context context) {
+        return new PairsMappingResourcesProvider(context);
+    }
+
+    @Singleton
+    @Provides
+    SchedulesMappingResourcesProvider getSchedulesMappingResourcesProvider(Context context) {
+        return new SchedulesMappingResourcesProvider(context);
     }
 }

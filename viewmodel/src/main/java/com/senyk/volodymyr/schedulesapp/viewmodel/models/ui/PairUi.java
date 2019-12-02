@@ -2,7 +2,10 @@ package com.senyk.volodymyr.schedulesapp.viewmodel.models.ui;
 
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 
+import java.util.Calendar;
+
 public class PairUi implements PrintableOnTheList {
+    private final long id;
     private String time;
     private long timeInMillis;
     private String name;
@@ -11,6 +14,26 @@ public class PairUi implements PrintableOnTheList {
     private String place;
     private String additionalInfo;
     private int holderColor;
+
+    public PairUi() {
+        this("", 0, "", "", "", "", "", 0);
+    }
+
+    public PairUi(String time, long timeInMillis, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {
+        this.time = time;
+        this.timeInMillis = timeInMillis;
+        this.name = name;
+        this.teacher = teacher;
+        this.type = type;
+        this.place = place;
+        this.additionalInfo = additionalInfo;
+        this.holderColor = holderColor;
+        this.id = Calendar.getInstance().getTimeInMillis();
+    }
+
+    public long getId() {
+        return this.id;
+    }
 
     public String getTime() {
         return time;
@@ -72,21 +95,6 @@ public class PairUi implements PrintableOnTheList {
         return holderColor;
     }
 
-    public PairUi() {
-        this("", 0, "", "", "", "", "", 0);
-    }
-
-    public PairUi(String time, long timeInMillis, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {
-        this.time = time;
-        this.timeInMillis = timeInMillis;
-        this.name = name;
-        this.teacher = teacher;
-        this.type = type;
-        this.place = place;
-        this.additionalInfo = additionalInfo;
-        this.holderColor = holderColor;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -98,6 +106,7 @@ public class PairUi implements PrintableOnTheList {
         result = prime * result + this.place.hashCode();
         result = prime * result + this.additionalInfo.hashCode();
         result = prime * result + this.holderColor;
+        result = prime * result + (int) this.timeInMillis;
         return result;
     }
 
@@ -114,6 +123,7 @@ public class PairUi implements PrintableOnTheList {
                 this.type.equals(other.type) &&
                 this.place.equals(other.place) &&
                 this.additionalInfo.equals(other.additionalInfo) &&
-                this.holderColor == other.holderColor;
+                this.holderColor == other.holderColor &&
+                this.timeInMillis == other.timeInMillis;
     }
 }

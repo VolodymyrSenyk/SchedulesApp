@@ -13,8 +13,8 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.DayDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.SchedulesDtoUiListMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.factories.ViewModelFactory;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.DayScheduleViewModel;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.WeekViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement.OneDayScheduleViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement.StudyWeekViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.NewScheduleCreatorViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement.SchedulesManagerViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
@@ -60,16 +60,15 @@ public class ViewModelsModule {
 
     @Provides
     @IntoMap
-    @ViewModelKey(DayScheduleViewModel.class)
-    ViewModel bindDayScheduleViewModel(
+    @ViewModelKey(OneDayScheduleViewModel.class)
+    ViewModel bindOneDayScheduleViewModel(
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
             DayDtoUiMapper dayDtoUiMapper) {
-        return new DayScheduleViewModel(
+        return new OneDayScheduleViewModel(
                 errorsHandler,
                 schedulesRepository,
-                dayDtoUiMapper
-        );
+                dayDtoUiMapper);
     }
 
     @Provides
@@ -84,8 +83,7 @@ public class ViewModelsModule {
                 errorsHandler,
                 schedulesRepository,
                 userSettingsRepository,
-                scheduleMapper
-        );
+                scheduleMapper);
     }
 
     @Provides
@@ -95,29 +93,24 @@ public class ViewModelsModule {
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
             UserSettingsRepository userSettingsRepository,
-            SchedulesDtoUiListMapper schedulesMapper
-    ) {
+            SchedulesDtoUiListMapper schedulesMapper) {
         return new SchedulesManagerViewModel(
                 errorsHandler,
                 schedulesRepository,
                 userSettingsRepository,
-                schedulesMapper
-        );
+                schedulesMapper);
     }
 
     @Provides
     @IntoMap
-    @ViewModelKey(WeekViewModel.class)
-    ViewModel bindWeekViewModel(
+    @ViewModelKey(StudyWeekViewModel.class)
+    ViewModel bindStudyWeekViewModel(
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
-            SchedulesDtoUiListMapper schedulesMapper
-    ) {
-        return new WeekViewModel(
+            SchedulesDtoUiListMapper schedulesMapper) {
+        return new StudyWeekViewModel(
                 errorsHandler,
                 schedulesRepository,
-                schedulesMapper
-        );
+                schedulesMapper);
     }
-
 }

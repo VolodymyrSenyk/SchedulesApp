@@ -15,10 +15,7 @@ import dagger.Provides;
 public class SharedPreferencesModule {
     @Singleton
     @Provides
-    public SharedPreferences getSharedPreferences(Context context) {
-        return context.getSharedPreferences(
-                SchedulesAppSharedPreferencesContract.FILE_NAME, Context.MODE_PRIVATE
-        );
+    SharedPreferences getSharedPreferences(Context context) {
+        return context.getSharedPreferences(SchedulesAppSharedPreferencesContract.FILE_NAME, Context.MODE_PRIVATE);
     }
-
 }

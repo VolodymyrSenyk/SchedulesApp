@@ -8,6 +8,10 @@
     <color name="colorControls">#333333</color>
     <color name="colorBackground">#808080</color>
 
+    <!-- List -->
+    <color name="colorNonSelected">#C0C0C0</color>
+    <color name="colorSelected">#FFD700</color>
+
     <!-- Additional colors -->
     <color name="colorTrue">#006400</color>
     <color name="colorFalse">#8B0000</color>

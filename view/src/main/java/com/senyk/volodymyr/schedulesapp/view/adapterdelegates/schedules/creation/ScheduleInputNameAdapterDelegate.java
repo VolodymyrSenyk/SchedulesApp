@@ -58,7 +58,7 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Print
                 } else {
                     fieldFillListener.scheduleNameFieldCleared();
                 }
-                ((ScheduleNameInputField) items.get(position)).setName(editable.toString());
+                ((ScheduleNameInputField) items.get(position)).setName(editable.toString().trim());
             }
         });
     }

@@ -1,6 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule;
-
-import android.util.Log;
+package com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,31 +13,29 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.base.BaseReactiveVi
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class WeekViewModel extends BaseReactiveViewModel {
-    private static final String TAG = "WeekVM";
+public class StudyWeekViewModel extends BaseReactiveViewModel {
+    private static final String TAG = "StudyWeekVM";
 
     private final SchedulesRepository schedulesRepository;
-    private final SchedulesDtoUiListMapper schedulesDtoUiListMapper;
+    private final SchedulesDtoUiListMapper schedulesMapper;
 
     private MutableLiveData<ScheduleUi> scheduleData = new MutableLiveData<>();
 
-    public LiveData<ScheduleUi> getScheduleData() {
-        return this.scheduleData;
-    }
-
-    public WeekViewModel(
+    public StudyWeekViewModel(
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
             SchedulesDtoUiListMapper schedulesDtoUiListMapper) {
-        super(errorsHandler);
+        super(TAG, errorsHandler);
         this.schedulesRepository = schedulesRepository;
-        this.schedulesDtoUiListMapper = schedulesDtoUiListMapper;
+        this.schedulesMapper = schedulesDtoUiListMapper;
+    }
+
+    public LiveData<ScheduleUi> getScheduleData() {
+        return this.scheduleData;
     }
 
     public void loadScheduleData(String scheduleName) {
@@ -49,25 +45,14 @@ public class WeekViewModel extends BaseReactiveViewModel {
                 .flatMap((Function<List<ScheduleDto>, Observable<ScheduleDto>>) Observable::fromIterable)
                 .filter(scheduleDto -> scheduleDto.getName().equals(scheduleName))
                 .toList()
-                .map(schedulesDtoUiListMapper::convertToUi)
+                .map(this.schedulesMapper::convertToUi)
                 .map(scheduleUis -> scheduleUis.get(0))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<ScheduleUi>() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
-
+                .subscribe(new MainSingleObserver<ScheduleUi>() {
                     @Override
                     public void onSuccess(ScheduleUi schedules) {
                         scheduleData.setValue(schedules);
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, errorsHandler.handle(e));
-                    }
                 });
     }
-
 }

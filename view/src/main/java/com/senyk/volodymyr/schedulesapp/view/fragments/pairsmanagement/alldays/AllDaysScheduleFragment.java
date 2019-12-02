@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.fragments.schedule.alldays;
+package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.alldays;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

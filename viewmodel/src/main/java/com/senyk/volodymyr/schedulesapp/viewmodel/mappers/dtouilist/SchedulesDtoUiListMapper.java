@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, ScheduleUi> {
-
     public SchedulesDtoUiListMapper(@NotNull BaseDtoUiMapper<ScheduleDto, ScheduleUi> mapper) {
         super(mapper);
     }
@@ -20,7 +19,7 @@ public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, S
     public List<ScheduleUi> convertToUi(@NotNull List<ScheduleDto> list) {
         List<ScheduleUi> convertedList = new ArrayList<>(list.size());
         for (ScheduleDto item : list) {
-            ScheduleUi uiItem = listItemMapper.convertToUi(item);
+            ScheduleUi uiItem = this.listItemMapper.convertToUi(item);
             convertedList.add(uiItem);
         }
         if (!convertedList.isEmpty()) {
@@ -33,7 +32,7 @@ public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, S
     public List<ScheduleUi> convertToUi(@NotNull List<ScheduleDto> list, String currentScheduleName) {
         List<ScheduleUi> convertedList = new ArrayList<>(list.size());
         for (ScheduleDto item : list) {
-            ScheduleUi uiItem = listItemMapper.convertToUi(item);
+            ScheduleUi uiItem = this.listItemMapper.convertToUi(item);
             if (item.getName().equals(currentScheduleName)) {
                 uiItem.setCurrent(true);
             }
@@ -46,9 +45,8 @@ public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, S
     public List<ScheduleDto> convertToDto(@NotNull List<ScheduleUi> list) {
         List<ScheduleDto> convertedList = new ArrayList<>(list.size());
         for (ScheduleUi item : list) {
-            convertedList.add(listItemMapper.convertToDto(item));
+            convertedList.add(this.listItemMapper.convertToDto(item));
         }
         return convertedList;
     }
-
 }

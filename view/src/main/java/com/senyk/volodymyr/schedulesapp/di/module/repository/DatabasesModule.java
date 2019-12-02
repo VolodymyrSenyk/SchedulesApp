@@ -16,11 +16,7 @@ import dagger.Provides;
 public class DatabasesModule {
     @Singleton
     @Provides
-    public SchedulesAppDatabase getAppDatabase(Context context) {
-        return Room.databaseBuilder(
-                context,
-                SchedulesAppDatabase.class,
-                SchedulesAppDatabase.SCHEDULES_APP_DATABASE_NAME
-        ).build();
+    SchedulesAppDatabase getAppDatabase(Context context) {
+        return Room.databaseBuilder(context, SchedulesAppDatabase.class, SchedulesAppDatabase.SCHEDULES_APP_DATABASE_NAME).build();
     }
 }

@@ -20,19 +20,19 @@ import dagger.Provides;
 public class EntityDtoListsMappersModule {
     @Singleton
     @Provides
-    public GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> getAllSchedulesListMapper(ScheduleEntityDtoMapper scheduleMapper) {
+    GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> getAllSchedulesListMapper(ScheduleEntityDtoMapper scheduleMapper) {
         return new GenericEntityDtoListMapper<>(scheduleMapper);
     }
 
     @Singleton
     @Provides
-    public GenericEntityDtoListMapper<WeekDataEntity, WeekDto> getWholeScheduleMapper(WeekEntityDtoMapper weekMapper) {
+    GenericEntityDtoListMapper<WeekDataEntity, WeekDto> getWholeScheduleMapper(WeekEntityDtoMapper weekMapper) {
         return new GenericEntityDtoListMapper<>(weekMapper);
     }
 
     @Singleton
     @Provides
-    public GenericEntityDtoListMapper<PairDataEntity, PairDto> getPairsListMapper(PairEntityDtoMapper pairMapper) {
+    GenericEntityDtoListMapper<PairDataEntity, PairDto> getPairsListMapper(PairEntityDtoMapper pairMapper) {
         return new GenericEntityDtoListMapper<>(pairMapper);
     }
 }

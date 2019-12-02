@@ -32,13 +32,12 @@ import java.util.ArrayList;
 public class NewScheduleCreatorFragment extends BaseFragment implements NewScheduleNameFieldListener, WarningClickListener {
     private static final int DIALOG_FRAGMENT_REQUEST_CODE = 1;
 
+    private NewScheduleCreatorFragmentArgs args;
+
     private NewScheduleCreatorViewModel viewModel;
     private SchedulesNavigationSharedViewModel sharedViewModel;
 
     private ScheduleCreationAdapter scheduleCreationAdapter;
-
-    private NewScheduleCreatorFragmentArgs args;
-
     private MaterialButton saveBottomButton;
 
     @Nullable
@@ -56,7 +55,7 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
                 .get(SchedulesNavigationSharedViewModel.class);
 
         if (this.getArguments() != null) {
-            args = NewScheduleCreatorFragmentArgs.fromBundle(this.getArguments());
+            this.args = NewScheduleCreatorFragmentArgs.fromBundle(this.getArguments());
         }
 
         setView(view);
@@ -75,16 +74,13 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
                     }
                 });
 
-        viewModel.loadInputFields();
+        this.viewModel.loadInputFields();
     }
 
     private void setView(View view) {
         ((TextView) view.findViewById(R.id.screen_title)).setText(R.string.new_schedule_creator_screen_title);
-
         view.findViewById(R.id.next_button).setVisibility(View.GONE);
-
         this.saveBottomButton = view.findViewById(R.id.confirm_creation_bottom_button);
-        disableSaveButtons();
 
         AppCompatImageButton cancelButton = view.findViewById(R.id.back_button);
         cancelButton.setImageResource(R.drawable.ic_cancel);
@@ -97,42 +93,36 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
             }
         });
 
-        scheduleCreationAdapter = new ScheduleCreationAdapter(this, new ArrayList<>());
+        this.scheduleCreationAdapter = new ScheduleCreationAdapter(this, new ArrayList<>());
         RecyclerView dataList = view.findViewById(R.id.new_schedule_input_field_list);
         dataList.setHasFixedSize(true);
         dataList.setNestedScrollingEnabled(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         dataList.setLayoutManager(layoutManager);
-        dataList.setAdapter(scheduleCreationAdapter);
+        dataList.setAdapter(this.scheduleCreationAdapter);
+
+        disableSaveButtons();
     }
 
     private void addObservers() {
-        viewModel.getInputFields()
-                .observe(this.getViewLifecycleOwner(), inputFields -> scheduleCreationAdapter.setItems(inputFields));
+        this.viewModel.getInputFields()
+                .observe(this.getViewLifecycleOwner(), inputFields ->
+                        this.scheduleCreationAdapter.setItems(inputFields));
 
-        viewModel.getCurrentScheduleName()
-                .observe(this.getViewLifecycleOwner(), scheduleName ->
-                        sharedViewModel.setCurrentScheduleName(scheduleName));
-
-        viewModel.needToShowSchedule()
-                .observe(this.getViewLifecycleOwner(), currentScheduleName ->
-                        NavHostFragment.findNavController(NewScheduleCreatorFragment.this)
-                                .navigate(NewScheduleCreatorFragmentDirections.goToNewSchedule())
-                );
-
-        viewModel.needToShowScheduleExistsWarning()
-                .observe(this.getViewLifecycleOwner(), needToShow -> {
-                    if (needToShow) {
-                        showScheduleExistsDialog();
-                    }
+        this.viewModel.getCurrentScheduleName()
+                .observe(this.getViewLifecycleOwner(), newCurrentScheduleName -> {
+                    this.sharedViewModel.setCurrentScheduleName(newCurrentScheduleName);
+                    NavHostFragment.findNavController(NewScheduleCreatorFragment.this)
+                            .navigate(NewScheduleCreatorFragmentDirections.goToNewSchedule());
                 });
 
-        viewModel.message
-                .observe(this.getViewLifecycleOwner(), message -> Toast.makeText(
-                        requireContext(),
-                        message,
-                        Toast.LENGTH_LONG
-                ).show());
+        this.viewModel.needToShowScheduleExistsWarning()
+                .observe(this.getViewLifecycleOwner(), needToShow ->
+                        this.showScheduleExistsDialog());
+
+        this.viewModel.getMessage()
+                .observe(this.getViewLifecycleOwner(), message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show());
     }
 
     private void disableSaveButtons() {
@@ -146,10 +136,9 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
     }
 
     private void showScheduleExistsDialog() {
-        DialogFragmentFactory dialogFactory = DialogFragmentFactory.newInstance(
-                DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING
-        );
-        dialogFactory.setTargetFragment(NewScheduleCreatorFragment.this, DIALOG_FRAGMENT_REQUEST_CODE);
+        DialogFragmentFactory dialogFactory =
+                DialogFragmentFactory.newInstance(DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING);
+        dialogFactory.setTargetFragment(this, DIALOG_FRAGMENT_REQUEST_CODE);
         dialogFactory.show(requireFragmentManager(), DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING);
     }
 

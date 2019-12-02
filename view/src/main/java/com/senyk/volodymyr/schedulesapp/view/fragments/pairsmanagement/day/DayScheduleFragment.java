@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.fragments.schedule.day;
+package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.day;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,9 +20,11 @@ import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.pairs.ShowPai
 import com.senyk.volodymyr.schedulesapp.view.dialogs.clicklisteners.WarningClickListener;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
 import com.senyk.volodymyr.schedulesapp.view.listeners.PairsClickListener;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.resourcesproviders.PairsMappingResourcesProvider;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.PairDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.DayUi;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.DayScheduleViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement.OneDayScheduleViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
     private static final String DAY_ORDINAL_BUNDLE_KEY = "Day ordinal number bundle key";
 
     private SchedulesNavigationSharedViewModel sharedViewModel;
-    private DayScheduleViewModel viewModel;
+    private OneDayScheduleViewModel viewModel;
 
     private FloatingActionButton editSaveButton;
     private ShowPairsListAdapter showPairsListAdapter;
@@ -67,7 +69,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
         this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
                 .get(SchedulesNavigationSharedViewModel.class);
         this.viewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
-                .get(DayScheduleViewModel.class);
+                .get(OneDayScheduleViewModel.class);
 
         Bundle args = this.getArguments();
         if (args == null) {
@@ -84,14 +86,14 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
                     @Override
                     public void handleOnBackPressed() {
                         if (viewModel.isEditMode().getValue() != null && viewModel.isEditMode().getValue()) {
-                            viewModel.setIsEditMode(false);
+                            viewModel.setOutputMode();
                         } else {
                             requireActivity().finish();
                         }
                     }
                 });
 
-        viewModel.loadScheduleForOneDay(this.scheduleName, this.weekOrdinal, this.dayOrdinal);
+        this.viewModel.loadScheduleForOneDay(this.scheduleName, this.weekOrdinal, this.dayOrdinal);
     }
 
     private void initNavigationFields(Bundle args) {
@@ -103,18 +105,18 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
     private void setViewState(View view) {
         this.editSaveButton = view.findViewById(R.id.edit_save_button);
 
-        RecyclerView pairsList = view.findViewById(R.id.pairs_list);
-        pairsList.setHasFixedSize(true);
-        pairsList.setNestedScrollingEnabled(false);
-        pairsList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        this.pairsList = pairsList;
+        RecyclerView pairsListView = view.findViewById(R.id.pairs_list);
+        pairsListView.setHasFixedSize(true);
+        pairsListView.setNestedScrollingEnabled(false);
+        pairsListView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        this.pairsList = pairsListView;
 
         this.showPairsListAdapter = new ShowPairsListAdapter(this, new ArrayList<>());
-        this.editPairsListAdapter = new EditPairsListAdapter(this);
+        this.editPairsListAdapter = new EditPairsListAdapter(this, new PairDtoUiMapper(new PairsMappingResourcesProvider(requireContext())));
     }
 
     private void addObservers() {
-        viewModel.message
+        viewModel.getMessage()
                 .observe(this.getViewLifecycleOwner(), message -> Toast.makeText(
                         requireContext(),
                         message,
@@ -144,7 +146,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
 
     private void setShowMode() {
         this.editSaveButton.setImageResource(R.drawable.ic_edit);
-        this.editSaveButton.setOnClickListener(view -> viewModel.setIsEditMode(true));
+        this.editSaveButton.setOnClickListener(view -> viewModel.setEditMode());
 
         this.pairsList.setAdapter(this.showPairsListAdapter);
     }
@@ -168,6 +170,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
     @Override
     public void pairAddButtonClicked() {
         this.editPairsListAdapter.addNewPair();
+        this.pairsList.smoothScrollToPosition(this.editPairsListAdapter.getItemCount());
     }
 
     @Override

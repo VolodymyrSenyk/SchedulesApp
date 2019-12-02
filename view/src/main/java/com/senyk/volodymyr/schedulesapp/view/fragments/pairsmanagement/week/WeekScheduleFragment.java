@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.fragments.schedule.week;
+package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.week;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,15 +16,15 @@ import com.google.android.material.tabs.TabLayout;
 import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.adapters.viewpager.SimpleTabAdapter;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
-import com.senyk.volodymyr.schedulesapp.view.fragments.schedule.day.DayScheduleFragment;
-import com.senyk.volodymyr.schedulesapp.view.fragments.schedule.twoweekformatday.TwoWeekFormatDayScheduleFragment;
+import com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.day.DayScheduleFragment;
+import com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.twoweekformatday.TwoWeekFormatDayScheduleFragment;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
-import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.WeekViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement.StudyWeekViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 public class WeekScheduleFragment extends BaseFragment {
     private SchedulesNavigationSharedViewModel sharedViewModel;
-    private WeekViewModel viewModel;
+    private StudyWeekViewModel viewModel;
 
     @Nullable
     @Override
@@ -45,7 +45,7 @@ public class WeekScheduleFragment extends BaseFragment {
                 .get(SchedulesNavigationSharedViewModel.class);
         this.sharedViewModel.setAppInitFinished();
         this.viewModel = ViewModelProviders.of(this, this.viewModelFactory)
-                .get(WeekViewModel.class);
+                .get(StudyWeekViewModel.class);
 
         setView(view);
         addObservers();
@@ -113,7 +113,7 @@ public class WeekScheduleFragment extends BaseFragment {
                     }
                 });
 
-        this.viewModel.message
+        this.viewModel.getMessage()
                 .observe(this.getViewLifecycleOwner(), message -> Toast.makeText(
                         requireContext(),
                         message,

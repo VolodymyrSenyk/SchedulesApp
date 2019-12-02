@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.view.fragments.schedule.twoweekformatday;
+package com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.twoweekformatday;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.adapters.viewpager.SimpleTabAdapter;
 import com.senyk.volodymyr.schedulesapp.view.fragments.base.BaseFragment;
-import com.senyk.volodymyr.schedulesapp.view.fragments.schedule.day.DayScheduleFragment;
+import com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.day.DayScheduleFragment;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 public class TwoWeekFormatDayScheduleFragment extends BaseFragment {

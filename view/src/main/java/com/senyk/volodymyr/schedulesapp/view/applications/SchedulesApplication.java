@@ -16,7 +16,7 @@ public class SchedulesApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        appComponent = DaggerAppComponent.builder()
+        this.appComponent = DaggerAppComponent.builder()
                 .contextModule(new ContextModule(getApplicationContext()))
                 .build();
     }

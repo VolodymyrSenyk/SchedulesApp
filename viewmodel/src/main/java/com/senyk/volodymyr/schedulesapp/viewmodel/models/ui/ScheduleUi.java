@@ -9,6 +9,25 @@ public class ScheduleUi implements PrintableOnTheList {
     private boolean isNumDenomSystem;
     private boolean isCurrent;
 
+    public ScheduleUi() {
+        this("", "", false, true);
+    }
+
+    public ScheduleUi(String name, boolean isSaturdayWorking, boolean isNumDenomSystem) {
+        this(name, "", isSaturdayWorking, isNumDenomSystem);
+    }
+
+    public ScheduleUi(
+            String name,
+            String createdAt,
+            boolean isSaturdayWorking,
+            boolean isNumDenomSystem) {
+        this.name = name;
+        this.createdAt = createdAt;
+        this.isSaturdayWorking = isSaturdayWorking;
+        this.isNumDenomSystem = isNumDenomSystem;
+    }
+
     public String getName() {
         return name;
     }
@@ -31,25 +50,6 @@ public class ScheduleUi implements PrintableOnTheList {
 
     public void setCurrent(boolean isCurrent) {
         this.isCurrent = isCurrent;
-    }
-
-    public ScheduleUi() {
-        this("", "", false, true);
-    }
-
-    public ScheduleUi(String name, boolean isSaturdayWorking, boolean isNumDenomSystem) {
-        this(name, "", isSaturdayWorking, isNumDenomSystem);
-    }
-
-    public ScheduleUi(
-            String name,
-            String createdAt,
-            boolean isSaturdayWorking,
-            boolean isNumDenomSystem) {
-        this.name = name;
-        this.createdAt = createdAt;
-        this.isSaturdayWorking = isSaturdayWorking;
-        this.isNumDenomSystem = isNumDenomSystem;
     }
 
     @Override

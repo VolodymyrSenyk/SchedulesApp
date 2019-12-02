@@ -1,9 +1,5 @@
 <resources>
-    <!-- Schedule data output -->
-    <string name="schedule_date_of_creation_form">%1$s.%2$s.%3$s %4$s:%5$s</string>
-
     <!-- Pair data output -->
-    <string name="pair_time_output">%1$d:%2$d</string>
     <string-array name="pairs_types">
         <item>Not stated</item>
         <item>Lecture</item>
@@ -13,16 +9,6 @@
     </string-array>
 
     <!-- Errors output -->
-    <string name="error_message"><b>Error:</b> %1$s!</string>
-    <string name="mandatory_field_message">This field is mandatory! Fill it to continue</string>
-    <string name="schedule_exists_error_message">Schedule with such name already exists!</string>
-
-    <!-- Days of the week -->
-    <string name="monday">Monday</string>
-    <string name="tuesday">Tuesday</string>
-    <string name="wednesday">Wednesday</string>
-    <string name="thursday">Thursday</string>
-    <string name="friday">Friday</string>
-    <string name="saturday">Saturday</string>
+    <string name="application_error_message" translatable="false">An error occurred: %1$s!</string>
 
 </resources>

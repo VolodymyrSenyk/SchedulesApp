@@ -6,12 +6,17 @@ import androidx.lifecycle.MutableLiveData;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.base.BaseViewModel;
 
 public class SchedulesNavigationSharedViewModel extends BaseViewModel {
+    private static String TAG = "SchedulesNavigationSharedVM";
     private boolean isAppInit = true;
     private String currentScheduleName = "";
     private int currentDayIndex;
     private int currentWeekIndex;
 
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
+    public SchedulesNavigationSharedViewModel() {
+        super(TAG, null);
+    }
 
     public LiveData<Boolean> isLoading() {
         return this.isLoading;
@@ -51,9 +56,5 @@ public class SchedulesNavigationSharedViewModel extends BaseViewModel {
 
     public void saveCurrentWeekIndex(int currentWeekIndex) {
         this.currentWeekIndex = currentWeekIndex;
-    }
-
-    public SchedulesNavigationSharedViewModel() {
-        super(null);
     }
 }

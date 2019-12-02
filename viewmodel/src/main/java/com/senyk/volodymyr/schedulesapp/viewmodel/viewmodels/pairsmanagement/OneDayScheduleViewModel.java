@@ -1,6 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule;
-
-import android.util.Log;
+package com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.pairsmanagement;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,14 +11,11 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.base.BaseReactiveVi
 
 import java.util.Collections;
 
-import io.reactivex.CompletableObserver;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class DayScheduleViewModel extends BaseReactiveViewModel {
-    private static final String TAG = "DayScheduleVM";
+public class OneDayScheduleViewModel extends BaseReactiveViewModel {
+    private static final String TAG = "OneDayScheduleVM";
 
     private final SchedulesRepository repository;
     private final DayDtoUiMapper mapper;
@@ -28,72 +23,54 @@ public class DayScheduleViewModel extends BaseReactiveViewModel {
     private MutableLiveData<Boolean> isEditMode = new MutableLiveData<>();
     private MutableLiveData<DayUi> scheduleForOneDay = new MutableLiveData<>();
 
+    public OneDayScheduleViewModel(
+            ErrorsHandler errorsHandler,
+            SchedulesRepository schedulesRepository,
+            DayDtoUiMapper dayDtoUiListMapper) {
+        super(TAG, errorsHandler);
+        this.repository = schedulesRepository;
+        this.mapper = dayDtoUiListMapper;
+    }
+
     public LiveData<Boolean> isEditMode() {
         return this.isEditMode;
     }
 
-    public void setIsEditMode(boolean isEditMode) {
-        this.isEditMode.setValue(isEditMode);
+    public void setEditMode() {
+        this.isEditMode.setValue(true);
+    }
+
+    public void setOutputMode() {
+        this.isEditMode.setValue(false);
     }
 
     public LiveData<DayUi> getScheduleForOneDay() {
         return this.scheduleForOneDay;
     }
 
-    public DayScheduleViewModel(
-            ErrorsHandler errorsHandler,
-            SchedulesRepository schedulesRepository,
-            DayDtoUiMapper dayDtoUiListMapper
-    ) {
-        super(errorsHandler);
-        this.repository = schedulesRepository;
-        this.mapper = dayDtoUiListMapper;
-
-    }
-
     public void loadScheduleForOneDay(String scheduleName, int weekOrdinal, int dayOrdinal) {
-        repository.getScheduleForOneDay(scheduleName, weekOrdinal, dayOrdinal)
+        this.repository.getScheduleForOneDay(scheduleName, weekOrdinal, dayOrdinal)
                 .subscribeOn(Schedulers.newThread())
-                .map(mapper::convertToUi)
+                .map(this.mapper::convertToUi)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<DayUi>() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
-
+                .subscribe(new MainSingleObserver<DayUi>() {
                     @Override
                     public void onSuccess(DayUi day) {
                         Collections.sort(day.getPairs(), (pair1, pair2) -> Long.compare(pair1.getTimeInMillis(), pair2.getTimeInMillis()));
                         scheduleForOneDay.setValue(new DayUi(day.getOrdinal(), weekOrdinal, day.getPairs()));
                         isEditMode.setValue(false);
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, errorsHandler.handle(e));
-                    }
                 });
     }
 
     public void updateScheduleForOneDay(String scheduleName, DayUi day) {
-        repository.updateSchedule(scheduleName, day.getWeekOrdinal(), mapper.convertToDto(day))
+        this.repository.updateSchedule(scheduleName, day.getWeekOrdinal(), mapper.convertToDto(day))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
-
+                .subscribe(new MainCompletableObserver() {
                     @Override
                     public void onComplete() {
                         loadScheduleForOneDay(scheduleName, day.getWeekOrdinal(), day.getOrdinal());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, errorsHandler.handle(e));
                     }
                 });
     }

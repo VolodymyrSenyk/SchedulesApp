@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- List -->
-    <color name="colorListItem">#C0C0C0</color>
-    <color name="colorSelectedListItem">#FFD700</color>
-
-    <!-- Pairs types -->
+    <!-- Pair data output -->
     <color name="colorLecture">#FFD700</color>
     <color name="colorPractice">#9370DB</color>
     <color name="colorLaboratory">#4682B4</color>

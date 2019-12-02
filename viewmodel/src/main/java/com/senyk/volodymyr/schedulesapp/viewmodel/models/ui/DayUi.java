@@ -7,6 +7,12 @@ public class DayUi {
     private int weekOrdinal;
     private List<PairUi> pairs;
 
+    public DayUi(int ordinal, int weekOrdinal, List<PairUi> pairs) {
+        this.ordinal = ordinal;
+        this.weekOrdinal = weekOrdinal;
+        this.pairs = pairs;
+    }
+
     public int getOrdinal() {
         return this.ordinal;
     }
@@ -17,11 +23,5 @@ public class DayUi {
 
     public List<PairUi> getPairs() {
         return this.pairs;
-    }
-
-    public DayUi(int ordinal, int weekOrdinal, List<PairUi> pairs) {
-        this.ordinal = ordinal;
-        this.weekOrdinal = weekOrdinal;
-        this.pairs = pairs;
     }
 }

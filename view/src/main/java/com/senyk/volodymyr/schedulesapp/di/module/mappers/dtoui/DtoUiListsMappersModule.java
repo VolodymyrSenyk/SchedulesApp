@@ -16,14 +16,13 @@ import dagger.Provides;
 public class DtoUiListsMappersModule {
     @Singleton
     @Provides
-    public SchedulesDtoUiListMapper getSchedulesListMapper(
-            ScheduleDtoUiMapper scheduleMapper) {
+    SchedulesDtoUiListMapper getSchedulesListMapper(ScheduleDtoUiMapper scheduleMapper) {
         return new SchedulesDtoUiListMapper(scheduleMapper);
     }
 
     @Singleton
     @Provides
-    public GenericDtoUiListMapper<PairDto, PairUi> getPairsListMapper(PairDtoUiMapper pairMapper) {
+    GenericDtoUiListMapper<PairDto, PairUi> getPairsListMapper(PairDtoUiMapper pairMapper) {
         return new GenericDtoUiListMapper<>(pairMapper);
     }
 }

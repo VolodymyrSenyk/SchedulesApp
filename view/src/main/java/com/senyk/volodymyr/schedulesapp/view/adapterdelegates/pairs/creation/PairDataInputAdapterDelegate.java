@@ -18,7 +18,7 @@ import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.TextChangeListener;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.TimeSetter;
 import com.senyk.volodymyr.schedulesapp.view.listeners.PairsClickListener;
-import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.resourcesproviders.PairsMappingResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
@@ -26,12 +26,12 @@ import java.util.List;
 
 public class PairDataInputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
     private final LayoutInflater inflater;
-    private final ResourcesProvider resourcesProvider;
+    private final PairsMappingResourcesProvider resourcesProvider;
     private final PairsClickListener listener;
 
     public PairDataInputAdapterDelegate(Fragment fragment) {
         this.inflater = fragment.getLayoutInflater();
-        this.resourcesProvider = new ResourcesProvider(fragment.getContext());
+        this.resourcesProvider = new PairsMappingResourcesProvider(fragment.getContext());
         this.listener = (PairsClickListener) fragment;
     }
 

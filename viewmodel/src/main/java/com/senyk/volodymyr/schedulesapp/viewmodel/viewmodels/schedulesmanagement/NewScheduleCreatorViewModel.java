@@ -1,7 +1,5 @@
 package com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedulesmanagement;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -9,7 +7,7 @@ import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
-import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.SingleEventLiveData;
+import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.livedata.SingleEventLiveData;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.datainputfields.ScheduleIsNumDenomSystemCheckField;
@@ -21,10 +19,7 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.base.BaseReactiveVi
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.CompletableObserver;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
@@ -41,8 +36,18 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
 
     private MutableLiveData<String> currentScheduleName = new MutableLiveData<>();
     private MutableLiveData<List<PrintableOnTheList>> inputFields = new MutableLiveData<>();
-    private MutableLiveData<Boolean> goToSchedule = new SingleEventLiveData<>();
     private MutableLiveData<Boolean> showScheduleExistsWarning = new SingleEventLiveData<>();
+
+    public NewScheduleCreatorViewModel(
+            ErrorsHandler errorsHandler,
+            SchedulesRepository repository,
+            UserSettingsRepository userSettingsRepository,
+            ScheduleDtoUiMapper scheduleMapper) {
+        super(TAG, errorsHandler);
+        this.schedulesRepository = repository;
+        this.userSettingsRepository = userSettingsRepository;
+        this.scheduleMapper = scheduleMapper;
+    }
 
     public LiveData<String> getCurrentScheduleName() {
         return this.currentScheduleName;
@@ -52,77 +57,47 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
         return this.inputFields;
     }
 
-    public LiveData<Boolean> needToShowSchedule() {
-        return this.goToSchedule;
-    }
-
     public LiveData<Boolean> needToShowScheduleExistsWarning() {
         return this.showScheduleExistsWarning;
     }
 
-    public NewScheduleCreatorViewModel(
-            ErrorsHandler errorsHandler,
-            SchedulesRepository repository,
-            UserSettingsRepository userSettingsRepository,
-            ScheduleDtoUiMapper scheduleMapper) {
-        super(errorsHandler);
-        this.schedulesRepository = repository;
-        this.userSettingsRepository = userSettingsRepository;
-        this.scheduleMapper = scheduleMapper;
-    }
-
     public void loadInputFields() {
         List<PrintableOnTheList> fields = new ArrayList<>(3);
-        fields.add(nameField);
-        fields.add(isSatWorkingField);
-        fields.add(isNumDenomSystemField);
-        inputFields.setValue(fields);
+        fields.add(this.nameField);
+        fields.add(this.isSatWorkingField);
+        fields.add(this.isNumDenomSystemField);
+        this.inputFields.setValue(fields);
         getExistSchedules();
     }
 
     public void saveNewSchedule() {
-        if (existSchedules.contains(nameField.getName())) {
-            showScheduleExistsWarning.setValue(true);
+        if (this.existSchedules.contains(this.nameField.getName())) {
+            this.showScheduleExistsWarning.setValue(true);
             return;
         }
+
         ScheduleUi newSchedule = new ScheduleUi(
-                nameField.getName(),
-                isSatWorkingField.isChecked(),
-                isNumDenomSystemField.isChecked()
-        );
-        schedulesRepository.createNewSchedule(scheduleMapper.convertToDto(newSchedule))
+                this.nameField.getName(),
+                this.isSatWorkingField.isChecked(),
+                this.isNumDenomSystemField.isChecked());
+
+        this.schedulesRepository.createNewSchedule(scheduleMapper.convertToDto(newSchedule))
                 .andThen(userSettingsRepository.setCurrentSchedule(newSchedule.getName()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
-
+                .subscribe(new MainCompletableObserver() {
                     @Override
                     public void onComplete() {
                         currentScheduleName.setValue(newSchedule.getName());
-                        goToSchedule.setValue(true);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, errorsHandler.handle(e));
                     }
                 });
     }
 
     private void getExistSchedules() {
-        schedulesRepository.getSchedulesList()
+        this.schedulesRepository.getSchedulesList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<ScheduleDto>>() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
-
+                .subscribe(new MainSingleObserver<List<ScheduleDto>>() {
                     @Override
                     public void onSuccess(List<ScheduleDto> schedules) {
                         existSchedules = new ArrayList<>();
@@ -130,12 +105,6 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
                             existSchedules.add(item.getName());
                         }
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, errorsHandler.handle(e));
-                    }
                 });
     }
-
 }

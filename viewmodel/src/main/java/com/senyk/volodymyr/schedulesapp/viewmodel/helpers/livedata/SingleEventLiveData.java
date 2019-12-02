@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.viewmodel.helpers;
+package com.senyk.volodymyr.schedulesapp.viewmodel.helpers.livedata;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
@@ -25,5 +25,4 @@ public class SingleEventLiveData<T> extends MutableLiveData<T> {
         this.pending.set(true);
         super.setValue(value);
     }
-
 }

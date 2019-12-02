@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter;
+import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
+import com.senyk.volodymyr.schedulesapp.model.models.enums.PairType;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.creation.NewPairCreationAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.creation.PairDataInputAdapterDelegate;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.PairDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
@@ -14,12 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<PrintableOnTheList> {
-    public EditPairsListAdapter(Fragment fragment) {
+    private final PairDtoUiMapper pairMapper;
+
+    public EditPairsListAdapter(Fragment fragment, PairDtoUiMapper pairMapper) {
         super(new DiffPrintableOnTheList());
         delegatesManager
                 .addDelegate(new PairDataInputAdapterDelegate(fragment))
                 .addDelegate(new NewPairCreationAdapterDelegate(fragment));
         setItems(new ArrayList<>());
+        this.pairMapper = pairMapper;
     }
 
     public void setPairsList(List<PairUi> items) {
@@ -48,15 +54,16 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
     }
 
     public void addNewPair() {
-        List<PrintableOnTheList> extendedList = new ArrayList<>();
-        for (PrintableOnTheList item : this.getItems()) {
-            if (item instanceof PairUi) {
-                extendedList.add(item);
-            }
-        }
-        extendedList.add(new PairUi());
-        extendedList.add(new PrintableOnTheList() {
-        });
+        List<PrintableOnTheList> extendedList = new ArrayList<>(this.getItemCount() + 1);
+        extendedList.addAll(this.getItems());
+        extendedList.add(this.getItemCount() - 1, this.pairMapper.convertToUi(new PairDto(
+                0,
+                "",
+                "",
+                PairType.NOT_STATED,
+                "",
+                ""
+        )));
         this.setItems(extendedList);
     }
 
@@ -65,15 +72,15 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
         boolean isPairDeleted = false;
         for (PrintableOnTheList item : this.getItems()) {
             if (item instanceof PairUi) {
-                if (!item.equals(pair) || isPairDeleted) {
+                if (isPairDeleted || ((PairUi) item).getId() != pair.getId()) {
                     croppedList.add(item);
                 } else {
                     isPairDeleted = true;
                 }
+            } else {
+                croppedList.add(item);
             }
         }
-        croppedList.add(new PrintableOnTheList() {
-        });
         this.setItems(croppedList);
     }
 
@@ -86,7 +93,7 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
             if (oldItem.getClass() != PairUi.class && newItem.getClass() != PairUi.class) {
                 return true;
             }
-            return oldItem.hashCode() == newItem.hashCode();
+            return ((PairUi) oldItem).getId() == ((PairUi) newItem).getId();
         }
 
         @Override

@@ -33,11 +33,11 @@
 
     <fragment
         android:id="@+id/workWeekScheduleFragment"
-        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.schedule.week.WeekScheduleFragment"
+        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.week.WeekScheduleFragment"
         android:label="WorkWeekScheduleFragment"/>
     <fragment
         android:id="@+id/allDaysScheduleFragment"
-        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.schedule.alldays.AllDaysScheduleFragment"
+        android:name="com.senyk.volodymyr.schedulesapp.view.fragments.pairsmanagement.alldays.AllDaysScheduleFragment"
         android:label="fragment_all_days_schedule"
         tools:layout="@layout/fragment_all_days_schedule" />
 
