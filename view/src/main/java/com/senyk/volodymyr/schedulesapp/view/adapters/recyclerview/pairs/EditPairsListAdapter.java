@@ -1,18 +1,21 @@
 package com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.pairs;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DiffUtil;
 
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.creation.NewPairCreationAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.creation.PairDataInputAdapterDelegate;
-import com.senyk.volodymyr.schedulesapp.view.adapters.recyclerview.base.BaseRecyclerViewAdapter;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditPairsListAdapter extends BaseRecyclerViewAdapter<PrintableOnTheList> {
+public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<PrintableOnTheList> {
     public EditPairsListAdapter(Fragment fragment) {
+        super(new DiffPrintableOnTheList());
         delegatesManager
                 .addDelegate(new PairDataInputAdapterDelegate(fragment))
                 .addDelegate(new NewPairCreationAdapterDelegate(fragment));
@@ -37,8 +40,7 @@ public class EditPairsListAdapter extends BaseRecyclerViewAdapter<PrintableOnThe
         List<PairUi> filteredList = new ArrayList<>(convertedList.size());
         for (PairUi pair : convertedList) {
             if (!pair.getTime().equals("") || !pair.getName().equals("") ||
-                    !pair.getTeacher().equals("") || !pair.getPlace().equals("") ||
-                    !pair.getType().equals("") || !pair.getAdditionalInfo().equals("")) {
+                    !pair.getTeacher().equals("") || !pair.getPlace().equals("")) {
                 filteredList.add(pair);
             }
         }
@@ -46,14 +48,55 @@ public class EditPairsListAdapter extends BaseRecyclerViewAdapter<PrintableOnThe
     }
 
     public void addNewPair() {
-        this.getItems().set(this.getItemCount() - 1, new PairUi());
-        this.getItems().add(new PrintableOnTheList() {
+        List<PrintableOnTheList> extendedList = new ArrayList<>();
+        for (PrintableOnTheList item : this.getItems()) {
+            if (item instanceof PairUi) {
+                extendedList.add(item);
+            }
+        }
+        extendedList.add(new PairUi());
+        extendedList.add(new PrintableOnTheList() {
         });
-        notifyDataSetChanged();
+        this.setItems(extendedList);
     }
 
     public void deletePair(PairUi pair) {
-        this.getItems().remove(pair);
-        notifyDataSetChanged();
+        List<PrintableOnTheList> croppedList = new ArrayList<>();
+        boolean isPairDeleted = false;
+        for (PrintableOnTheList item : this.getItems()) {
+            if (item instanceof PairUi) {
+                if (!item.equals(pair) || isPairDeleted) {
+                    croppedList.add(item);
+                } else {
+                    isPairDeleted = true;
+                }
+            }
+        }
+        croppedList.add(new PrintableOnTheList() {
+        });
+        this.setItems(croppedList);
+    }
+
+    static class DiffPrintableOnTheList extends DiffUtil.ItemCallback<PrintableOnTheList> {
+        @Override
+        public boolean areItemsTheSame(@NonNull PrintableOnTheList oldItem, @NonNull PrintableOnTheList newItem) {
+            if (oldItem.getClass() != newItem.getClass()) {
+                return false;
+            }
+            if (oldItem.getClass() != PairUi.class && newItem.getClass() != PairUi.class) {
+                return true;
+            }
+            return oldItem.hashCode() == newItem.hashCode();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull PrintableOnTheList oldItem, @NonNull PrintableOnTheList newItem) {
+            if (!(oldItem instanceof PairUi && newItem instanceof PairUi)) {
+                return false;
+            }
+            PairUi oldPair = (PairUi) oldItem;
+            PairUi newPair = (PairUi) newItem;
+            return oldPair.equals(newPair);
+        }
     }
 }

@@ -10,8 +10,10 @@
     android:paddingTop="@dimen/padding_main"
     android:paddingEnd="@dimen/padding_main"
     android:textColorHint="@color/colorBackground"
-    app:errorEnabled="true"
-    app:errorTextAppearance="@style/ErrorTextAppearance"
+    app:counterEnabled="true"
+    app:counterMaxLength="60"
+    app:counterOverflowTextAppearance="@style/ErrorTextAppearance"
+    app:counterTextAppearance="@style/HintInputTextAppearance"
     app:hintTextAppearance="@style/HintInputTextAppearance">
 
     <com.senyk.volodymyr.schedulesapp.view.customviews.CustomTextInputField

@@ -7,16 +7,10 @@ public class ScheduleUi implements PrintableOnTheList {
     private String createdAt;
     private boolean isSaturdayWorking;
     private boolean isNumDenomSystem;
-    private int scheduleHolderColor;
     private boolean isCurrent;
-    private boolean isSelected;
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDateOfCreation() {
@@ -27,24 +21,8 @@ public class ScheduleUi implements PrintableOnTheList {
         return isSaturdayWorking;
     }
 
-    public void setSaturdayWorking(boolean saturdayWorking) {
-        isSaturdayWorking = saturdayWorking;
-    }
-
     public boolean isNumDenomSystem() {
         return isNumDenomSystem;
-    }
-
-    public void setNumDenomSystem(boolean numDenomSystem) {
-        isNumDenomSystem = numDenomSystem;
-    }
-
-    public void setScheduleHolderColor(int scheduleHolderColor) {
-        this.scheduleHolderColor = scheduleHolderColor;
-    }
-
-    public int getScheduleHolderColor() {
-        return scheduleHolderColor;
     }
 
     public boolean isCurrent() {
@@ -55,33 +33,48 @@ public class ScheduleUi implements PrintableOnTheList {
         this.isCurrent = isCurrent;
     }
 
-    public boolean isSelected() {
-        return isSelected;
+    public ScheduleUi() {
+        this("", "", false, true);
     }
 
-    public void setSelected(boolean isSelected) {
-        this.isSelected = isSelected;
+    public ScheduleUi(String name, boolean isSaturdayWorking, boolean isNumDenomSystem) {
+        this(name, "", isSaturdayWorking, isNumDenomSystem);
     }
-
-    public ScheduleUi() {}
 
     public ScheduleUi(
             String name,
             String createdAt,
             boolean isSaturdayWorking,
-            boolean isNumDenomSystem
-    ) {
+            boolean isNumDenomSystem) {
         this.name = name;
         this.createdAt = createdAt;
         this.isSaturdayWorking = isSaturdayWorking;
         this.isNumDenomSystem = isNumDenomSystem;
     }
 
-    public ScheduleUi(ScheduleUi schedule) {
-        this.name = schedule.getName();
-        this.createdAt = schedule.getDateOfCreation();
-        this.isSaturdayWorking = schedule.isSaturdayWorking();
-        this.isNumDenomSystem = schedule.isNumDenomSystem();
-        this.isCurrent = schedule.isCurrent();
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + this.name.hashCode();
+        result = prime * result + this.createdAt.hashCode();
+        result = prime * result + Boolean.valueOf(this.isSaturdayWorking).hashCode();
+        result = prime * result + Boolean.valueOf(this.isNumDenomSystem).hashCode();
+        result = prime * result + Boolean.valueOf(this.isCurrent).hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        if (this.hashCode() != obj.hashCode()) return false;
+        ScheduleUi other = (ScheduleUi) obj;
+        return this.name.equals(other.name) &&
+                this.createdAt.equals(other.createdAt) &&
+                this.isSaturdayWorking == other.isSaturdayWorking &&
+                this.isNumDenomSystem == other.isNumDenomSystem &&
+                this.isCurrent == other.isCurrent;
     }
 }

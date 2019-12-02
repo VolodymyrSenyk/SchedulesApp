@@ -39,7 +39,6 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
 
     private NewScheduleCreatorFragmentArgs args;
 
-    private AppCompatImageButton saveButton;
     private MaterialButton saveBottomButton;
 
     @Nullable
@@ -82,7 +81,8 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
     private void setView(View view) {
         ((TextView) view.findViewById(R.id.screen_title)).setText(R.string.new_schedule_creator_screen_title);
 
-        this.saveButton = view.findViewById(R.id.next_button);
+        view.findViewById(R.id.next_button).setVisibility(View.GONE);
+
         this.saveBottomButton = view.findViewById(R.id.confirm_creation_bottom_button);
         disableSaveButtons();
 
@@ -136,15 +136,11 @@ public class NewScheduleCreatorFragment extends BaseFragment implements NewSched
     }
 
     private void disableSaveButtons() {
-        this.saveButton.setImageResource(R.drawable.ic_disabled_confirm);
-        this.saveButton.setOnClickListener(null);
         this.saveBottomButton.setEnabled(false);
         this.saveBottomButton.setOnClickListener(null);
     }
 
     private void enableSaveButtons() {
-        this.saveButton.setImageResource(R.drawable.ic_confirm);
-        this.saveButton.setOnClickListener(view -> viewModel.saveNewSchedule());
         this.saveBottomButton.setEnabled(true);
         this.saveBottomButton.setOnClickListener(view -> viewModel.saveNewSchedule());
     }

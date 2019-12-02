@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Schedules list -->
-    <color name="colorCurrentSelectedSchedule">#FFD700</color>
-    <color name="colorCurrentDeselectedSchedule">#F0E68C</color>
-    <color name="colorSelectedSchedule">#00FFFF</color>
-    <color name="colorDeselectedSchedule">#C0C0C0</color>
+    <!-- List -->
+    <color name="colorListItem">#C0C0C0</color>
+    <color name="colorSelectedListItem">#FFD700</color>
 
     <!-- Pairs types -->
     <color name="colorLecture">#FFD700</color>

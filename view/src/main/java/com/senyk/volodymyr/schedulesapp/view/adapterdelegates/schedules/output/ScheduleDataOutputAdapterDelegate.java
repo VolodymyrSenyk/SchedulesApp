@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,18 +59,23 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
                         item.getDateOfCreation()
                 )
         );
-        if (item.isSaturdayWorking()) {
-            viewHolder.scheduleIsSaturdayWorking.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_true, 0);
-        } else {
-            viewHolder.scheduleIsSaturdayWorking.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_false, 0);
+        if (!item.isSaturdayWorking()) {
+            viewHolder.scheduleIsSaturdayWorking.setVisibility(View.GONE);
         }
-        if (item.isNumDenomSystem()) {
-            viewHolder.scheduleIsNumDenomSystem.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_true, 0);
-        } else {
-            viewHolder.scheduleIsNumDenomSystem.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_false, 0);
+        if (!item.isNumDenomSystem()) {
+            viewHolder.scheduleIsNumDenomSystem.setVisibility(View.GONE);
         }
-
-        viewHolder.itemView.setBackgroundColor(item.getScheduleHolderColor());
+        if (item.isCurrent()) {
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                viewHolder.itemView.setBackgroundDrawable(
+                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.selected_list_item)
+                );
+            } else {
+                viewHolder.itemView.setBackground(
+                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.selected_list_item)
+                );
+            }
+        }
 
         viewHolder.itemView.setOnClickListener(view ->
                 clickListener.scheduleClicked(viewHolder.scheduleName.getText().toString()));

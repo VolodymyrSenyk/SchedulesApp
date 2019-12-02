@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
@@ -22,6 +23,7 @@ import com.senyk.volodymyr.schedulesapp.view.listeners.PairsClickListener;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.DayUi;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.DayScheduleViewModel;
+import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.shared.SchedulesNavigationSharedViewModel;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
     private static final String WEEK_ORDINAL_BUNDLE_KEY = "Week ordinal number bundle key";
     private static final String DAY_ORDINAL_BUNDLE_KEY = "Day ordinal number bundle key";
 
+    private SchedulesNavigationSharedViewModel sharedViewModel;
     private DayScheduleViewModel viewModel;
 
     private FloatingActionButton editSaveButton;
@@ -61,6 +64,8 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.sharedViewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
+                .get(SchedulesNavigationSharedViewModel.class);
         this.viewModel = ViewModelProviders.of(requireActivity(), this.viewModelFactory)
                 .get(DayScheduleViewModel.class);
 
@@ -73,6 +78,18 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
         initNavigationFields(args);
         setViewState(view);
         addObservers();
+
+        requireActivity().getOnBackPressedDispatcher()
+                .addCallback(this.getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        if (viewModel.isEditMode().getValue() != null && viewModel.isEditMode().getValue()) {
+                            viewModel.setIsEditMode(false);
+                        } else {
+                            requireActivity().finish();
+                        }
+                    }
+                });
 
         viewModel.loadScheduleForOneDay(this.scheduleName, this.weekOrdinal, this.dayOrdinal);
     }
@@ -120,6 +137,7 @@ public class DayScheduleFragment extends BaseFragment implements PairsClickListe
                             scheduleForOneDay.getOrdinal() == this.dayOrdinal) {
                         showPairsListAdapter.setUiItems(scheduleForOneDay.getPairs());
                         editPairsListAdapter.setPairsList(scheduleForOneDay.getPairs());
+                        sharedViewModel.setIsLoading(false);
                     }
                 });
     }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -55,17 +56,26 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
         setView(view);
         addObservers();
 
+        requireActivity().getOnBackPressedDispatcher()
+                .addCallback(this.getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        NavHostFragment.findNavController(SchedulesManagerFragment.this)
+                                .navigate(SchedulesManagerFragmentDirections.goToSchedule());
+                    }
+                });
+
         viewModel.loadSchedules();
+        sharedViewModel.setIsLoading(true);
     }
 
     private void setView(View view) {
         ((TextView) view.findViewById(R.id.screen_title)).setText(R.string.schedules_manager_screen_title);
-
-        view.findViewById(R.id.back_button).setVisibility(View.GONE);
-
-        AppCompatImageButton confirmButton = view.findViewById(R.id.next_button);
-        confirmButton.setImageResource(R.drawable.ic_confirm);
-        confirmButton.setOnClickListener(view1 -> viewModel.managementFinished(false));
+        view.findViewById(R.id.next_button).setVisibility(View.GONE);
+        AppCompatImageButton cancelButton = view.findViewById(R.id.back_button);
+        cancelButton.setImageResource(R.drawable.ic_back);
+        cancelButton.setOnClickListener(view1 -> NavHostFragment.findNavController(SchedulesManagerFragment.this)
+                .navigate(SchedulesManagerFragmentDirections.goToSchedule()));
 
         schedulesListAdapter = new SchedulesOutputAdapter(this, new ArrayList<>());
         RecyclerView dataList = view.findViewById(R.id.all_schedules_list);
@@ -146,7 +156,7 @@ public class SchedulesManagerFragment extends BaseFragment implements SchedulesC
     public void onPositiveButtonClick(String dialogType, String additionalData) {
         switch (dialogType) {
             case DialogFragmentsTypes.CURRENT_SCHEDULE_SWAP_DIALOG:
-                viewModel.managementFinished(true);
+                viewModel.managementFinished();
                 break;
             case DialogFragmentsTypes.SCHEDULE_DELETING_DIALOG:
                 viewModel.deleteSchedule(additionalData);

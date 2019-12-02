@@ -3,7 +3,7 @@
     style="@style/TitleText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorNotStated"
     android:gravity="center"
+    android:padding="@dimen/padding_main"
     android:text="@string/pair_output_no_pairs"
     android:textColor="@color/colorPrimary" />

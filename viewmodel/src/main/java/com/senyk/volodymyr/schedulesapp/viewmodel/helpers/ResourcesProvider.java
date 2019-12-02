@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 import com.senyk.volodymyr.schedulesapp.model.models.enums.PairType;
 import com.senyk.volodymyr.schedulesapp.model.models.enums.PairTypeEnumContract;
 import com.senyk.volodymyr.schedulesapp.viewmodel.R;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 
 import java.util.Calendar;
 
@@ -88,54 +87,17 @@ public class ResourcesProvider {
         }
     }
 
-    public int getPairsHolderColorByIndex(int typeIndex) {
-        switch (typeIndex) {
-            case PairTypeEnumContract.LECTURE_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorLecture);
-            case PairTypeEnumContract.PRACTICE_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorPractice);
-            case PairTypeEnumContract.LABORATORY_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorLaboratory);
-            case PairTypeEnumContract.SPORT_TYPE_INDEX:
-                return ContextCompat.getColor(context, R.color.colorSport);
-            default:
-                return ContextCompat.getColor(context, R.color.colorNotStated);
+    public String getDateTime(long date) {
+        if (date == 0) {
+            return "";
         }
-    }
-
-    public String getDateOfCreation(long date) {
-        Calendar timeCalendar = Calendar.getInstance();
-        timeCalendar.setTimeInMillis(date);
-        return context.getString(
-                R.string.schedule_date_of_creation_form,
-                formatNums(timeCalendar.get(Calendar.DAY_OF_MONTH) + ""),
-                formatNums(timeCalendar.get(Calendar.MONTH) + 1 + ""),
-                timeCalendar.get(Calendar.YEAR) + "",
-                formatNums(timeCalendar.get(Calendar.HOUR_OF_DAY) + ""),
-                formatNums(timeCalendar.get(Calendar.MINUTE) + "")
+        Calendar dateAndTime = Calendar.getInstance();
+        dateAndTime.setTimeInMillis(date);
+        return DateUtils.formatDateTime(
+                context,
+                dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_SHOW_TIME
         );
-    }
-
-    private String formatNums(String number) {
-        int numsCount = 2;
-        if (number.length() < numsCount) {
-            number = "0" + number;
-        }
-        return number;
-    }
-
-    public int getScheduleHolderColor(ScheduleUi schedule) {
-        if (schedule.isCurrent() && schedule.isSelected()) {
-            return ContextCompat.getColor(context, R.color.colorCurrentSelectedSchedule);
-        } else if (schedule.isCurrent() && !schedule.isSelected()) {
-            return ContextCompat.getColor(context, R.color.colorCurrentDeselectedSchedule);
-        } else if (!schedule.isCurrent() && schedule.isSelected()) {
-            return ContextCompat.getColor(context, R.color.colorSelectedSchedule);
-        } else if (!schedule.isCurrent() && !schedule.isSelected()) {
-            return ContextCompat.getColor(context, R.color.colorDeselectedSchedule);
-        } else {
-            return ContextCompat.getColor(context, R.color.colorDeselectedSchedule);
-        }
     }
 
     public String getPairTypeByIndex(int typeIndex) {

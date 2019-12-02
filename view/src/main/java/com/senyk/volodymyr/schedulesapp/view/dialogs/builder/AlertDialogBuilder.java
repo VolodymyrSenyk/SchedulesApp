@@ -42,4 +42,9 @@ public class AlertDialogBuilder {
         builder.setNeutralButton(text, listener);
         return this;
     }
+
+    public AlertDialogBuilder addIcon(int iconId) {
+        builder.setIcon(iconId);
+        return this;
+    }
 }

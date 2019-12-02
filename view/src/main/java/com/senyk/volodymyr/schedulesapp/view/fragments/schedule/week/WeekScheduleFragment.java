@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
@@ -36,6 +35,7 @@ public class WeekScheduleFragment extends BaseFragment {
     private SimpleTabAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private View progressBar;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -50,23 +50,7 @@ public class WeekScheduleFragment extends BaseFragment {
         setView(view);
         addObservers();
 
-        requireActivity().getOnBackPressedDispatcher()
-                .addCallback(this.getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-                    @Override
-                    public void handleOnBackPressed() {
-                        requireActivity().finish();
-                    }
-                });
-
         this.viewModel.loadScheduleData(sharedViewModel.getCurrentScheduleName());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        /*this.viewPager.setCurrentItem(
-                sharedViewModel.getCurrentDayIndex()
-        );*/
     }
 
     @Override
@@ -83,6 +67,7 @@ public class WeekScheduleFragment extends BaseFragment {
         view.findViewById(R.id.next_button).setVisibility(View.GONE);
         this.viewPager = view.findViewById(R.id.week_pager);
         this.tabLayout = view.findViewById(R.id.week_tabs);
+        this.progressBar = view.findViewById(R.id.progressBar);
     }
 
     private void addObservers() {
@@ -117,6 +102,15 @@ public class WeekScheduleFragment extends BaseFragment {
                     viewPager.setCurrentItem(
                             sharedViewModel.getCurrentDayIndex()
                     );
+                });
+
+        this.sharedViewModel.isLoading()
+                .observe(this.getViewLifecycleOwner(), isLoading -> {
+                    if (isLoading) {
+                        this.progressBar.setVisibility(View.VISIBLE);
+                    } else {
+                        this.progressBar.setVisibility(View.GONE);
+                    }
                 });
 
         this.viewModel.message

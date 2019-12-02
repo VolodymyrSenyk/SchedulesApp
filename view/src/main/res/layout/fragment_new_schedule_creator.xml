@@ -25,10 +25,11 @@
         style="@style/StandartRecyclerViewStyle"
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_creation_bottom_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_creator_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_creator_toolbar"
+        app:layout_constraintVertical_bias="0.40" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/confirm_creation_bottom_button"
@@ -36,6 +37,8 @@
         android:text="@string/create_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_schedule_input_field_list"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

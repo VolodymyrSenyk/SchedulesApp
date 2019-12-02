@@ -58,9 +58,7 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
             @NonNull List<Object> payloads) {
         PairUi item = (PairUi) items.get(position);
         PairDataInputViewHolder viewHolder = (PairDataInputViewHolder) holder;
-        if (!item.equals(new PairUi())) {
-            setData(viewHolder, item);
-        }
+        setData(viewHolder, item);
         setListeners(viewHolder, item);
     }
 

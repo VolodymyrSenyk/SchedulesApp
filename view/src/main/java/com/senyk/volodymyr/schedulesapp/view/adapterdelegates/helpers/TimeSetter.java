@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.text.format.DateUtils;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.senyk.volodymyr.schedulesapp.R;
 
 import java.util.Calendar;
 
@@ -15,6 +16,7 @@ public class TimeSetter extends DateTimeSetter {
     public void setDialog() {
         TimePickerDialog dialog = new TimePickerDialog(
                 textView.getContext(),
+                R.style.TimePickerDialogTheme,
                 (timePicker, hourOfDay, minute) -> {
                     dateAndTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     dateAndTime.set(Calendar.MINUTE, minute);

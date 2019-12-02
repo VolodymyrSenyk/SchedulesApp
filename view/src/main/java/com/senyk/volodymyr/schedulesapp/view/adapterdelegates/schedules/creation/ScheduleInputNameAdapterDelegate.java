@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegates.helpers.TextChangeListener;
@@ -21,8 +20,6 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.models.datainputfields.Schedul
 import java.util.List;
 
 public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
-    private static final int MAX_LENGTH = 60;
-
     private final LayoutInflater inflater;
     private final NewScheduleNameFieldListener fieldFillListener;
 
@@ -56,30 +53,21 @@ public class ScheduleInputNameAdapterDelegate extends AdapterDelegate<List<Print
         viewHolder.scheduleNameView.addTextChangedListener(new TextChangeListener() {
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == MAX_LENGTH) {
-                    viewHolder.scheduleNameLayout.setError(
-                            viewHolder.scheduleNameLayout.getContext().getString(R.string.field_limit_reached_error_message)
-                    );
-                } else {
-                    viewHolder.scheduleNameLayout.setError("");
-                }
                 if (editable.toString().length() > 0) {
                     fieldFillListener.scheduleNameFieldFilled();
                 } else {
                     fieldFillListener.scheduleNameFieldCleared();
                 }
-                ((ScheduleNameInputField)items.get(position)).setName(editable.toString());
+                ((ScheduleNameInputField) items.get(position)).setName(editable.toString());
             }
         });
     }
 
     static class ScheduleNameInputFieldViewHolder extends RecyclerView.ViewHolder {
-        private TextInputLayout scheduleNameLayout;
         private TextInputEditText scheduleNameView;
 
         ScheduleNameInputFieldViewHolder(View view) {
             super(view);
-            this.scheduleNameLayout = view.findViewById(R.id.new_schedule_name_layout);
             this.scheduleNameView = view.findViewById(R.id.new_schedule_name);
         }
     }

@@ -3,7 +3,7 @@
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
     <style name="BottomNavigationItemInactive" parent="Widget.Design.BottomNavigationView">
@@ -27,14 +27,16 @@
     <style name="StandartRecyclerViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0dp</item>
-        <item name="android:layout_margin">@dimen/margin_big</item>
+        <item name="android:layout_marginRight">@dimen/margin_medium</item>
+        <item name="android:layout_marginLeft">@dimen/margin_medium</item>
+        <item name="android:overScrollMode">never</item>
     </style>
 
     <style name="StandartBottomButtonStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/margin_big</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@drawable/button</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -69,7 +71,7 @@
         <item name="android:layout_margin">@dimen/borders_width</item>
         <item name="android:padding">0dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/border</item>
+        <item name="android:background">@drawable/output_box</item>
     </style>
 
     <style name="PairDataInputFieldTheme">
@@ -100,6 +102,18 @@
     <style name="AlertDialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="android:textColorPrimary">@color/colorPrimary</item>
         <item name="android:colorBackground">@color/colorPrimaryInversed</item>
+    </style>
+
+    <style name="TimePickerDialogTheme" parent="@style/ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/colorPrimaryInversed</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryInversedFaded</item>
+        <item name="android:buttonBarButtonStyle">@style/PickerDialogButtonStyle</item>
+    </style>
+
+    <style name="PickerDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:colorBackground">@color/colorPrimaryInversed</item>
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:textSize">@dimen/simple_text</item>
     </style>
 
 </resources>

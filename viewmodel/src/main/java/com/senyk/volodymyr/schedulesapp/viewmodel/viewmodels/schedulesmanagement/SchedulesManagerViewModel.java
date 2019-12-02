@@ -11,7 +11,6 @@ import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.SingleEventLiveData;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.SchedulesDtoUiListMapper;
-import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.uilistupdater.SchedulesUiListUpdater;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.base.BaseReactiveViewModel;
 
@@ -30,10 +29,10 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
     private final UserSettingsRepository userSettingsRepository;
 
     private final SchedulesDtoUiListMapper schedulesMapper;
-    private final SchedulesUiListUpdater schedulesListChanger;
 
     public boolean isAppStart;
     private List<ScheduleDto> schedulesList;
+    private String selectedSchedule;
 
     private MutableLiveData<String> currentScheduleName = new MutableLiveData<>();
     private MutableLiveData<List<ScheduleUi>> schedulesOutputList = new MutableLiveData<>();
@@ -65,13 +64,11 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
             UserSettingsRepository userSettingsRepository,
-            SchedulesDtoUiListMapper scheduleDtoUiListMapper,
-            SchedulesUiListUpdater schedulesListChanger) {
+            SchedulesDtoUiListMapper scheduleDtoUiListMapper) {
         super(errorsHandler);
         this.schedulesRepository = schedulesRepository;
         this.userSettingsRepository = userSettingsRepository;
         this.schedulesMapper = scheduleDtoUiListMapper;
-        this.schedulesListChanger = schedulesListChanger;
     }
 
     public void loadSchedules() {
@@ -102,11 +99,11 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
     }
 
     public void scheduleSelected(String selectedScheduleName) {
-        if (schedulesOutputList.getValue() != null) {
-            schedulesOutputList.setValue(schedulesListChanger.updateSelections(
-                    schedulesOutputList.getValue(),
-                    selectedScheduleName
-            ));
+        if (currentScheduleName.getValue() != null) {
+            if (!selectedScheduleName.equals(currentScheduleName.getValue())) {
+                selectedSchedule = selectedScheduleName;
+                showConfirmSwapDialog.setValue(true);
+            }
         }
     }
 
@@ -155,25 +152,11 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
         }
     }
 
-    public void managementFinished(boolean isSure) {
-        if (schedulesOutputList.getValue() == null || schedulesOutputList.getValue().isEmpty()) {
-            return;
-        }
-        String newCurrentScheduleName = null;
-        for (ScheduleUi uiItem : schedulesOutputList.getValue()) {
-            if (uiItem.isSelected()) {
-                newCurrentScheduleName = uiItem.getName();
-                break;
-            }
-        }
-        if (newCurrentScheduleName == null) {
-            return;
-        }
-        if (newCurrentScheduleName.equals(currentScheduleName.getValue()) || isSure) {
-            setNewCurrentSchedule(newCurrentScheduleName);
-            currentScheduleName.setValue(newCurrentScheduleName);
-        } else {
-            showConfirmSwapDialog.setValue(true);
+    public void managementFinished() {
+        if (this.selectedSchedule != null) {
+            setNewCurrentSchedule(this.selectedSchedule);
+            currentScheduleName.setValue(this.selectedSchedule);
+            goToSchedule.setValue(true);
         }
     }
 

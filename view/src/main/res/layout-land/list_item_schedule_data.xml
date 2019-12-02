@@ -3,27 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorDeselectedSchedule">
-
-    <TextView
-        android:id="@+id/schedule_name_label"
-        style="@style/SimpleTextFieldStyle"
-        android:layout_width="wrap_content"
-        android:text="@string/schedule_name_output"
-        app:layout_constraintBottom_toTopOf="@+id/schedule_date_of_creation"
-        app:layout_constraintEnd_toStartOf="@+id/schedule_name_field"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_margin="8dp"
+    android:background="@drawable/list_item"
+    android:padding="@dimen/padding_main">
 
     <TextView
         android:id="@+id/schedule_name_field"
         style="@style/SimpleTextFieldStyle"
         android:layout_width="0dp"
+        android:text="My first schedule"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/schedule_date_of_creation"
         app:layout_constraintEnd_toStartOf="@+id/delete_schedule_bottom_button"
-        app:layout_constraintStart_toEndOf="@+id/schedule_name_label"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -34,14 +26,12 @@
         app:layout_constraintBottom_toTopOf="@+id/schedule_is_sat_working"
         app:layout_constraintEnd_toStartOf="@+id/delete_schedule_bottom_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_name_label" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_name_field" />
 
     <TextView
         android:id="@+id/schedule_is_sat_working"
         style="@style/SimpleTextFieldStyle"
         android:layout_width="0dp"
-        android:drawableEnd="@drawable/ic_false"
-        android:drawableRight="@drawable/ic_false"
         android:text="@string/schedule_is_saturday_working_output"
         app:layout_constraintBottom_toTopOf="@+id/schedule_is_num_denom_system"
         app:layout_constraintEnd_toStartOf="@+id/delete_schedule_bottom_button"
@@ -52,8 +42,6 @@
         android:id="@+id/schedule_is_num_denom_system"
         style="@style/SimpleTextFieldStyle"
         android:layout_width="0dp"
-        android:drawableEnd="@drawable/ic_true"
-        android:drawableRight="@drawable/ic_true"
         android:text="@string/schedule_is_num_denom_system_output"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete_schedule_bottom_button"

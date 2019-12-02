@@ -2,7 +2,10 @@
 <resources>
     <!-- Main application style -->
     <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryInversed">#FFFFFF</color>
+    <color name="colorPrimaryInversedFaded">#D3D3D3</color>
+    <color name="colorControls">#333333</color>
     <color name="colorBackground">#808080</color>
 
     <!-- Additional colors -->

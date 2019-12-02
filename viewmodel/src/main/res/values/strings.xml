@@ -14,7 +14,7 @@
 
     <!-- Errors output -->
     <string name="error_message"><b>Error:</b> %1$s!</string>
-    <string name="field_limit_reached_error_message">Maximum input length reached!</string>
+    <string name="mandatory_field_message">This field is mandatory! Fill it to continue</string>
     <string name="schedule_exists_error_message">Schedule with such name already exists!</string>
 
     <!-- Days of the week -->

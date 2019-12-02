@@ -20,8 +20,9 @@ public class ScheduleExistsWarningCreator implements DialogCreator {
     public AlertDialog createDialog(Context context) {
         return new AlertDialogBuilder(context)
                 .addTitle(context.getString(R.string.schedule_exists_dialog_title))
+                .addIcon(R.drawable.ic_error)
                 .addMessage(context.getString(R.string.schedule_exists_dialog_message))
-                .addNegativeButton(
+                .addNeutralButton(
                         context.getString(R.string.answer_ok),
                         (dialogInterface, i) -> listener.onNeutralButtonClick(DialogFragmentsTypes.SCHEDULE_ALREADY_EXISTS_WARNING))
                 .build();

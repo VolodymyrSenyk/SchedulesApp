@@ -72,17 +72,8 @@ public class PairUi implements PrintableOnTheList {
         return holderColor;
     }
 
-    public void setHolderColor(int holderColor) {
-        this.holderColor = holderColor;
-    }
-
     public PairUi() {
-        this.time = "";
-        this.name = "";
-        this.teacher = "";
-        this.type = "";
-        this.place = "";
-        this.additionalInfo = "";
+        this("", 0, "", "", "", "", "", 0);
     }
 
     public PairUi(String time, long timeInMillis, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {
@@ -115,8 +106,10 @@ public class PairUi implements PrintableOnTheList {
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
+        if (this.hashCode() != obj.hashCode()) return false;
         PairUi other = (PairUi) obj;
         return this.time.equals(other.time) &&
+                this.name.equals(other.name) &&
                 this.teacher.equals(other.teacher) &&
                 this.type.equals(other.type) &&
                 this.place.equals(other.place) &&

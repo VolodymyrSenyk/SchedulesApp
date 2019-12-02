@@ -22,6 +22,7 @@ public class ScheduleDeletingDialogCreator implements DialogCreator {
     public AlertDialog createDialog(Context context) {
         return new AlertDialogBuilder(context)
                 .addTitle(context.getString(R.string.schedule_delete_dialog_title))
+                .addIcon(R.drawable.ic_warning)
                 .addMessage(context.getString(R.string.schedule_delete_dialog_message))
                 .addPositiveButton(
                         context.getString(R.string.answer_yes),

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.R;
+import com.senyk.volodymyr.schedulesapp.view.dialogs.builder.AlertDialogBuilder;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.PrintableOnTheList;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 
@@ -54,6 +55,12 @@ public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<Printabl
         viewHolder.pairTeacher.setText(item.getTeacher());
         viewHolder.pairType.setText(item.getType());
         viewHolder.pairPlace.setText(item.getPlace());
+
+        viewHolder.itemView.setOnClickListener(view -> {
+            if (!item.getAdditionalInfo().equals("")) {
+                new AlertDialogBuilder(view.getContext()).addMessage(item.getAdditionalInfo()).build().show();
+            }
+        });
     }
 
     static class PairDataOutputViewHolder extends RecyclerView.ViewHolder {

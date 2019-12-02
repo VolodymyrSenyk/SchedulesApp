@@ -35,7 +35,6 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
     private final ScheduleDtoUiMapper scheduleMapper;
 
     private List<String> existSchedules;
-    private ScheduleUi newSchedule = new ScheduleUi();
     private ScheduleNameInputField nameField = new ScheduleNameInputField();
     private ScheduleIsSaturdayWorkingCheckField isSatWorkingField = new ScheduleIsSaturdayWorkingCheckField();
     private ScheduleIsNumDenomSystemCheckField isNumDenomSystemField = new ScheduleIsNumDenomSystemCheckField();
@@ -82,14 +81,17 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
     }
 
     public void saveNewSchedule() {
-        newSchedule.setName(nameField.getName());
-        if (existSchedules.contains(newSchedule.getName())) {
+        if (existSchedules.contains(nameField.getName())) {
             showScheduleExistsWarning.setValue(true);
             return;
         }
-        newSchedule.setSaturdayWorking(isSatWorkingField.isChecked());
-        newSchedule.setNumDenomSystem(isNumDenomSystemField.isChecked());
+        ScheduleUi newSchedule = new ScheduleUi(
+                nameField.getName(),
+                isSatWorkingField.isChecked(),
+                isNumDenomSystemField.isChecked()
+        );
         schedulesRepository.createNewSchedule(scheduleMapper.convertToDto(newSchedule))
+                .andThen(userSettingsRepository.setSchedule(newSchedule.getName()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
@@ -100,29 +102,8 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
 
                     @Override
                     public void onComplete() {
-                        setCurrentSchedule();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, errorsHandler.handle(e));
-                    }
-                });
-    }
-
-    private void setCurrentSchedule() {
-        userSettingsRepository.setSchedule(newSchedule.getName())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        setNewCurrentSchedule(newSchedule.getName());
+                        currentScheduleName.setValue(newSchedule.getName());
+                        goToSchedule.setValue(true);
                     }
 
                     @Override
@@ -148,29 +129,6 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
                         for (ScheduleDto item : schedules) {
                             existSchedules.add(item.getName());
                         }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, errorsHandler.handle(e));
-                    }
-                });
-    }
-
-    private void setNewCurrentSchedule(String newCurrentScheduleName) {
-        userSettingsRepository.setSchedule(newCurrentScheduleName)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-                        compositeDisposable.add(disposable);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        currentScheduleName.setValue(newSchedule.getName());
-                        goToSchedule.setValue(true);
                     }
 
                     @Override

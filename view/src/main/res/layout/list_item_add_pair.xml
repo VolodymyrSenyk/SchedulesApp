@@ -4,6 +4,7 @@
     android:id="@+id/add_pair_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/button"
     android:layout_marginTop="@dimen/margin_small"
     android:padding="@dimen/padding_main"
     app:srcCompat="@drawable/ic_add">

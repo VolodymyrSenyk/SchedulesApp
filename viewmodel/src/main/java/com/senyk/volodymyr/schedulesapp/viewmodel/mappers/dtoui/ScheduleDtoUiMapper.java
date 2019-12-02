@@ -20,14 +20,12 @@ public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi
 
     @Override
     public ScheduleUi convertToUi(ScheduleDto dto) {
-        ScheduleUi uiModel = new ScheduleUi(
+        return new ScheduleUi(
                 dto.getName(),
-                resourcesProvider.getDateOfCreation(dto.getDateOfCreation()),
+                resourcesProvider.getDateTime(dto.getDateOfCreation()),
                 dto.getNumberOfDays() == WEEK_LENGTH_WITH_SAT,
                 dto.getNumberOfWeeks() == NUM_OF_WEEK_TYPES_NUM_DENOM
         );
-        uiModel.setScheduleHolderColor(resourcesProvider.getScheduleHolderColor(uiModel));
-        return uiModel;
     }
 
     @Override

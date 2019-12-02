@@ -26,14 +26,11 @@ public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, S
         List<ScheduleUi> convertedList = new ArrayList<>(list.size());
         for (ScheduleDto item : list) {
             ScheduleUi uiItem = listItemMapper.convertToUi(item);
-            uiItem.setScheduleHolderColor(resourcesProvider.getScheduleHolderColor(uiItem));
             convertedList.add(uiItem);
         }
         if (!convertedList.isEmpty()) {
             ScheduleUi uiItem = convertedList.get(0);
             uiItem.setCurrent(true);
-            uiItem.setSelected(true);
-            uiItem.setScheduleHolderColor(resourcesProvider.getScheduleHolderColor(uiItem));
         }
         return convertedList;
     }
@@ -44,9 +41,7 @@ public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, S
             ScheduleUi uiItem = listItemMapper.convertToUi(item);
             if (item.getName().equals(currentScheduleName)) {
                 uiItem.setCurrent(true);
-                uiItem.setSelected(true);
             }
-            uiItem.setScheduleHolderColor(resourcesProvider.getScheduleHolderColor(uiItem));
             convertedList.add(uiItem);
         }
         return convertedList;
