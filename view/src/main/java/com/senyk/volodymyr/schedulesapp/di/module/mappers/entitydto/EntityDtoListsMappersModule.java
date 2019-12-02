@@ -26,13 +26,13 @@ public class EntityDtoListsMappersModule {
 
     @Singleton
     @Provides
-    public GenericEntityDtoListMapper<WeekDataEntity, WeekDto> getAllScheduleMapper(WeekEntityDtoMapper weekMapper) {
+    public GenericEntityDtoListMapper<WeekDataEntity, WeekDto> getWholeScheduleMapper(WeekEntityDtoMapper weekMapper) {
         return new GenericEntityDtoListMapper<>(weekMapper);
     }
 
     @Singleton
     @Provides
-    public GenericEntityDtoListMapper<PairDataEntity, PairDto> getOneDayScheduleMapper(PairEntityDtoMapper pairMapper) {
+    public GenericEntityDtoListMapper<PairDataEntity, PairDto> getPairsListMapper(PairEntityDtoMapper pairMapper) {
         return new GenericEntityDtoListMapper<>(pairMapper);
     }
 }

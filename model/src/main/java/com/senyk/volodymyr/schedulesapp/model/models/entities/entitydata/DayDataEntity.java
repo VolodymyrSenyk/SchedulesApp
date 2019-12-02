@@ -13,7 +13,10 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity(
         tableName = "days",
         foreignKeys = @ForeignKey(
-                entity = WeekDataEntity.class, parentColumns = "week_id", childColumns = "week_id", onDelete = CASCADE
+                entity = WeekDataEntity.class,
+                parentColumns = "week_id",
+                childColumns = "week_id",
+                onDelete = CASCADE
         ),
         indices = @Index(value = "week_id")
 )
@@ -28,6 +31,6 @@ public class DayDataEntity {
     public long weekId;
 
     @NonNull
-    @ColumnInfo(name = "day_ordinal")
+    @ColumnInfo(name = "day_ordinalNumber")
     public int dayOrdinal;
 }

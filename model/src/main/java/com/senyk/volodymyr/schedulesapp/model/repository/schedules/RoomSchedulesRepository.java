@@ -29,15 +29,15 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     private DayEntityDtoMapper dayMapper;
     private GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper;
     private GenericEntityDtoListMapper<WeekDataEntity, WeekDto> fullScheduleMapper;
-    private GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper;
+    private GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDaySchedulePairsMapper;
 
     public RoomSchedulesRepository(
             SchedulesAppDatabase database,
             ScheduleEntityDtoMapper scheduleMapper,
             DayEntityDtoMapper dayMapper,
             GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
-            GenericEntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper,
-            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper
+            GenericEntityDtoListMapper<WeekDataEntity, WeekDto> wholeScheduleMapper,
+            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDaySchedulePairsMapper
     ) {
         this.schedulesManagementDao = database.getSchedulesManagementDao();
         this.pairsManagementDao = database.getPairsManagementDao();
@@ -46,8 +46,8 @@ public class RoomSchedulesRepository implements SchedulesRepository {
         this.dayMapper = dayMapper;
 
         this.allSchedulesListMapper = allSchedulesListMapper;
-        this.fullScheduleMapper = allScheduleMapper;
-        this.oneDayScheduleMapper = oneDayScheduleMapper;
+        this.fullScheduleMapper = wholeScheduleMapper;
+        this.oneDaySchedulePairsMapper = oneDaySchedulePairsMapper;
     }
 
     @Override
@@ -72,15 +72,17 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     public Completable updateSchedule(final String scheduleName, final int weekNumber, final DayDto day) {
         DayEntity newSchedule = new DayEntity();
         newSchedule.day = dayMapper.convertToEntity(day);
-        newSchedule.pairs = oneDayScheduleMapper.convertToEntities(day.getPairs());
+        newSchedule.pairs = oneDaySchedulePairsMapper.convertToEntities(day.getPairs());
         return Completable.fromCallable(() ->
                 pairsManagementDao.updateSchedule(scheduleName, weekNumber, day.getOrdinalNumber(), newSchedule));
     }
 
     @Override
-    public Single<List<PairDto>> getScheduleForOneDay(final String scheduleName, final int weekNumber, final int dayNumber) {
+    public Single<DayDto> getScheduleForOneDay(final String scheduleName, final int weekNumber, final int dayNumber) {
         return pairsManagementDao.getSchedule(scheduleName, weekNumber, dayNumber)
-                .map(entity -> oneDayScheduleMapper.convertToDtos(entity.pairs));
+                .map(entity -> new DayDto(
+                        dayMapper.convertToDto(entity.day).getOrdinalNumber(),
+                        oneDaySchedulePairsMapper.convertToDtos(entity.pairs)));
     }
 
     @Override

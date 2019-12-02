@@ -5,11 +5,11 @@ import java.util.List;
 public abstract class BaseEntityDtoListMapper<ENTITY, DTO> {
     protected final BaseEntityDtoMapper<ENTITY, DTO> listItemMapper;
 
-    public BaseEntityDtoListMapper(BaseEntityDtoMapper<ENTITY, DTO> simpleMapper) {
-        this.listItemMapper = simpleMapper;
+    public BaseEntityDtoListMapper(BaseEntityDtoMapper<ENTITY, DTO> listItemMapper) {
+        this.listItemMapper = listItemMapper;
     }
 
-    abstract public List<ENTITY> convertToEntities(List<DTO> list);
+    public abstract List<ENTITY> convertToEntities(List<DTO> list);
 
-    abstract public List<DTO> convertToDtos(List<ENTITY> list);
+    public abstract List<DTO> convertToDtos(List<ENTITY> list);
 }

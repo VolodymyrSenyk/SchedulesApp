@@ -24,8 +24,7 @@ public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi
                 dto.getName(),
                 resourcesProvider.getDateTime(dto.getDateOfCreation()),
                 dto.getNumberOfDays() == WEEK_LENGTH_WITH_SAT,
-                dto.getNumberOfWeeks() == NUM_OF_WEEK_TYPES_NUM_DENOM
-        );
+                dto.getNumberOfWeeks() == NUM_OF_WEEK_TYPES_NUM_DENOM);
     }
 
     @Override
@@ -33,7 +32,6 @@ public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi
         return new ScheduleDto(
                 uiModel.getName(),
                 uiModel.isSaturdayWorking() ? WEEK_LENGTH_WITH_SAT : NORMAL_WEEK_LENGTH,
-                uiModel.isNumDenomSystem() ? NUM_OF_WEEK_TYPES_NUM_DENOM : NORMAL_NUM_OF_WEEK_TYPES
-        );
+                uiModel.isNumDenomSystem() ? NUM_OF_WEEK_TYPES_NUM_DENOM : NORMAL_NUM_OF_WEEK_TYPES);
     }
 }

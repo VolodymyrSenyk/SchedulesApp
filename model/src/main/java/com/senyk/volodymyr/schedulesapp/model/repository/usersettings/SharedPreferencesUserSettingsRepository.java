@@ -18,24 +18,22 @@ public class SharedPreferencesUserSettingsRepository implements UserSettingsRepo
 
     @Override
     public Single<String> getCurrentSchedule() {
-        return Single.fromCallable(() -> sharedPreferences.getString(
+        return Single.fromCallable(() -> this.sharedPreferences.getString(
                 SchedulesAppSharedPreferencesContract.CURRENT_SCHEDULE_NAME_KEY, ""
         ));
     }
 
     @Override
-    public Completable setSchedule(final String scheduleName) {
+    public Completable setCurrentSchedule(final String scheduleName) {
         return Completable.fromCallable((Callable<Boolean>) () -> {
-            sharedPreferences
+            this.sharedPreferences
                     .edit()
                     .putString(
-                            SchedulesAppSharedPreferencesContract.CURRENT_SCHEDULE_NAME_KEY,
-                            scheduleName
-                    )
+                            SchedulesAppSharedPreferencesContract.CURRENT_SCHEDULE_NAME_KEY, scheduleName)
                     .apply();
-            return !sharedPreferences.getString(
-                    SchedulesAppSharedPreferencesContract.CURRENT_SCHEDULE_NAME_KEY, ""
-            ).equals("");
+            return !this.sharedPreferences.getString(
+                    SchedulesAppSharedPreferencesContract.CURRENT_SCHEDULE_NAME_KEY, "")
+                    .equals("");
         });
     }
 }

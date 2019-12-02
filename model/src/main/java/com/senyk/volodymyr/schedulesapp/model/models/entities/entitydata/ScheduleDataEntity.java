@@ -20,7 +20,7 @@ public class ScheduleDataEntity {
     public String name;
 
     @NonNull
-    @ColumnInfo(name = "schedule_createdAt")
+    @ColumnInfo(name = "schedule_dateOfCreation")
     public long createdAt = Calendar.getInstance().getTimeInMillis();
 
     @NonNull

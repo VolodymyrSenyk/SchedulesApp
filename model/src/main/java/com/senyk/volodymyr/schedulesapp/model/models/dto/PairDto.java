@@ -10,72 +10,36 @@ public class PairDto {
     private String place;
     private String additionalInfo;
 
+    public PairDto(long time, String name, String teacher, PairType type, String place, String additionalInfo) {
+        this.time = time;
+        this.name = name;
+        this.teacher = teacher;
+        this.type = type;
+        this.place = place;
+        this.additionalInfo = additionalInfo;
+    }
+
     public long getTime() {
-        return time;
+        return this.time;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getTeacher() {
-        return teacher;
+        return this.teacher;
     }
 
     public PairType getType() {
-        return type;
+        return this.type;
     }
 
     public String getPlace() {
-        return place;
+        return this.place;
     }
 
     public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public static Builder getBuilder() {
-        return new PairDto().new Builder();
-    }
-
-    public class Builder {
-
-        private Builder() {
-        }
-
-        public PairDto build() {
-            return PairDto.this;
-        }
-
-        public Builder setTime(long time) {
-            PairDto.this.time = time;
-            return this;
-        }
-
-        public Builder setName(String name) {
-            PairDto.this.name = name;
-            return this;
-        }
-
-        public Builder setTeacher(String teacher) {
-            PairDto.this.teacher = teacher;
-            return this;
-        }
-
-        public Builder setType(PairType type) {
-            PairDto.this.type = type;
-            return this;
-        }
-
-        public Builder setPlace(String place) {
-            PairDto.this.place = place;
-            return this;
-        }
-
-        public Builder setAdditionalInfo(String additionalInfo) {
-            PairDto.this.additionalInfo = additionalInfo;
-            return this;
-        }
-
+        return this.additionalInfo;
     }
 }

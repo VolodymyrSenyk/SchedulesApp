@@ -5,17 +5,13 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.senyk.volodymyr.schedulesapp.model.models.dto.DayDto;
-import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
-import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.GenericDtoUiListMapper;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.DayDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.DayUi;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.base.BaseReactiveViewModel;
 
 import java.util.Collections;
-import java.util.List;
 
 import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
@@ -27,7 +23,7 @@ public class DayScheduleViewModel extends BaseReactiveViewModel {
     private static final String TAG = "DayScheduleVM";
 
     private final SchedulesRepository repository;
-    private final GenericDtoUiListMapper<PairDto, PairUi> mapper;
+    private final DayDtoUiMapper mapper;
 
     private MutableLiveData<Boolean> isEditMode = new MutableLiveData<>();
     private MutableLiveData<DayUi> scheduleForOneDay = new MutableLiveData<>();
@@ -47,11 +43,12 @@ public class DayScheduleViewModel extends BaseReactiveViewModel {
     public DayScheduleViewModel(
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
-            GenericDtoUiListMapper<PairDto, PairUi> pairDtoUiListMapper
+            DayDtoUiMapper dayDtoUiListMapper
     ) {
         super(errorsHandler);
         this.repository = schedulesRepository;
-        this.mapper = pairDtoUiListMapper;
+        this.mapper = dayDtoUiListMapper;
+
     }
 
     public void loadScheduleForOneDay(String scheduleName, int weekOrdinal, int dayOrdinal) {
@@ -59,16 +56,16 @@ public class DayScheduleViewModel extends BaseReactiveViewModel {
                 .subscribeOn(Schedulers.newThread())
                 .map(mapper::convertToUi)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<PairUi>>() {
+                .subscribe(new SingleObserver<DayUi>() {
                     @Override
                     public void onSubscribe(Disposable disposable) {
                         compositeDisposable.add(disposable);
                     }
 
                     @Override
-                    public void onSuccess(List<PairUi> pairs) {
-                        Collections.sort(pairs, (pair1, pair2) -> Long.compare(pair1.getTimeInMillis(), pair2.getTimeInMillis()));
-                        scheduleForOneDay.setValue(new DayUi(dayOrdinal, weekOrdinal, pairs));
+                    public void onSuccess(DayUi day) {
+                        Collections.sort(day.getPairs(), (pair1, pair2) -> Long.compare(pair1.getTimeInMillis(), pair2.getTimeInMillis()));
+                        scheduleForOneDay.setValue(new DayUi(day.getOrdinal(), weekOrdinal, day.getPairs()));
                         isEditMode.setValue(false);
                     }
 
@@ -80,8 +77,7 @@ public class DayScheduleViewModel extends BaseReactiveViewModel {
     }
 
     public void updateScheduleForOneDay(String scheduleName, DayUi day) {
-        DayDto dayToSave = new DayDto(day.getOrdinal(), mapper.convertToDto(day.getPairs()));
-        repository.updateSchedule(scheduleName, day.getWeekOrdinal(), dayToSave)
+        repository.updateSchedule(scheduleName, day.getWeekOrdinal(), mapper.convertToDto(day))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {

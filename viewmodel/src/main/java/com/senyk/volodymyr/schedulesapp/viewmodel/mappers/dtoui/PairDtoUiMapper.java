@@ -17,25 +17,22 @@ public class PairDtoUiMapper extends BaseDtoUiMapper<PairDto, PairUi> {
         return new PairUi(
                 resourcesProvider.getPairTime(dto.getTime()),
                 dto.getTime(),
-                dto.getName() != null ? dto.getName() : "",
-                dto.getTeacher() != null ? dto.getTeacher() : "",
+                dto.getName(),
+                dto.getTeacher(),
                 resourcesProvider.getPairType(dto.getType()),
-                dto.getPlace() != null ? dto.getPlace() : "",
-                dto.getAdditionalInfo() != null ? dto.getAdditionalInfo() : "",
-                resourcesProvider.getPairsHolderColor(dto.getType())
-        );
+                dto.getPlace(),
+                dto.getAdditionalInfo(),
+                resourcesProvider.getPairsHolderColor(dto.getType()));
     }
 
     @Override
     public PairDto convertToDto(PairUi uiModel) {
-        return PairDto.getBuilder()
-                .setTime(uiModel.getTimeInMillis())
-                .setName(uiModel.getName())
-                .setTeacher(uiModel.getTeacher())
-                .setType(resourcesProvider.getPairType(uiModel.getType()))
-                .setPlace(uiModel.getPlace())
-                .setAdditionalInfo(uiModel.getAdditionalInfo())
-                .build();
+        return new PairDto(
+                uiModel.getTimeInMillis(),
+                uiModel.getName(),
+                uiModel.getTeacher(),
+                resourcesProvider.getPairType(uiModel.getType()),
+                uiModel.getPlace(), uiModel.getAdditionalInfo());
     }
 
 }

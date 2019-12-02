@@ -26,9 +26,7 @@ public class PairEntityDtoMapper extends BaseEntityDtoMapper<PairDataEntity, Pai
             default:
                 pairType = PairType.NOT_STATED;
         }
-        return PairDto.getBuilder().setName(entity.name).setTime(entity.time).setTeacher(entity.teacher)
-                .setType(pairType).setPlace(entity.place).setAdditionalInfo(entity.additionalInfo)
-                .build();
+        return new PairDto(entity.time, entity.name, entity.teacher, pairType, entity.place, entity.additionalInfo);
     }
 
     @Override

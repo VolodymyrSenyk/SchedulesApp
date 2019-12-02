@@ -6,11 +6,12 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.senyk.volodymyr.schedulesapp.model.exceptions.SQLiteQueryExecutingException;
+import com.senyk.volodymyr.schedulesapp.model.exceptions.SqlQueryExecutionException;
 import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.DayDataEntity;
 import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.ScheduleDataEntity;
 import com.senyk.volodymyr.schedulesapp.model.models.entities.entitydata.WeekDataEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Completable;
@@ -23,37 +24,40 @@ public abstract class SchedulesManagementDao {
 
     @Transaction
     public Completable createNewSchedule(ScheduleDataEntity newSchedule) {
+        List<Long> newDaysIds = new ArrayList<>();
         long newScheduleId = insert(newSchedule);
-        for (int i = 1; i <= newSchedule.numberOfWeeks; i++) {
+        for (int weekOrdinal = 1; weekOrdinal <= newSchedule.numberOfWeeks; weekOrdinal++) {
             WeekDataEntity newWeek = new WeekDataEntity();
             newWeek.scheduleId = newScheduleId;
-            newWeek.weekOrdinal = i;
+            newWeek.weekOrdinal = weekOrdinal;
             long newWeekId = insert(newWeek);
-            for (int j = 1; j <= newSchedule.numberOfDays; j++) {
+            for (int dayOrdinal = 1; dayOrdinal <= newSchedule.numberOfDays; dayOrdinal++) {
                 DayDataEntity newDay = new DayDataEntity();
                 newDay.weekId = newWeekId;
-                newDay.dayOrdinal = j;
-                insert(newDay);
+                newDay.dayOrdinal = dayOrdinal;
+                newDaysIds.add(insert(newDay));
             }
         }
+        if (newDaysIds.isEmpty())
+            return Completable.error(new SqlQueryExecutionException("No new days created"));
         return Completable.complete();
     }
 
     public Completable deleteSchedule(String scheduleName) {
         return delete(scheduleName) != 1 ?
-                Completable.error(new SQLiteQueryExecutingException("More than one schedule deleted")) :
+                Completable.error(new SqlQueryExecutionException("More than one schedule deleted")) :
                 Completable.complete();
     }
 
     @Query("DELETE FROM schedules WHERE schedules.schedule_name = :scheduleName")
-    public abstract int delete(String scheduleName);
+    abstract int delete(String scheduleName);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract long insert(ScheduleDataEntity newSchedule);
+    abstract long insert(ScheduleDataEntity newSchedule);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract long insert(WeekDataEntity newWeek);
+    abstract long insert(WeekDataEntity newWeek);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public abstract long insert(DayDataEntity newDay);
+    abstract long insert(DayDataEntity newDay);
 }

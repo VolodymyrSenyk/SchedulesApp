@@ -28,6 +28,6 @@ public class WeekDataEntity {
     public long scheduleId;
 
     @NonNull
-    @ColumnInfo(name = "week_ordinal")
+    @ColumnInfo(name = "week_ordinalNumber")
     public int weekOrdinal;
 }

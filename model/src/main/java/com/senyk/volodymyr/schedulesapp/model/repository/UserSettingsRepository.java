@@ -6,5 +6,5 @@ import io.reactivex.Single;
 public interface UserSettingsRepository {
     Single<String> getCurrentSchedule();
 
-    Completable setSchedule(String scheduleName);
+    Completable setCurrentSchedule(String scheduleName);
 }

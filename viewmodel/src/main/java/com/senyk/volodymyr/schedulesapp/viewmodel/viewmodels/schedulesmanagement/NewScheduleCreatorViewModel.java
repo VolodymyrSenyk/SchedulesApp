@@ -91,7 +91,7 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
                 isNumDenomSystemField.isChecked()
         );
         schedulesRepository.createNewSchedule(scheduleMapper.convertToDto(newSchedule))
-                .andThen(userSettingsRepository.setSchedule(newSchedule.getName()))
+                .andThen(userSettingsRepository.setCurrentSchedule(newSchedule.getName()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {

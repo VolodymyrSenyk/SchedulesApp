@@ -13,7 +13,10 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity(
         tableName = "pairs",
         foreignKeys = @ForeignKey(
-                entity = DayDataEntity.class, parentColumns = "day_id", childColumns = "day_id", onDelete = CASCADE
+                entity = DayDataEntity.class,
+                parentColumns = "day_id",
+                childColumns = "day_id"
+                , onDelete = CASCADE
         ),
         indices = @Index(value = "day_id")
 )

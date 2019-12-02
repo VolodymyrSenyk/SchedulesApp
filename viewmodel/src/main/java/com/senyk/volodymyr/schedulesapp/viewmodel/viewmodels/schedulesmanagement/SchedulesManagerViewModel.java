@@ -110,7 +110,7 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
     public void deleteSchedule(String scheduleName) {
         if (scheduleName.equals(this.currentScheduleName.getValue())) {
             schedulesRepository.deleteSchedule(scheduleName)
-                    .andThen(userSettingsRepository.setSchedule(""))
+                    .andThen(userSettingsRepository.setCurrentSchedule(""))
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new CompletableObserver() {
@@ -192,7 +192,7 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
     }
 
     private void setNewCurrentSchedule(String newCurrentScheduleName) {
-        userSettingsRepository.setSchedule(newCurrentScheduleName)
+        userSettingsRepository.setCurrentSchedule(newCurrentScheduleName)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {

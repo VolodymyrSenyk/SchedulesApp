@@ -14,7 +14,7 @@ public class GenericEntityDtoListMapper<ENTITY, DTO> extends BaseEntityDtoListMa
     public List<ENTITY> convertToEntities(List<DTO> list) {
         List<ENTITY> convertedList = new ArrayList<>(list.size());
         for (DTO item : list) {
-            convertedList.add(listItemMapper.convertToEntity(item));
+            convertedList.add(this.listItemMapper.convertToEntity(item));
         }
         return convertedList;
     }
@@ -22,7 +22,7 @@ public class GenericEntityDtoListMapper<ENTITY, DTO> extends BaseEntityDtoListMa
     public List<DTO> convertToDtos(List<ENTITY> list) {
         List<DTO> convertedList = new ArrayList<>(list.size());
         for (ENTITY item : list) {
-            convertedList.add(listItemMapper.convertToDto(item));
+            convertedList.add(this.listItemMapper.convertToDto(item));
         }
         return convertedList;
     }

@@ -1,7 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist;
 
 import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
-import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.base.BaseDtoUiListMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.base.BaseDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.ScheduleUi;
@@ -12,13 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, ScheduleUi> {
-    private ResourcesProvider resourcesProvider;
 
-    public SchedulesDtoUiListMapper(
-            @NotNull BaseDtoUiMapper<ScheduleDto, ScheduleUi> mapper,
-            ResourcesProvider resourcesProvider) {
+    public SchedulesDtoUiListMapper(@NotNull BaseDtoUiMapper<ScheduleDto, ScheduleUi> mapper) {
         super(mapper);
-        this.resourcesProvider = resourcesProvider;
     }
 
     @Override

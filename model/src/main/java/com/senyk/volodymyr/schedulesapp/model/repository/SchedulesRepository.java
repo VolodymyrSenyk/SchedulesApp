@@ -1,7 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.model.repository;
 
 import com.senyk.volodymyr.schedulesapp.model.models.dto.DayDto;
-import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.ScheduleDto;
 import com.senyk.volodymyr.schedulesapp.model.models.dto.WeekDto;
 
@@ -19,7 +18,7 @@ public interface SchedulesRepository {
 
     Completable updateSchedule(String scheduleName, int weekNumber, DayDto day);
 
-    Single<List<PairDto>> getScheduleForOneDay(String scheduleName, int weekNumber, int dayNumber);
+    Single<DayDto> getScheduleForOneDay(String scheduleName, int weekNumber, int dayNumber);
 
     Single<List<WeekDto>> getFullSchedule(String scheduleName);
 }

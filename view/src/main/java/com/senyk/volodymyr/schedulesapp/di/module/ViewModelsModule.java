@@ -3,16 +3,15 @@ package com.senyk.volodymyr.schedulesapp.di.module;
 import androidx.lifecycle.ViewModel;
 
 import com.senyk.volodymyr.schedulesapp.di.module.helpers.ErrorsHandlerModule;
+import com.senyk.volodymyr.schedulesapp.di.module.mappers.dtoui.DtoUiComplicatedModelsMappersModule;
 import com.senyk.volodymyr.schedulesapp.di.module.mappers.dtoui.DtoUiListsMappersModule;
 import com.senyk.volodymyr.schedulesapp.di.module.repository.RepositoriesModule;
-import com.senyk.volodymyr.schedulesapp.model.models.dto.PairDto;
 import com.senyk.volodymyr.schedulesapp.model.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.model.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.viewmodel.helpers.ErrorsHandler;
+import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.DayDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtoui.ScheduleDtoUiMapper;
-import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.GenericDtoUiListMapper;
 import com.senyk.volodymyr.schedulesapp.viewmodel.mappers.dtouilist.SchedulesDtoUiListMapper;
-import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.factories.ViewModelFactory;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.DayScheduleViewModel;
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.schedule.WeekViewModel;
@@ -36,7 +35,8 @@ import dagger.multibindings.IntoMap;
 @Module(includes = {
         ErrorsHandlerModule.class,
         RepositoriesModule.class,
-        DtoUiListsMappersModule.class
+        DtoUiListsMappersModule.class,
+        DtoUiComplicatedModelsMappersModule.class
 })
 public class ViewModelsModule {
     @Target(ElementType.METHOD)
@@ -64,11 +64,11 @@ public class ViewModelsModule {
     ViewModel bindDayScheduleViewModel(
             ErrorsHandler errorsHandler,
             SchedulesRepository schedulesRepository,
-            GenericDtoUiListMapper<PairDto, PairUi> pairDtoUiUiListMapper) {
+            DayDtoUiMapper dayDtoUiMapper) {
         return new DayScheduleViewModel(
                 errorsHandler,
                 schedulesRepository,
-                pairDtoUiUiListMapper
+                dayDtoUiMapper
         );
     }
 
