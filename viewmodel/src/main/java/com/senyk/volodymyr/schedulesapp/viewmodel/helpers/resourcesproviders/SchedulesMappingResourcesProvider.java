@@ -13,9 +13,6 @@ public class SchedulesMappingResourcesProvider {
     }
 
     public String getDateOfCreation(long date) {
-        if (date == 0) {
-            return "";
-        }
         Calendar dateAndTime = Calendar.getInstance();
         dateAndTime.setTimeInMillis(date);
         return DateUtils.formatDateTime(

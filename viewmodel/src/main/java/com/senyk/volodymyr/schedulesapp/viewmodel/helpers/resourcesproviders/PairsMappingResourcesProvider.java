@@ -19,9 +19,6 @@ public class PairsMappingResourcesProvider {
     }
 
     public String getPairTime(long time) {
-        if (time == 0) {
-            return "";
-        }
         Calendar dateAndTime = Calendar.getInstance();
         dateAndTime.setTimeInMillis(time);
         return DateUtils.formatDateTime(
