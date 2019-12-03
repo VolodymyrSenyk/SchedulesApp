@@ -55,13 +55,16 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
     public void addNewPair() {
         List<PrintableOnTheList> extendedList = new ArrayList<>(this.getItemCount() + 1);
         extendedList.addAll(this.getItems());
-        extendedList.add(this.getItemCount() - 1, this.pairMapper.convertToUi(new PairDto(
+        PairUi newPair = this.pairMapper.convertToUi(new PairDto(
                 0,
                 "",
                 "",
                 PairType.NOT_STATED,
                 "",
-                "")));
+                ""));
+        newPair.setTime("");
+        newPair.setTimeInMillis(null);
+        extendedList.add(this.getItemCount() - 1, newPair);
         this.setItems(extendedList);
     }
 

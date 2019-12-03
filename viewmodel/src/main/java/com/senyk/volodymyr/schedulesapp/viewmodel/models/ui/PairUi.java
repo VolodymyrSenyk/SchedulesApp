@@ -7,7 +7,7 @@ import java.util.Calendar;
 public class PairUi implements PrintableOnTheList {
     private final long id;
     private String time;
-    private long timeInMillis;
+    private Long timeInMillis;
     private String name;
     private String teacher;
     private String type;
@@ -16,10 +16,10 @@ public class PairUi implements PrintableOnTheList {
     private int holderColor;
 
     public PairUi() {
-        this("", 0, "", "", "", "", "", 0);
+        this("", null, "", "", "", "", "", 0);
     }
 
-    public PairUi(String time, long timeInMillis, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {
+    public PairUi(String time, Long timeInMillis, String name, String teacher, String type, String place, String additionalInfo, int holderColor) {
         this.time = time;
         this.timeInMillis = timeInMillis;
         this.name = name;
@@ -36,23 +36,23 @@ public class PairUi implements PrintableOnTheList {
     }
 
     public String getTime() {
-        return time;
+        return this.time;
     }
 
     public void setTime(String time) {
         this.time = time;
     }
 
-    public long getTimeInMillis() {
+    public Long getTimeInMillis() {
         return this.timeInMillis;
     }
 
-    public void setTimeInMillis(long timeInMillis) {
+    public void setTimeInMillis(Long timeInMillis) {
         this.timeInMillis = timeInMillis;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -60,7 +60,7 @@ public class PairUi implements PrintableOnTheList {
     }
 
     public String getTeacher() {
-        return teacher;
+        return this.teacher;
     }
 
     public void setTeacher(String teacher) {
@@ -68,7 +68,7 @@ public class PairUi implements PrintableOnTheList {
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(String type) {
@@ -76,7 +76,7 @@ public class PairUi implements PrintableOnTheList {
     }
 
     public String getPlace() {
-        return place;
+        return this.place;
     }
 
     public void setPlace(String place) {
@@ -84,7 +84,7 @@ public class PairUi implements PrintableOnTheList {
     }
 
     public String getAdditionalInfo() {
-        return additionalInfo;
+        return this.additionalInfo;
     }
 
     public void setAdditionalInfo(String additionalInfo) {
@@ -92,7 +92,7 @@ public class PairUi implements PrintableOnTheList {
     }
 
     public int getHolderColor() {
-        return holderColor;
+        return this.holderColor;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class PairUi implements PrintableOnTheList {
         result = prime * result + this.place.hashCode();
         result = prime * result + this.additionalInfo.hashCode();
         result = prime * result + this.holderColor;
-        result = prime * result + (int) this.timeInMillis;
+        result = prime * result + this.timeInMillis.intValue();
         return result;
     }
 
@@ -124,6 +124,8 @@ public class PairUi implements PrintableOnTheList {
                 this.place.equals(other.place) &&
                 this.additionalInfo.equals(other.additionalInfo) &&
                 this.holderColor == other.holderColor &&
-                this.timeInMillis == other.timeInMillis;
+                this.timeInMillis != null &&
+                other.timeInMillis != null &&
+                this.timeInMillis.equals(other.timeInMillis);
     }
 }
