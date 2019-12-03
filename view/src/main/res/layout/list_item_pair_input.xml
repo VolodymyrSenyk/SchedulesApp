@@ -44,7 +44,6 @@
             style="@style/PairDataInputFieldStyle"
             android:hint="@string/pair_name_input_hint"
             android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
-            android:maxLength="30"
             android:maxLines="2" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,7 +63,7 @@
             style="@style/PairDataInputFieldStyle"
             android:hint="@string/pair_place_input_hint"
             android:inputType="textShortMessage|textMultiLine|textCapSentences"
-            android:maxLength="10"
+            android:maxLength="30"
             android:maxLines="2"
             android:textColor="@color/colorPrimary" />
 
@@ -85,7 +84,6 @@
             style="@style/PairDataInputFieldStyle"
             android:hint="@string/pair_teacher_input_hint"
             android:inputType="textMultiLine|textPersonName|textCapWords"
-            android:maxLength="30"
             android:maxLines="2" />
 
     </com.google.android.material.textfield.TextInputLayout>
