@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pair data output -->
+    <color name="colorLecture">#FFD700</color>
+    <color name="colorPractice">#9370DB</color>
+    <color name="colorLaboratory">#4682B4</color>
+    <color name="colorSport">#2E8B57</color>
+    <color name="colorNotStated">#C0C0C0</color>
+
+</resources>

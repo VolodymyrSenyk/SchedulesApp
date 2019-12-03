@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/schedulesManagerFragment"
+        android:icon="@drawable/ic_swap_schedules"
+        android:title="@string/action_schedules_manager" />
+
+    <item
+        android:id="@+id/studyWeekFragment"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/action_one_day_schedule" />
+
+    <item
+        android:id="@+id/wholeScheduleFragment"
+        android:icon="@drawable/ic_show_whole_schedule"
+        android:title="@string/action_whole_schedule" />
+
+</menu>

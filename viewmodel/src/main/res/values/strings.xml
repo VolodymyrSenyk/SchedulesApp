@@ -1,0 +1,14 @@
+<resources>
+    <!-- Pair data output -->
+    <string-array name="pairs_types">
+        <item>Not stated</item>
+        <item>Lecture</item>
+        <item>Practice</item>
+        <item>Laboratory</item>
+        <item>Sport</item>
+    </string-array>
+
+    <!-- Errors output -->
+    <string name="application_error_message" translatable="false">An error occurred: %1$s!</string>
+
+</resources>
