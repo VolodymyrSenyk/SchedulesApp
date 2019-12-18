@@ -1,5 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.view.adapterdelegates.pairs.output;
 
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.senyk.volodymyr.schedulesapp.viewmodel.models.ui.PairUi;
 import java.util.List;
 
 public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<PrintableOnTheList>> {
+    private static final float CORNER_RADIUS = 30;
     private final LayoutInflater inflater;
 
     public PairDataOutputAdapterDelegate(Fragment fragment) {
@@ -47,13 +50,26 @@ public class PairDataOutputAdapterDelegate extends AdapterDelegate<List<Printabl
         PairUi item = (PairUi) items.get(position);
         PairDataOutputViewHolder viewHolder = (PairDataOutputViewHolder) holder;
 
-        viewHolder.itemView.setBackgroundColor(item.getHolderColor());
-
         viewHolder.pairTime.setText(item.getTime());
         viewHolder.pairName.setText(item.getName());
         viewHolder.pairTeacher.setText(item.getTeacher());
         viewHolder.pairType.setText(item.getType());
         viewHolder.pairPlace.setText(item.getPlace());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setColor(item.getHolderColor());
+            if (items.size() == 1) {
+                drawable.setCornerRadii(new float[]{CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS});
+            } else if (items.get(0).equals(item)) {
+                drawable.setCornerRadii(new float[]{CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, 0, 0, 0, 0});
+            } else if (items.get(items.size() - 1).equals(item)) {
+                drawable.setCornerRadii(new float[]{0, 0, 0, 0, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS, CORNER_RADIUS});
+            }
+            viewHolder.itemView.setBackground(drawable);
+        } else {
+            viewHolder.itemView.setBackgroundColor(item.getHolderColor());
+        }
 
         viewHolder.itemView.setOnClickListener(view -> {
             if (!item.getAdditionalInfo().equals("")) {

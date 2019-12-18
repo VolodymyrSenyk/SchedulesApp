@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Text sizes -->
+    <dimen name="nav_item_active">16sp</dimen>
+    <dimen name="nav_item_inactive">14sp</dimen>
+
+</resources>
