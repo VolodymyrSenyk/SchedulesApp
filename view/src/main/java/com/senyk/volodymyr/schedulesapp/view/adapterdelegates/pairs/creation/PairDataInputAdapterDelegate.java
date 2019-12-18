@@ -74,7 +74,9 @@ public class PairDataInputAdapterDelegate extends AdapterDelegate<List<Printable
         viewHolder.pairTime.setFocusableInTouchMode(false);
         viewHolder.pairTime.setFocusable(false);
         TimeSetter timeSetter = new TimeSetter(viewHolder.pairTime);
-        timeSetter.setDateAndTime(item.getTimeInMillis());
+        if (item.getTimeInMillis() != null) {
+            timeSetter.setDateAndTime(item.getTimeInMillis());
+        }
         viewHolder.pairTime.setOnClickListener(view -> timeSetter.setDialog());
         viewHolder.pairTime.addTextChangedListener(new TextChangeListener() {
             @Override

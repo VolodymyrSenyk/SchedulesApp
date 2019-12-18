@@ -3,8 +3,8 @@
     <!-- Text sizes -->
     <dimen name="title_text">24sp</dimen>
     <dimen name="simple_text">18sp</dimen>
-    <dimen name="nav_item_active">16sp</dimen>
-    <dimen name="nav_item_inactive">14sp</dimen>
+    <dimen name="nav_item_active">14sp</dimen>
+    <dimen name="nav_item_inactive">12sp</dimen>
 
     <!-- Icons sizes -->
     <dimen name="icon_size">24dp</dimen>
@@ -13,15 +13,13 @@
     <dimen name="margin_big">32dp</dimen>
     <dimen name="margin_medium">24dp</dimen>
     <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_inner">1dp</dimen>
     <dimen name="screen_title_margin">8dp</dimen>
 
     <!-- Paddings -->
     <dimen name="padding_main">8dp</dimen>
 
-    <!-- Floating action button_rounded -->
+    <!-- Floating action button -->
     <dimen name="fab_margins">16dp</dimen>
-
-    <!-- Pair data output -->
-    <dimen name="borders_width">1dp</dimen>
 
 </resources>

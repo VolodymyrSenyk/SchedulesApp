@@ -29,6 +29,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    // Drawables
+                    'src/main/res/drawables/common',
+                    'src/main/res/drawables/icons',
+                    'src/main/res/drawables/list_items',
+
+                    'src/main/res/drawables',
+
+                    // Layouts
+                    'src/main/res/layouts/schedules_management/schedule_creation',
+                    'src/main/res/layouts/schedules_management/schedules_output',
+
+                    'src/main/res/layouts/pairs_management/screens',
+                    'src/main/res/layouts/pairs_management/holders',
+
+                    'src/main/res/layouts/common',
+                    'src/main/res/layouts/schedules_management',
+                    'src/main/res/layouts/pairs_management',
+                    'src/main/res/layouts/whole_schedule_feature',
+
+                    'src/main/res/layouts',
+
+                    // Common
+                    'src/main/res'
+            ]
+        }
+    }
 }
 
 dependencies {
