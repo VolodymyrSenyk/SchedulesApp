@@ -1,0 +1,68 @@
+apply plugin: 'java-library'
+
+buildscript {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("androidx.*")
+                includeGroupByRegex("com.android.*")
+                includeGroupByRegex("com.google.*")
+            }
+        }
+        mavenCentral {
+            content {
+                includeGroupByRegex("com.google.*")
+                includeGroupByRegex("com.sun.*")
+                includeGroupByRegex("jakarta.*")
+                includeGroupByRegex("org.apache.*")
+                includeGroupByRegex("org.codehaus.*")
+                includeGroupByRegex("org.jetbrains.*")
+                includeGroup("com.github.gundy")
+                includeGroup("com.squareup")
+                includeGroup("commons-codec")
+                includeGroup("commons-io")
+                includeGroup("commons-logging")
+                includeGroup("de.undercouch")
+                includeGroup("io.grpc")
+                includeGroup("io.netty")
+                includeGroup("io.opencensus")
+                includeGroup("it.unimi.dsi")
+                includeGroup("javax.inject")
+                includeGroup("net.java.dev.jna")
+                includeGroup("net.sf.jopt-simple")
+                includeGroup("net.sf.kxml")
+                includeGroup("org.antlr")
+                includeGroup("org.bouncycastle")
+                includeGroup("org.checkerframework")
+                includeGroup("org.glassfish.jaxb")
+                includeGroup("org.jdom")
+                includeGroup("org.json")
+                includeGroup("org.jvnet.staxex")
+                includeGroup("org.ow2")
+                includeGroup("org.ow2.asm")
+                includeGroup("org.tensorflow")
+                includeGroup("xerces")
+                includeGroup("xml-apis")
+                includeGroup("xmlpull")
+                includeGroup("xpp3")
+            }
+        }
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:${versions.gradle}"
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    // di
+    implementation "javax.inject:javax.inject:$versions.di.inject"
+
+    // rxjava
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rx.java"
+}

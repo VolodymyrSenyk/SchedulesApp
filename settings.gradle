@@ -1,4 +1,4 @@
-include ':model'
-include ':view'
-include ':viewmodel'
+include ':data'
+include ':presentation'
+include ':domain'
 rootProject.name='SchedulesApp'
