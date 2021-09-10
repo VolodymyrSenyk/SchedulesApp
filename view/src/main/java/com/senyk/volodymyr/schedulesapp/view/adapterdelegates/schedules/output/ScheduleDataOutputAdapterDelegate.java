@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,7 +64,13 @@ public class ScheduleDataOutputAdapterDelegate extends AdapterDelegate<List<Prin
         }
 
         if (item.isCurrent()) {
-            viewHolder.itemView.setSelected(true);
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                viewHolder.itemView.setBackgroundDrawable(
+                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.list_item_selected));
+            } else {
+                viewHolder.itemView.setBackground(
+                        ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.list_item_selected));
+            }
         }
 
         viewHolder.itemView.setOnClickListener(view ->

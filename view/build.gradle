@@ -1,94 +1,104 @@
 apply plugin: 'com.android.application'
-
-apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
-    android {
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
-    }
+    compileSdkVersion versions.application.targetSdk
+    buildToolsVersion versions.application.buildTools
 
     defaultConfig {
-        vectorDrawables.useSupportLibrary = true
-        applicationId "com.senyk.volodymyr.schedulesapp"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId "com.senyk.volodymyr.bloknot"
+        minSdkVersion versions.application.minSdk
+        targetSdkVersion versions.application.targetSdk
+        versionName "$versions.application.versionName (${getVersion()})"
+        versionCode versions.application.versionCode
+
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../keystore/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+
+        release {
+            storeFile file(getKeystoreProperty('releaseStoreFile'))
+            storePassword getKeystoreProperty('releaseStorePassword')
+            keyAlias getKeystoreProperty('releaseKeyAlias')
+            keyPassword getKeystoreProperty('releaseKeyPassword')
+        }
     }
 
     buildTypes {
-        release {
+        debug {
+            signingConfig signingConfigs.debug
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            debuggable true
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
-    sourceSets {
-        main {
-            res.srcDirs = [
-                    // Drawables
-                    'src/main/res/drawables/common',
-                    'src/main/res/drawables/icons',
-                    'src/main/res/drawables/list_items',
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 
-                    'src/main/res/drawables',
-
-                    // Layouts
-                    'src/main/res/layouts/schedules_management/schedule_creation',
-                    'src/main/res/layouts/schedules_management/schedules_output',
-
-                    'src/main/res/layouts/pairs_management/screens',
-                    'src/main/res/layouts/pairs_management/holders',
-
-                    'src/main/res/layouts/common',
-                    'src/main/res/layouts/schedules_management',
-                    'src/main/res/layouts/pairs_management',
-                    'src/main/res/layouts/whole_schedule_feature',
-
-                    'src/main/res/layouts',
-
-                    // Common
-                    'src/main/res'
-            ]
-        }
+String getKeystoreProperty(String propertyName) {
+    def keystorePropertiesFile = rootProject.file("keystore/keystore.properties")
+    def keystoreProperties = new Properties()
+    if (keystorePropertiesFile.exists()) {
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    }
+    if (keystoreProperties.containsKey(propertyName)) {
+        return keystoreProperties[propertyName]
+    } else if (System.getenv(propertyName) != null) {
+        return System.getenv(propertyName)
+    } else {
+        throw new IllegalStateException("Keystore property not found: $propertyName")
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':viewmodel')
+    // modules
+    implementation project(":viewmodel")
+    implementation project(":model")
 
-    // AppCompat
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    // view
+    implementation "androidx.appcompat:appcompat:$versions.view.appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.view.constraint"
+    implementation "com.google.android.material:material:$versions.view.material"
 
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment:$navigation_version"
-    implementation "androidx.navigation:navigation-ui:$navigation_version"
+    // di
+    implementation "com.google.dagger:dagger:$versions.di.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$versions.di.dagger"
 
-    // ConstraintLayout
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation.arch_component"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation.arch_component"
 
-    // Adapter delegates
-    implementation "com.hannesdorfmann:adapterdelegates4:$adapter_delegates_version"
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
 
-    // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    // persistence
+    implementation "android.arch.persistence.room:runtime:$versions.persistence.room"
+    implementation "android.arch.persistence.room:rxjava2:$versions.persistence.room"
+    annotationProcessor "android.arch.persistence.room:compiler:$versions.persistence.room"
 
-    // Dagger
-    implementation "com.google.dagger:dagger:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    // rx
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rx.android"
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rx.java"
 
-    // Dependencies for Dagger module
-    implementation project(':model')
-
-    // Room
-    implementation "android.arch.persistence.room:runtime:$room_version"
+    // frameworks
+    implementation "com.hannesdorfmann:adapterdelegates4:$versions.frameworks.adapterdelegates"
 }

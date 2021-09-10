@@ -1,38 +1,37 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.application.targetSdk
+    buildToolsVersion versions.application.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.application.minSdk
+        targetSdkVersion versions.application.targetSdk
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    // Room
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
-    implementation "android.arch.persistence.room:rxjava2:$room_version"
+    // persistence
+    implementation "android.arch.persistence.room:runtime:$versions.persistence.room"
+    implementation "android.arch.persistence.room:rxjava2:$versions.persistence.room"
+    annotationProcessor "android.arch.persistence.room:compiler:$versions.persistence.room"
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxandroid:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rx.android"
 }

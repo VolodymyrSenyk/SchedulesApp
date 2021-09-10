@@ -1,2 +1,4 @@
-include ':view', ':viewmodel', ':model', ':dagger', ':dagger', ':app'
+include ':model'
+include ':view'
+include ':viewmodel'
 rootProject.name='SchedulesApp'

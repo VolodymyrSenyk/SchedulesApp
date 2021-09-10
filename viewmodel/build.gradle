@@ -1,47 +1,44 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
-    android {
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
-    }
+    compileSdkVersion versions.application.targetSdk
+    buildToolsVersion versions.application.buildTools
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+        minSdkVersion versions.application.minSdk
+        targetSdkVersion versions.application.targetSdk
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':model')
+    // modules
+    implementation project(":model")
 
-    // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    // di
+    implementation "com.google.dagger:dagger:$versions.di.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$versions.di.dagger"
 
-    // RxJava
-    implementation "io.reactivex.rxjava2:rxandroid:$rxjava_version"
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
 
-    // Dagger
-    implementation "com.google.dagger:dagger:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    // rx
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rx.android"
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rx.java"
 }

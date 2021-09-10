@@ -90,10 +90,6 @@ public class StudyWeekFragment extends BaseFragment {
                     this.viewPager.setAdapter(this.adapter);
                     this.tabLayout.setupWithViewPager(this.viewPager);
                     this.viewPager.setCurrentItem(this.sharedViewModel.getCurrentDayIndex());
-                    if (this.viewPager.getCurrentItem() != this.sharedViewModel.getCurrentDayIndex()) {
-                        this.viewPager.setCurrentItem(0);
-                        this.sharedViewModel.saveCurrentDayIndex(0);
-                    }
                 });
 
         this.sharedViewModel.isLoading()

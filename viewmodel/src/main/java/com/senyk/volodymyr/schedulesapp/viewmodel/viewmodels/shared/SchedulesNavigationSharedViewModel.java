@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.senyk.volodymyr.schedulesapp.viewmodel.viewmodels.base.BaseViewModel;
 
-import java.util.Calendar;
-
 public class SchedulesNavigationSharedViewModel extends BaseViewModel {
     private static String TAG = "SchedulesNavigationSharedVM";
     private boolean isAppInit = true;
@@ -18,27 +16,6 @@ public class SchedulesNavigationSharedViewModel extends BaseViewModel {
 
     public SchedulesNavigationSharedViewModel() {
         super(TAG, null);
-        Calendar currentDate = Calendar.getInstance();
-        int currentDay = currentDate.get(Calendar.DAY_OF_WEEK);
-        switch (currentDay) {
-            case Calendar.TUESDAY:
-                saveCurrentDayIndex(1);
-                break;
-            case Calendar.WEDNESDAY:
-                saveCurrentDayIndex(2);
-                break;
-            case Calendar.THURSDAY:
-                saveCurrentDayIndex(3);
-                break;
-            case Calendar.FRIDAY:
-                saveCurrentDayIndex(4);
-                break;
-            case Calendar.SATURDAY:
-                saveCurrentDayIndex(5);
-                break;
-            default:
-                saveCurrentDayIndex(0);
-        }
     }
 
     public LiveData<Boolean> isLoading() {

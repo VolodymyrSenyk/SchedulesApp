@@ -1,44 +1,129 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext.gradle_version = '3.5.3'
-    ext.nav_safe_args_version = '1.0.0'
+    apply from: 'versions.gradle'
 
     repositories {
-        google()
-        jcenter()
+        google {
+            content {
+                includeGroupByRegex("androidx.*")
+                includeGroupByRegex("com.android.*")
+                includeGroupByRegex("com.google.*")
+            }
+        }
+        mavenCentral {
+            content {
+                includeGroupByRegex("com.google.*")
+                includeGroupByRegex("com.sun.*")
+                includeGroupByRegex("jakarta.*")
+                includeGroupByRegex("org.apache.*")
+                includeGroupByRegex("org.codehaus.*")
+                includeGroupByRegex("org.jetbrains.*")
+                includeGroup("com.github.gundy")
+                includeGroup("com.squareup")
+                includeGroup("commons-codec")
+                includeGroup("commons-io")
+                includeGroup("commons-logging")
+                includeGroup("de.undercouch")
+                includeGroup("io.grpc")
+                includeGroup("io.netty")
+                includeGroup("io.opencensus")
+                includeGroup("it.unimi.dsi")
+                includeGroup("javax.inject")
+                includeGroup("net.java.dev.jna")
+                includeGroup("net.sf.jopt-simple")
+                includeGroup("net.sf.kxml")
+                includeGroup("org.antlr")
+                includeGroup("org.bouncycastle")
+                includeGroup("org.checkerframework")
+                includeGroup("org.glassfish.jaxb")
+                includeGroup("org.jdom")
+                includeGroup("org.json")
+                includeGroup("org.jvnet.staxex")
+                includeGroup("org.ow2")
+                includeGroup("org.ow2.asm")
+                includeGroup("org.tensorflow")
+                includeGroup("xerces")
+                includeGroup("xml-apis")
+                includeGroup("xmlpull")
+                includeGroup("xpp3")
+            }
+        }
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradle_version"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$nav_safe_args_version"
+        classpath "com.android.tools.build:gradle:${versions.gradle}"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigation.safe_args}"
     }
 }
 
 allprojects {
     repositories {
-        google()
-        jcenter()
+        google {
+            content {
+                includeGroupByRegex("androidx.*")
+                includeGroupByRegex("com.android.*")
+                includeGroupByRegex("com.google.*")
+            }
+        }
+        mavenCentral {
+            content {
+                includeGroupByRegex("com.google.*")
+                includeGroupByRegex("com.sun.*")
+                includeGroupByRegex("jakarta.*")
+                includeGroupByRegex("org.apache.*")
+                includeGroupByRegex("org.jetbrains.*")
+                includeGroupByRegex("org.junit.*")
+                includeGroup("com.beust")
+                includeGroup("com.github.gcacace")
+                includeGroup("com.github.javaparser")
+                includeGroup("com.github.stephenc.jcip")
+                includeGroup("com.github.vipulasri")
+                includeGroup("com.hannesdorfmann")
+                includeGroup("com.intellij")
+                includeGroup("com.squareup")
+                includeGroup("com.thoughtworks.qdox")
+                includeGroup("commons-codec")
+                includeGroup("commons-io")
+                includeGroup("commons-logging")
+                includeGroup("info.picocli")
+                includeGroup("io.grpc")
+                includeGroup("io.reactivex.rxjava2")
+                includeGroup("it.unimi.dsi")
+                includeGroup("javax.annotation")
+                includeGroup("javax.inject")
+                includeGroup("jline")
+                includeGroup("junit")
+                includeGroup("net.java.dev.jna")
+                includeGroup("net.ltgt.gradle.incap")
+                includeGroup("net.sf.jopt-simple")
+                includeGroup("net.sf.kxml")
+                includeGroup("org.antlr")
+                includeGroup("org.bouncycastle")
+                includeGroup("org.checkerframework")
+                includeGroup("org.codehaus.groovy")
+                includeGroup("org.codehaus.mojo")
+                includeGroup("org.glassfish.jaxb")
+                includeGroup("org.hamcrest")
+                includeGroup("org.jvnet.staxex")
+                includeGroup("org.opentest4j")
+                includeGroup("org.ow2.asm")
+                includeGroup("org.reactivestreams")
+                includeGroup("org.testng")
+                includeGroup("org.xerial")
+                includeGroup("xerces")
+                includeGroup("xml-apis")
+            }
+        }
+        jcenter {
+            content {
+                includeGroupByRegex("com.google.*")
+                includeGroup("com.squareup")
+                includeGroup("org.xerial")
+                includeGroup("me.eugeniomarletti.kotlin.metadata")
+            }
+        }
     }
 }
 
-ext {
-    appcompat_version = '1.1.0'
-    constraintlayout_version = '1.1.3'
-
-    junit_version = '4.12'
-
-    lifecycle_version = '2.1.0'
-    navigation_version = '2.1.0'
-    room_version = '1.1.1'
-    rxjava_version = '2.1.1'
-    dagger_version = '2.24'
-    adapter_delegates_version = '4.2.0'
-
-    compileSdkVersion = 29
-    buildToolsVersion = '29.0.0'
-    minSdkVersion = 15
-    targetSdkVersion = 29
-    versionCode = 1
-    versionName = '1.0.0'
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
