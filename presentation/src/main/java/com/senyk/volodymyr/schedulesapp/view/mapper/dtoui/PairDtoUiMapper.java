@@ -1,11 +1,11 @@
 package com.senyk.volodymyr.schedulesapp.view.mapper.dtoui;
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.PairDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Pair;
 import com.senyk.volodymyr.schedulesapp.view.helper.resourcesprovider.PairsMappingResourcesProvider;
 import com.senyk.volodymyr.schedulesapp.view.mapper.base.BaseDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.view.entity.PairUi;
 
-public class PairDtoUiMapper extends BaseDtoUiMapper<PairDto, PairUi> {
+public class PairDtoUiMapper extends BaseDtoUiMapper<Pair, PairUi> {
     private PairsMappingResourcesProvider resourcesProvider;
 
     public PairDtoUiMapper(PairsMappingResourcesProvider resourcesProvider) {
@@ -13,7 +13,7 @@ public class PairDtoUiMapper extends BaseDtoUiMapper<PairDto, PairUi> {
     }
 
     @Override
-    public PairUi convertToUi(PairDto dto) {
+    public PairUi convertToUi(Pair dto) {
         return new PairUi(
                 resourcesProvider.getPairTime(dto.getTime()),
                 dto.getTime(),
@@ -26,8 +26,8 @@ public class PairDtoUiMapper extends BaseDtoUiMapper<PairDto, PairUi> {
     }
 
     @Override
-    public PairDto convertToDto(PairUi uiModel) {
-        return new PairDto(
+    public Pair convertToDto(PairUi uiModel) {
+        return new Pair(
                 uiModel.getTimeInMillis(),
                 uiModel.getName(),
                 uiModel.getTeacher(),

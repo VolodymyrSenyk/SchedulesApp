@@ -3,7 +3,7 @@ package com.senyk.volodymyr.schedulesapp.viewmodel.schedulesmanagement;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
 import com.senyk.volodymyr.schedulesapp.domain.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.domain.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.view.helper.ErrorsHandler;
@@ -97,11 +97,11 @@ public class NewScheduleCreatorViewModel extends BaseReactiveViewModel {
         this.schedulesRepository.getSchedulesList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MainSingleObserver<List<ScheduleDto>>() {
+                .subscribe(new MainSingleObserver<List<Schedule>>() {
                     @Override
-                    public void onSuccess(List<ScheduleDto> schedules) {
+                    public void onSuccess(List<Schedule> schedules) {
                         existSchedules = new ArrayList<>();
-                        for (ScheduleDto item : schedules) {
+                        for (Schedule item : schedules) {
                             existSchedules.add(item.getName());
                         }
                     }

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter;
-import com.senyk.volodymyr.schedulesapp.domain.entity.PairDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Pair;
 import com.senyk.volodymyr.schedulesapp.domain.entity.PairType;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegate.pairs.creation.NewPairAddingAdapterDelegate;
 import com.senyk.volodymyr.schedulesapp.view.adapterdelegate.pairs.creation.PairDataInputAdapterDelegate;
@@ -55,7 +55,7 @@ public class EditPairsListAdapter extends AsyncListDifferDelegationAdapter<Print
     public void addNewPair() {
         List<PrintableOnTheList> extendedList = new ArrayList<>(this.getItemCount() + 1);
         extendedList.addAll(this.getItems());
-        PairUi newPair = this.pairMapper.convertToUi(new PairDto(
+        PairUi newPair = this.pairMapper.convertToUi(new Pair(
                 0,
                 "",
                 "",

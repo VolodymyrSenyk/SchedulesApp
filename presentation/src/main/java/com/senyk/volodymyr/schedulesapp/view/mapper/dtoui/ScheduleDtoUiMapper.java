@@ -1,11 +1,11 @@
 package com.senyk.volodymyr.schedulesapp.view.mapper.dtoui;
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
 import com.senyk.volodymyr.schedulesapp.domain.helpers.resourcesproviders.SchedulesMappingResourcesProvider;
-import com.senyk.volodymyr.schedulesapp.view.mapper.base.BaseDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.view.entity.ScheduleUi;
+import com.senyk.volodymyr.schedulesapp.view.mapper.base.BaseDtoUiMapper;
 
-public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi> {
+public class ScheduleDtoUiMapper extends BaseDtoUiMapper<Schedule, ScheduleUi> {
     public static final int NORMAL_WEEK_LENGTH = 5;
     public static final int WEEK_LENGTH_WITH_SAT = 6;
 
@@ -19,7 +19,7 @@ public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi
     }
 
     @Override
-    public ScheduleUi convertToUi(ScheduleDto dto) {
+    public ScheduleUi convertToUi(Schedule dto) {
         return new ScheduleUi(
                 dto.getName(),
                 resourcesProvider.getDateOfCreation(dto.getDateOfCreation()),
@@ -28,9 +28,10 @@ public class ScheduleDtoUiMapper extends BaseDtoUiMapper<ScheduleDto, ScheduleUi
     }
 
     @Override
-    public ScheduleDto convertToDto(ScheduleUi uiModel) {
-        return new ScheduleDto(
+    public Schedule convertToDto(ScheduleUi uiModel) {
+        return new Schedule(
                 uiModel.getName(),
+                System.currentTimeMillis(),
                 uiModel.isSaturdayWorking() ? WEEK_LENGTH_WITH_SAT : NORMAL_WEEK_LENGTH,
                 uiModel.isNumDenomSystem() ? NUM_OF_WEEK_TYPES_FOR_NUM_DENOM_SYSTEM : NORMAL_NUM_OF_WEEK_TYPES);
     }

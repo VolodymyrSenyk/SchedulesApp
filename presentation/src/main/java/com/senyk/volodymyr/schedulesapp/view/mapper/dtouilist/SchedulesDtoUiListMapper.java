@@ -1,6 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.view.mapper.dtouilist;
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
 import com.senyk.volodymyr.schedulesapp.view.mapper.base.BaseDtoUiListMapper;
 import com.senyk.volodymyr.schedulesapp.view.mapper.base.BaseDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.view.entity.ScheduleUi;
@@ -10,15 +10,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, ScheduleUi> {
-    public SchedulesDtoUiListMapper(@NotNull BaseDtoUiMapper<ScheduleDto, ScheduleUi> mapper) {
+public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<Schedule, ScheduleUi> {
+    public SchedulesDtoUiListMapper(@NotNull BaseDtoUiMapper<Schedule, ScheduleUi> mapper) {
         super(mapper);
     }
 
     @Override
-    public List<ScheduleUi> convertToUi(@NotNull List<ScheduleDto> list) {
+    public List<ScheduleUi> convertToUi(@NotNull List<Schedule> list) {
         List<ScheduleUi> convertedList = new ArrayList<>(list.size());
-        for (ScheduleDto item : list) {
+        for (Schedule item : list) {
             ScheduleUi uiItem = this.listItemMapper.convertToUi(item);
             convertedList.add(uiItem);
         }
@@ -29,9 +29,9 @@ public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, S
         return convertedList;
     }
 
-    public List<ScheduleUi> convertToUi(@NotNull List<ScheduleDto> list, String currentScheduleName) {
+    public List<ScheduleUi> convertToUi(@NotNull List<Schedule> list, String currentScheduleName) {
         List<ScheduleUi> convertedList = new ArrayList<>(list.size());
-        for (ScheduleDto item : list) {
+        for (Schedule item : list) {
             ScheduleUi uiItem = this.listItemMapper.convertToUi(item);
             if (item.getName().equals(currentScheduleName)) {
                 uiItem.setCurrent(true);
@@ -42,8 +42,8 @@ public class SchedulesDtoUiListMapper extends BaseDtoUiListMapper<ScheduleDto, S
     }
 
     @Override
-    public List<ScheduleDto> convertToDto(@NotNull List<ScheduleUi> list) {
-        List<ScheduleDto> convertedList = new ArrayList<>(list.size());
+    public List<Schedule> convertToDto(@NotNull List<ScheduleUi> list) {
+        List<Schedule> convertedList = new ArrayList<>(list.size());
         for (ScheduleUi item : list) {
             convertedList.add(this.listItemMapper.convertToDto(item));
         }

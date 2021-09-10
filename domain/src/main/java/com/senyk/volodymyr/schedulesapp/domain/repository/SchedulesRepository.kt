@@ -1,24 +1,29 @@
-package com.senyk.volodymyr.schedulesapp.domain.repository;
+package com.senyk.volodymyr.schedulesapp.domain.repository
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.DayDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.WeekDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Day
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule
+import com.senyk.volodymyr.schedulesapp.domain.entity.Week
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.annotations.CheckReturnValue
 
-import java.util.List;
+interface SchedulesRepository {
 
-import io.reactivex.Completable;
-import io.reactivex.Single;
+    @CheckReturnValue
+    fun createNewSchedule(schedule: Schedule): Completable
 
-public interface SchedulesRepository {
-    Completable createNewSchedule(ScheduleDto schedule);
+    @CheckReturnValue
+    fun getSchedulesList(): Single<List<Schedule>>
 
-    Single<List<ScheduleDto>> getSchedulesList();
+    @CheckReturnValue
+    fun deleteSchedule(scheduleName: String): Completable
 
-    Completable deleteSchedule(String scheduleName);
+    @CheckReturnValue
+    fun updateSchedule(scheduleName: String, weekNumber: Int, day: Day): Completable
 
-    Completable updateSchedule(String scheduleName, int weekNumber, DayDto day);
+    @CheckReturnValue
+    fun getScheduleForOneDay(scheduleName: String, weekNumber: Int, dayNumber: Int): Single<Day>
 
-    Single<DayDto> getScheduleForOneDay(String scheduleName, int weekNumber, int dayNumber);
-
-    Single<List<WeekDto>> getFullSchedule(String scheduleName);
+    @CheckReturnValue
+    fun getFullSchedule(scheduleName: String): Single<List<Week>>
 }

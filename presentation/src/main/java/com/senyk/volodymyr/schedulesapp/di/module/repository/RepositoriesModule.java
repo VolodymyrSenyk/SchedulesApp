@@ -7,9 +7,9 @@ import com.senyk.volodymyr.schedulesapp.data.datasource.database.SchedulesAppDat
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydto.DayEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydto.ScheduleEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydtolist.GenericEntityDtoListMapper;
-import com.senyk.volodymyr.schedulesapp.domain.entity.PairDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.WeekDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Pair;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Week;
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.entitydata.PairDataEntity;
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.entitydata.ScheduleDataEntity;
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.entitydata.WeekDataEntity;
@@ -35,9 +35,9 @@ public class RepositoriesModule {
             SchedulesAppDatabase database,
             ScheduleEntityDtoMapper scheduleMapper,
             DayEntityDtoMapper dayMapper,
-            GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
-            GenericEntityDtoListMapper<WeekDataEntity, WeekDto> allScheduleMapper,
-            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDayScheduleMapper) {
+            GenericEntityDtoListMapper<ScheduleDataEntity, Schedule> allSchedulesListMapper,
+            GenericEntityDtoListMapper<WeekDataEntity, Week> allScheduleMapper,
+            GenericEntityDtoListMapper<PairDataEntity, Pair> oneDayScheduleMapper) {
         return new RoomSchedulesRepository(
                 database,
                 scheduleMapper,

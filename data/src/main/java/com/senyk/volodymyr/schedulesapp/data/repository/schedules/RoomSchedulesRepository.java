@@ -10,10 +10,10 @@ import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.entityda
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydto.DayEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydto.ScheduleEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydtolist.GenericEntityDtoListMapper;
-import com.senyk.volodymyr.schedulesapp.domain.entity.DayDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.PairDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.WeekDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Day;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Pair;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Week;
 import com.senyk.volodymyr.schedulesapp.domain.repository.SchedulesRepository;
 
 import java.util.List;
@@ -27,17 +27,17 @@ public class RoomSchedulesRepository implements SchedulesRepository {
 
     private ScheduleEntityDtoMapper scheduleMapper;
     private DayEntityDtoMapper dayMapper;
-    private GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper;
-    private GenericEntityDtoListMapper<WeekDataEntity, WeekDto> fullScheduleMapper;
-    private GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDaySchedulePairsMapper;
+    private GenericEntityDtoListMapper<ScheduleDataEntity, Schedule> allSchedulesListMapper;
+    private GenericEntityDtoListMapper<WeekDataEntity, Week> fullScheduleMapper;
+    private GenericEntityDtoListMapper<PairDataEntity, Pair> oneDaySchedulePairsMapper;
 
     public RoomSchedulesRepository(
             SchedulesAppDatabase database,
             ScheduleEntityDtoMapper scheduleMapper,
             DayEntityDtoMapper dayMapper,
-            GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> allSchedulesListMapper,
-            GenericEntityDtoListMapper<WeekDataEntity, WeekDto> wholeScheduleMapper,
-            GenericEntityDtoListMapper<PairDataEntity, PairDto> oneDaySchedulePairsMapper
+            GenericEntityDtoListMapper<ScheduleDataEntity, Schedule> allSchedulesListMapper,
+            GenericEntityDtoListMapper<WeekDataEntity, Week> wholeScheduleMapper,
+            GenericEntityDtoListMapper<PairDataEntity, Pair> oneDaySchedulePairsMapper
     ) {
         this.schedulesManagementDao = database.getSchedulesManagementDao();
         this.pairsManagementDao = database.getPairsManagementDao();
@@ -51,13 +51,13 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     }
 
     @Override
-    public Completable createNewSchedule(ScheduleDto schedule) {
+    public Completable createNewSchedule(Schedule schedule) {
         return Completable.fromCallable(() ->
                 schedulesManagementDao.createNewSchedule(scheduleMapper.convertToEntity(schedule)));
     }
 
     @Override
-    public Single<List<ScheduleDto>> getSchedulesList() {
+    public Single<List<Schedule>> getSchedulesList() {
         return schedulesManagementDao.getSchedulesList()
                 .map(entity -> allSchedulesListMapper.convertToDtos(entity));
     }
@@ -69,7 +69,7 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     }
 
     @Override
-    public Completable updateSchedule(final String scheduleName, final int weekNumber, final DayDto day) {
+    public Completable updateSchedule(final String scheduleName, final int weekNumber, final Day day) {
         DayEntity newSchedule = new DayEntity();
         newSchedule.day = dayMapper.convertToEntity(day);
         newSchedule.pairs = oneDaySchedulePairsMapper.convertToEntities(day.getPairs());
@@ -78,15 +78,15 @@ public class RoomSchedulesRepository implements SchedulesRepository {
     }
 
     @Override
-    public Single<DayDto> getScheduleForOneDay(final String scheduleName, final int weekNumber, final int dayNumber) {
+    public Single<Day> getScheduleForOneDay(final String scheduleName, final int weekNumber, final int dayNumber) {
         return pairsManagementDao.getSchedule(scheduleName, weekNumber, dayNumber)
-                .map(entity -> new DayDto(
+                .map(entity -> new Day(
                         dayMapper.convertToDto(entity.day).getOrdinalNumber(),
                         oneDaySchedulePairsMapper.convertToDtos(entity.pairs)));
     }
 
     @Override
-    public Single<List<WeekDto>> getFullSchedule(final String scheduleName) {
+    public Single<List<Week>> getFullSchedule(final String scheduleName) {
         return pairsManagementDao.getScheduleByName(scheduleName)
                 .map(entity -> fullScheduleMapper.convertToDtos(entity.weeks));
     }

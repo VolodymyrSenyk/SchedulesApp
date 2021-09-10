@@ -3,7 +3,7 @@ package com.senyk.volodymyr.schedulesapp.viewmodel.pairsmanagement;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
 import com.senyk.volodymyr.schedulesapp.domain.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.view.helper.ErrorsHandler;
 import com.senyk.volodymyr.schedulesapp.view.mapper.dtouilist.SchedulesDtoUiListMapper;
@@ -42,7 +42,7 @@ public class StudyWeekViewModel extends BaseReactiveViewModel {
         this.schedulesRepository.getSchedulesList()
                 .subscribeOn(Schedulers.newThread())
                 .toObservable()
-                .flatMap((Function<List<ScheduleDto>, Observable<ScheduleDto>>) Observable::fromIterable)
+                .flatMap((Function<List<Schedule>, Observable<Schedule>>) Observable::fromIterable)
                 .filter(scheduleDto -> scheduleDto.getName().equals(scheduleName))
                 .toList()
                 .map(this.schedulesMapper::convertToUi)

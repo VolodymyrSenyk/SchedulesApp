@@ -3,7 +3,7 @@ package com.senyk.volodymyr.schedulesapp.viewmodel.schedulesmanagement;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
 import com.senyk.volodymyr.schedulesapp.domain.repository.SchedulesRepository;
 import com.senyk.volodymyr.schedulesapp.domain.repository.UserSettingsRepository;
 import com.senyk.volodymyr.schedulesapp.view.helper.ErrorsHandler;
@@ -72,9 +72,9 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
         this.schedulesRepository.getSchedulesList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MainSingleObserver<List<ScheduleDto>>() {
+                .subscribe(new MainSingleObserver<List<Schedule>>() {
                     @Override
-                    public void onSuccess(List<ScheduleDto> schedules) {
+                    public void onSuccess(List<Schedule> schedules) {
                         if (schedules.isEmpty()) {
                             isNoSchedules.setValue(true);
                         } else {
@@ -121,7 +121,7 @@ public class SchedulesManagerViewModel extends BaseReactiveViewModel {
         }
     }
 
-    private void getCurrentSchedule(List<ScheduleDto> schedulesList) {
+    private void getCurrentSchedule(List<Schedule> schedulesList) {
         this.userSettingsRepository.getCurrentSchedule()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

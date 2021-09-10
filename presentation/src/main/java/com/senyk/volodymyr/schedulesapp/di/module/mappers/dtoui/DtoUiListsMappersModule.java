@@ -1,6 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.di.module.mappers.dtoui;
 
-import com.senyk.volodymyr.schedulesapp.domain.entity.PairDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Pair;
 import com.senyk.volodymyr.schedulesapp.view.mapper.dtoui.PairDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.view.mapper.dtoui.ScheduleDtoUiMapper;
 import com.senyk.volodymyr.schedulesapp.view.mapper.dtouilist.GenericDtoUiListMapper;
@@ -22,7 +22,7 @@ public class DtoUiListsMappersModule {
 
     @Singleton
     @Provides
-    GenericDtoUiListMapper<PairDto, PairUi> getPairsListMapper(PairDtoUiMapper pairMapper) {
+    GenericDtoUiListMapper<Pair, PairUi> getPairsListMapper(PairDtoUiMapper pairMapper) {
         return new GenericDtoUiListMapper<>(pairMapper);
     }
 }

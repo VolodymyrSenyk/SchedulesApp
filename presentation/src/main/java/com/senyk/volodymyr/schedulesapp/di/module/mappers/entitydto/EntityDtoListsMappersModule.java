@@ -4,9 +4,9 @@ import com.senyk.volodymyr.schedulesapp.data.mapper.entitydto.PairEntityDtoMappe
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydto.ScheduleEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydto.WeekEntityDtoMapper;
 import com.senyk.volodymyr.schedulesapp.data.mapper.entitydtolist.GenericEntityDtoListMapper;
-import com.senyk.volodymyr.schedulesapp.domain.entity.PairDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleDto;
-import com.senyk.volodymyr.schedulesapp.domain.entity.WeekDto;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Pair;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule;
+import com.senyk.volodymyr.schedulesapp.domain.entity.Week;
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.entitydata.PairDataEntity;
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.entitydata.ScheduleDataEntity;
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.entitydata.WeekDataEntity;
@@ -20,19 +20,19 @@ import dagger.Provides;
 public class EntityDtoListsMappersModule {
     @Singleton
     @Provides
-    GenericEntityDtoListMapper<ScheduleDataEntity, ScheduleDto> getAllSchedulesListMapper(ScheduleEntityDtoMapper scheduleMapper) {
+    GenericEntityDtoListMapper<ScheduleDataEntity, Schedule> getAllSchedulesListMapper(ScheduleEntityDtoMapper scheduleMapper) {
         return new GenericEntityDtoListMapper<>(scheduleMapper);
     }
 
     @Singleton
     @Provides
-    GenericEntityDtoListMapper<WeekDataEntity, WeekDto> getWholeScheduleMapper(WeekEntityDtoMapper weekMapper) {
+    GenericEntityDtoListMapper<WeekDataEntity, Week> getWholeScheduleMapper(WeekEntityDtoMapper weekMapper) {
         return new GenericEntityDtoListMapper<>(weekMapper);
     }
 
     @Singleton
     @Provides
-    GenericEntityDtoListMapper<PairDataEntity, PairDto> getPairsListMapper(PairEntityDtoMapper pairMapper) {
+    GenericEntityDtoListMapper<PairDataEntity, Pair> getPairsListMapper(PairEntityDtoMapper pairMapper) {
         return new GenericEntityDtoListMapper<>(pairMapper);
     }
 }

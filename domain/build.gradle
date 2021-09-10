@@ -1,56 +1,27 @@
 apply plugin: 'java-library'
+apply plugin: 'kotlin'
 
 buildscript {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("androidx.*")
-                includeGroupByRegex("com.android.*")
-                includeGroupByRegex("com.google.*")
-            }
-        }
         mavenCentral {
             content {
-                includeGroupByRegex("com.google.*")
-                includeGroupByRegex("com.sun.*")
-                includeGroupByRegex("jakarta.*")
-                includeGroupByRegex("org.apache.*")
-                includeGroupByRegex("org.codehaus.*")
                 includeGroupByRegex("org.jetbrains.*")
-                includeGroup("com.github.gundy")
-                includeGroup("com.squareup")
-                includeGroup("commons-codec")
-                includeGroup("commons-io")
-                includeGroup("commons-logging")
+                includeGroupByRegex("com.google.*")
                 includeGroup("de.undercouch")
-                includeGroup("io.grpc")
-                includeGroup("io.netty")
-                includeGroup("io.opencensus")
-                includeGroup("it.unimi.dsi")
-                includeGroup("javax.inject")
-                includeGroup("net.java.dev.jna")
-                includeGroup("net.sf.jopt-simple")
-                includeGroup("net.sf.kxml")
-                includeGroup("org.antlr")
-                includeGroup("org.bouncycastle")
+                includeGroup("com.github.gundy")
                 includeGroup("org.checkerframework")
-                includeGroup("org.glassfish.jaxb")
-                includeGroup("org.jdom")
-                includeGroup("org.json")
-                includeGroup("org.jvnet.staxex")
-                includeGroup("org.ow2")
-                includeGroup("org.ow2.asm")
-                includeGroup("org.tensorflow")
-                includeGroup("xerces")
-                includeGroup("xml-apis")
-                includeGroup("xmlpull")
-                includeGroup("xpp3")
             }
         }
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:${versions.gradle}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin.language"
+    }
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -60,6 +31,9 @@ java {
 }
 
 dependencies {
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin.language"
+
     // di
     implementation "javax.inject:javax.inject:$versions.di.inject"
 
