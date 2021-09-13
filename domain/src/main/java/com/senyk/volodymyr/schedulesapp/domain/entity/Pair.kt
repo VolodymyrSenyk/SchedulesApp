@@ -1,7 +1,9 @@
 package com.senyk.volodymyr.schedulesapp.domain.entity
 
 class Pair(
-    val time: Long,
+    val id: String,
+    val startTimeInMillis: Long,
+    val endTimeInMillis: Long,
     val name: String,
     val teacher: String,
     val type: PairType,

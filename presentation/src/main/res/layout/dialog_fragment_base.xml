@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_rect_borderless"
+    android:backgroundTint="?attr/colorBackgroundOnSurface"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/padding_small"
+    android:paddingTop="@dimen/padding_big"
+    android:paddingBottom="@dimen/padding_small">
+
+    <ImageView
+        android:id="@+id/icon_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_small"
+        app:layout_constraintEnd_toStartOf="@+id/output_dialog_title"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintBottom_toBottomOf="@id/output_dialog_title"
+        app:layout_constraintTop_toTopOf="@id/output_dialog_title"
+        tools:ignore="ContentDescription"
+        tools:src="?attr/iconWarning"
+        tools:tint="?attr/colorWarning" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/output_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorContentPrimary"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/delete_schedule_dialog_title" />
+
+    <View
+        android:id="@+id/divider_dialog_title"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="?attr/colorDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/output_dialog_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/output_dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginVertical="@dimen/margin_medium"
+        android:textColor="?attr/colorContentPrimary"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider_dialog_title"
+        tools:text="@string/delete_schedule_dialog_message" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_dialog_unfilled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:backgroundTint="?attr/colorBackgroundOnSurface"
+        android:textAllCaps="false"
+        android:textColor="?attr/colorContentPrimary"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintEnd_toStartOf="@+id/button_dialog_filled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/output_dialog_message"
+        app:strokeColor="?attr/colorBorders"
+        app:strokeWidth="1dp"
+        tools:text="@string/dialog_answer_cancel"
+        tools:visibility="visible" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_dialog_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:backgroundTint="?attr/colorAccentLight"
+        android:textAllCaps="false"
+        android:textColor="?attr/colorContentPrimary"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_dialog_unfilled"
+        app:layout_constraintTop_toBottomOf="@+id/output_dialog_message"
+        app:strokeColor="?attr/colorBorders"
+        app:strokeWidth="1dp"
+        tools:text="@string/dialog_answer_continue"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

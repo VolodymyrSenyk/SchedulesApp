@@ -59,6 +59,9 @@
     <string name="create_button">Создать</string>
 
     <!-- Dialogs -->
+    <string name="dialog_answer_cancel">Отмена</string>
+    <string name="dialog_answer_close">Закрыть</string>
+    <string name="dialog_answer_continue">Продолжить</string>
     <string name="answer_yes">Да</string>
     <string name="answer_no">Нет</string>
     <string name="answer_ok">ОК</string>
@@ -69,5 +72,6 @@
     <string name="schedule_exists_dialog_title">Уже существует</string>
     <string name="schedule_exists_dialog_message">Расписание с таким же названием уже существует</string>
     <string name="application_error_message">Возникла ошибка: $%1$s</string>
+    <string name="message_press_one_more_time_to_exit">Нажмите ещё раз для выхода</string>
 
 </resources>

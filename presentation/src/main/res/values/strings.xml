@@ -22,14 +22,25 @@
         <item>Sat</item>
     </string-array>
 
+    <string name="day_of_the_week_monday">Mon</string>
+    <string name="day_of_the_week_tuesday">Tue</string>
+    <string name="day_of_the_week_wednesday">Wed</string>
+    <string name="day_of_the_week_thursday">Thu</string>
+    <string name="day_of_the_week_friday">Fri</string>
+    <string name="day_of_the_week_saturday">Sat</string>
+
     <!-- Weeks -->
     <string-array name="weeks_names">
         <item>Numerator</item>
         <item>Denominator</item>
     </string-array>
 
+    <string name="week_name_numerator">Numerator</string>
+    <string name="week_name_denominator">Denominator</string>
+
     <!-- Schedule data output -->
     <string name="schedule_date_of_creation_output">Created at %1$s</string>
+    <string name="schedule_date_of_update_output">Updated at %1$s</string>
     <string name="schedule_is_saturday_working_output">Saturday is working day</string>
     <string name="schedule_is_num_denom_system_output">Numerator/Denominator schedule</string>
 
@@ -38,10 +49,6 @@
     <string name="schedule_is_saturday_working_input">Saturday is working day</string>
     <string name="schedule_is_num_denom_system_input">Numerator/Denominator schedule</string>
 
-    <!-- Pair data input -->
-    <string name="pair_time_input_hint">Time</string>
-    <string name="pair_name_input_hint">Name</string>
-    <string name="pair_teacher_input_hint">Teacher</string>
     <string-array name="pairs_types">
         <item>Not stated</item>
         <item>Lecture</item>
@@ -49,6 +56,16 @@
         <item>Laboratory</item>
         <item>Sport</item>
     </string-array>
+
+    <!-- Pair data input -->
+    <string name="pair_time_input_hint">Time</string>
+    <string name="pair_name_input_hint">Name</string>
+    <string name="pair_teacher_input_hint">Teacher</string>
+    <string name="pair_type_not_stated">Not stated</string>
+    <string name="pair_type_lecture">Lecture</string>
+    <string name="pair_type_practice">Practice</string>
+    <string name="pair_type_laboratory">Laboratory</string>
+    <string name="pair_type_sport">Sport</string>
     <string name="pair_place_input_hint">Place</string>
     <string name="pair_additional_info_input_hint">Additional information</string>
 
@@ -59,6 +76,11 @@
     <string name="create_button">Create</string>
 
     <!-- Dialogs -->
+    <string name="dialog_answer_cancel">Cancel</string>
+    <string name="dialog_answer_close">Close</string>
+    <string name="dialog_answer_continue">Continue</string>
+    <string name="dialog_answer_ok" translatable="false">OK</string>
+
     <string name="answer_yes">Yes</string>
     <string name="answer_no">No</string>
     <string name="answer_ok">OK</string>
@@ -70,5 +92,9 @@
     <string name="schedule_exists_dialog_message">Schedule with the same name is already exists</string>
 
     <string name="application_error_message">An error occurred: $%1$s</string>
+    <string name="message_press_one_more_time_to_exit">Press one more time to exit</string>
+
+    <string name="create_schedule_title">Create schedule</string>
+    <string name="hint_schedule_name">Schedule name</string>
 
 </resources>

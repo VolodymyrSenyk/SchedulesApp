@@ -16,7 +16,7 @@ ext {
                     versionName: getVersionName(),
                     versionCode: getVersionCode(),
                     buildTools : '30.0.2',
-                    minSdk     : 21,
+                    minSdk     : 26,
                     targetSdk  : 30
             ],
             gradle     : '7.0.2',
@@ -40,11 +40,12 @@ ext {
             ],
             lifecycle  : '2.2.0',
             rx         : [
-                    android: '2.1.1',
-                    java   : '2.2.20'
+                    android    : '2.1.1',
+                    java       : '2.2.20',
+                    kotlin     : '2.4.0'
             ],
             persistence: [
-                    room: '1.1.1'
+                    room: '2.3.0'
             ],
             frameworks : [
                     adapterdelegates: '4.3.0'

@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main">
+    android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/host_fragment"
+        android:id="@+id/fragment_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
+        tools:ignore="FragmentTagUsage"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +26,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/host_fragment"
+        app:layout_constraintTop_toBottomOf="@id/fragment_host"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/nav_menu" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_custom_toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginVertical="@dimen/margin_big"
+        android:background="?attr/backgroundCustomToast"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/padding_big"
+        android:paddingVertical="@dimen/padding_small"
+        android:textColor="?attr/colorContentOnPrimary"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="italic"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Some toast message"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

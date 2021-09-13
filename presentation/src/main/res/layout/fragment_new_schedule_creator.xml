@@ -14,11 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <include layout="@layout/standart_toolbar_content" />
-
-    </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintVertical_bias="0.0"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/new_schedule_input_field_list"

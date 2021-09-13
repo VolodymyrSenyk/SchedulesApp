@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="max_length_schedule_name" type="integer">30</item>
+    <item name="max_length_pair_name" type="integer">30</item>
+    <item name="max_length_pair_teacher" type="integer">30</item>
+    <item name="max_length_pair_place" type="integer">16</item>
+    <item name="max_length_pair_additional_info" type="integer">300</item>
+
+</resources>

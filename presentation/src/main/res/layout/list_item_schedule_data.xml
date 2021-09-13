@@ -1,40 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/list_item_simple"
-    android:padding="@dimen/padding_main"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/schedule_name_field"
-        style="@style/SimpleTextFieldStyle"
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.ScheduleUi" />
+
+        <import type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedulesmanager.SchedulesManagerViewModel" />
+
+        <variable
+            name="model"
+            type="ScheduleUi" />
+
+        <variable
+            name="viewModel"
+            type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedulesmanager.SchedulesManagerViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:text="My first schedule"
-        android:textStyle="bold"/>
+        android:layout_height="wrap_content"
+        android:backgroundTint="@{model.tintColorInt}"
+        android:padding="@dimen/padding_small"
+        app:cardCornerRadius="12dp"
+        tools:backgroundTint="@color/colorSelected">
 
-    <TextView
-        android:id="@+id/schedule_date_of_creation"
-        style="@style/SimpleTextFieldStyle"
-        android:text="@string/schedule_date_of_creation_output"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/schedule_is_sat_working"
-        style="@style/SimpleTextFieldStyle"
-        android:text="@string/schedule_is_saturday_working_output"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/schedule_name_field"
+                style="@style/SimpleTextFieldStyle"
+                android:layout_width="match_parent"
+                android:text="@{model.name}"
+                android:textStyle="bold"
+                tools:text="My first schedule" />
 
-    <TextView
-        android:id="@+id/schedule_is_num_denom_system"
-        style="@style/SimpleTextFieldStyle"
-        android:text="@string/schedule_is_num_denom_system_output"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/schedule_date_of_creation"
+                style="@style/SimpleTextFieldStyle"
+                android:text="@{model.createdAt}"
+                tools:text="@string/schedule_date_of_creation_output" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/delete_schedule_bottom_button"
-        style="@style/StandartBottomButtonStyle"
-        android:layout_margin="@dimen/margin_small"
-        app:icon="@drawable/ic_delete"
-        app:iconGravity="textStart"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/schedule_date_of_update"
+                style="@style/SimpleTextFieldStyle"
+                android:text="@{model.updatedAt}"
+                tools:text="@string/schedule_date_of_update_output" />
 
-</LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/schedule_is_sat_working"
+                style="@style/SimpleTextFieldStyle"
+                android:text="@string/schedule_is_saturday_working_output"
+                android:visibility="@{model.saturdayWorkingDay ? View.VISIBLE : View.GONE}"
+                tools:visibility="visible" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/schedule_is_num_denom_system"
+                style="@style/SimpleTextFieldStyle"
+                android:text="@string/schedule_is_num_denom_system_output"
+                android:visibility="@{model.numeratorDenominatorSystem ? View.VISIBLE : View.GONE}"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete_schedule_bottom_button"
+                style="@style/StandartBottomButtonStyle"
+                android:layout_margin="@dimen/margin_small"
+                android:onClick="@{v -> viewModel.onDelete(model)}"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="textStart"
+                app:iconTint="@color/colorContentOnPrimary" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

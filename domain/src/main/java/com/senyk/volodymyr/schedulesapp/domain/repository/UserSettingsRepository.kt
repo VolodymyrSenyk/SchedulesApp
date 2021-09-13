@@ -7,8 +7,8 @@ import io.reactivex.annotations.CheckReturnValue
 interface UserSettingsRepository {
 
     @CheckReturnValue
-    fun getCurrentSchedule(): Single<String>
+    fun getCurrentScheduleId(): Single<String>
 
     @CheckReturnValue
-    fun setCurrentSchedule(scheduleName: String): Completable
+    fun setCurrentScheduleId(scheduleId: String): Completable
 }

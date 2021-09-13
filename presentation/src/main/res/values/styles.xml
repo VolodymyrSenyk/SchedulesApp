@@ -2,8 +2,35 @@
 
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="recyclerViewStyle">@style/RecyclerView</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:navigationBarColor">?attr/colorAccent</item>
+        <item name="android:itemTextAppearance">@style/Toolbar.MenuText</item>
+
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccentDark">@color/colorAccentDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccentLight">@color/colorAccentLight</item>
+        <item name="colorBackgroundPrimary">@color/colorBackgroundPrimary</item>
+        <item name="colorBackgroundSurface">@color/colorBackgroundSurface</item>
+        <item name="colorBackgroundOnSurface">@color/colorBackgroundOnSurface</item>
+        <item name="colorContentOnPrimary">@color/colorContentOnPrimary</item>
+        <item name="colorContentPrimary">@color/colorContentPrimary</item>
+        <item name="colorContentSecondary">@color/colorContentPrimary</item>
+        <item name="colorContentLinks">@color/colorContentLinks</item>
+        <item name="colorContentFaded">@color/colorContentFaded</item>
+        <item name="colorDivider">@color/colorDivider</item>
+        <item name="colorBorders">@color/colorBorders</item>
+        <item name="colorSuccess">@color/colorSuccess</item>
+        <item name="colorWarning">@color/colorWarning</item>
+        <item name="colorError">@color/colorError</item>
+
+        <item name="backgroundMain">@drawable/bg_gradient_radial</item>
+        <item name="backgroundCustomToast">@drawable/bg_custom_toast</item>
+
+        <item name="iconInfo">@drawable/ic_info</item>
+        <item name="iconWarning">@drawable/ic_warning</item>
     </style>
 
     <!-- Bottom navigation -->
@@ -15,14 +42,51 @@
 
     <style name="BottomNavigationItemInactive" parent="Widget.Design.BottomNavigationView">
         <item name="android:textColor">@color/colorBackground</item>
-        <item name="android:textSize">@dimen/nav_item_inactive</item>
+        <item name="android:textSize">@dimen/text_size_very_small</item>
     </style>
 
     <style name="BottomNavigationItemActive" parent="Widget.Design.BottomNavigationView">
         <item name="android:textColor">@color/colorPrimaryInversed</item>
-        <item name="android:textSize">@dimen/nav_item_active</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
     <!-- -->
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="AppBarLayoutStub">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">@dimen/elevation_big</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="layout_scrollFlags">scroll|enterAlways</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.DayNight</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:elevation">@dimen/elevation_big</item>
+        <item name="titleTextColor">?attr/colorContentOnPrimary</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">?attr/colorContentOnPrimary</item>
+    </style>
+
+    <style name="Toolbar.MenuText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">?attr/colorContentOnPrimary</item>
+        <item name="android:iconTint">?attr/colorContentOnPrimary</item>
+    </style>
+
+    <style name="RecyclerView">
+        <item name="android:itemPadding">@dimen/padding_small</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
 
     <style name="StandartToolbarStyle">
         <item name="android:layout_width">match_parent</item>
@@ -57,20 +121,20 @@
     </style>
 
     <style name="ScreenTitleText" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">@dimen/title_text</item>
+        <item name="android:textSize">@dimen/text_size_big</item>
     </style>
 
     <style name="TitleText" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">@dimen/title_text</item>
+        <item name="android:textSize">@dimen/text_size_big</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="SimpleTextFieldStyle" parent="TextAppearance.AppCompat.Body1">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/padding_main</item>
+        <item name="android:padding">@dimen/padding_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/simple_text</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="PairDataOutputFieldStyle" parent="SimpleTextFieldStyle">
@@ -85,7 +149,7 @@
     <style name="PairDataInputFieldTheme">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorBackground</item>
-        <item name="android:textSize">@dimen/simple_text</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:colorBackground">@color/colorPrimaryInversed</item>
         <item name="android:maxLines">2</item>
@@ -101,12 +165,12 @@
 
     <style name="HintInputTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorBackground</item>
-        <item name="android:textSize">@dimen/simple_text</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="ErrorTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorError</item>
-        <item name="android:textSize">@dimen/simple_text</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="AlertDialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
@@ -124,7 +188,7 @@
     <style name="PickerDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:colorBackground">@color/colorPrimaryInversed</item>
         <item name="android:textColor">@color/colorBackground</item>
-        <item name="android:textSize">@dimen/simple_text</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
     <!-- -->
 

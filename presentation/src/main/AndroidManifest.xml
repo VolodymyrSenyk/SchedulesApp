@@ -3,7 +3,7 @@
     package="com.senyk.volodymyr.schedulesapp">
 
     <application
-        android:name=".view.SchedulesApplication"
+        android:name=".presentation.feature.App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".view.activity.SchedulesAppMainActivity"
+            android:name=".presentation.feature.SchedulesAppActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
