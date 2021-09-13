@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.senyk.volodymyr.schedulesapp.domain.entity.DayType
 import com.senyk.volodymyr.schedulesapp.domain.entity.Pair
 import com.senyk.volodymyr.schedulesapp.domain.entity.WeekType
-import com.senyk.volodymyr.schedulesapp.domain.repository.ScheduleRepository
+import com.senyk.volodymyr.schedulesapp.domain.usecase.pairsmanagement.GetAllPairsForSpecificDayUseCase
+import com.senyk.volodymyr.schedulesapp.domain.usecase.pairsmanagement.SaveAllPairsForSpecificDayUseCase
 import com.senyk.volodymyr.schedulesapp.presentation.core.base.viewmodel.BaseRxViewModel
 import com.senyk.volodymyr.schedulesapp.presentation.core.provider.ResourcesProvider
 import com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.PairUi
@@ -14,7 +15,8 @@ import com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.toPai
 import javax.inject.Inject
 
 class OneDayScheduleViewModel @Inject constructor(
-    private val scheduleRepository: ScheduleRepository,
+    private val getAllPairsForSpecificDayUseCase: GetAllPairsForSpecificDayUseCase,
+    private val saveAllPairsForSpecificDayUseCase: SaveAllPairsForSpecificDayUseCase,
     private val resourcesProvider: ResourcesProvider
 ) : BaseRxViewModel() {
 
@@ -63,18 +65,20 @@ class OneDayScheduleViewModel @Inject constructor(
     }
 
     fun onSaveClick() {
-        subscribe(
-            upstream = scheduleRepository.updateScheduleForOneDay(
-                scheduleId,
-                weekType,
-                dayType,
-                editablePairs.value!!.map { it.toPair(resourcesProvider) }
-            ),
-            onSuccess = {
-                setPairs(it)
-                onCancelClick()
-            }
-        )
+        editablePairs.value?.let { pairs ->
+            subscribe(
+                upstream = saveAllPairsForSpecificDayUseCase(
+                    scheduleId,
+                    weekType,
+                    dayType,
+                    pairs.map { it.toPair(resourcesProvider) }
+                ),
+                onSuccess = {
+                    setPairs(it)
+                    onCancelClick()
+                }
+            )
+        }
     }
 
     fun onCancelClick() {
@@ -84,7 +88,7 @@ class OneDayScheduleViewModel @Inject constructor(
 
     private fun loadPairs() {
         subscribeWithProgress(
-            upstream = scheduleRepository.getScheduleForOneDay(scheduleId, weekType, dayType),
+            upstream = getAllPairsForSpecificDayUseCase(scheduleId, weekType, dayType),
             onSuccess = { setPairs(it) }
         )
     }

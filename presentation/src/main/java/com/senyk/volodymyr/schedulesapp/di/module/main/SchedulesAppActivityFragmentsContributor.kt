@@ -1,7 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.di.module.main
 
 import com.senyk.volodymyr.schedulesapp.di.annotation.scope.FragmentScope
-import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.NumDenomScheduleFragment
+import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.NumeratorDenominatorScheduleFragment
 import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleFragment
 import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.StudyWeekFragment
 import com.senyk.volodymyr.schedulesapp.presentation.feature.wholeschedule.WholeScheduleFragment
@@ -18,7 +18,7 @@ interface SchedulesAppActivityFragmentsContributor {
 
     @FragmentScope
     @ContributesAndroidInjector
-    fun contributeNumDenomScheduleFragment(): NumDenomScheduleFragment
+    fun contributeNumDenomScheduleFragment(): NumeratorDenominatorScheduleFragment
 
     @FragmentScope
     @ContributesAndroidInjector

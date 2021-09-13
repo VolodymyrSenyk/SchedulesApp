@@ -107,7 +107,6 @@ dependencies {
 
     // lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
     kapt "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
 
     // persistence

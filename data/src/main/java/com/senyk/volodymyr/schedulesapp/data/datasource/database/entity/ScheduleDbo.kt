@@ -3,7 +3,7 @@ package com.senyk.volodymyr.schedulesapp.data.datasource.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleInfo
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule
 
 @Entity(tableName = ScheduleDbo.TABLE_NAME)
 internal data class ScheduleDbo(
@@ -12,7 +12,8 @@ internal data class ScheduleDbo(
     @ColumnInfo(name = CREATED_AT_IN_MILLIS) val createdAtInMillis: Long = System.currentTimeMillis(),
     @ColumnInfo(name = UPDATED_AT_IN_MILLIS) val updatedAtInMillis: Long = System.currentTimeMillis(),
     @ColumnInfo(name = IS_SATURDAY_WORKING_DAY) val isSaturdayWorkingDay: Boolean = false,
-    @ColumnInfo(name = IS_NUMERATOR_DENOMINATOR_SYSTEM) val isNumeratorDenominatorSystem: Boolean = false
+    @ColumnInfo(name = IS_NUMERATOR_DENOMINATOR_SYSTEM) val isNumeratorDenominatorSystem: Boolean = false,
+    @ColumnInfo(name = IS_CURRENT) val isCurrent: Boolean = false
 ) {
 
     companion object {
@@ -23,24 +24,26 @@ internal data class ScheduleDbo(
         const val UPDATED_AT_IN_MILLIS = "schedule_updated_at_in_millis"
         const val IS_SATURDAY_WORKING_DAY = "schedule_is_saturday_working_day"
         const val IS_NUMERATOR_DENOMINATOR_SYSTEM = "schedule_is_numerator_denominator_system"
+        const val IS_CURRENT = "schedule_is_current"
     }
 }
 
-internal fun ScheduleDbo.toScheduleInfo(): ScheduleInfo = ScheduleInfo(
+internal fun ScheduleDbo.toSchedule(): Schedule = Schedule(
     id = id.toString(),
     name = name,
     createdAtInMillis = createdAtInMillis,
     updatedAtInMillis = updatedAtInMillis,
     isSaturdayWorkingDay = isSaturdayWorkingDay,
     isNumeratorDenominatorSystem = isNumeratorDenominatorSystem,
-    isCurrent = false
+    isCurrent = isCurrent
 )
 
-internal fun ScheduleInfo.toScheduleDbo(): ScheduleDbo = ScheduleDbo(
+internal fun Schedule.toScheduleDbo(): ScheduleDbo = ScheduleDbo(
     id = id.toLong(),
     name = name,
     createdAtInMillis = createdAtInMillis,
     updatedAtInMillis = updatedAtInMillis,
     isSaturdayWorkingDay = isSaturdayWorkingDay,
-    isNumeratorDenominatorSystem = isNumeratorDenominatorSystem
+    isNumeratorDenominatorSystem = isNumeratorDenominatorSystem,
+    isCurrent = isCurrent
 )

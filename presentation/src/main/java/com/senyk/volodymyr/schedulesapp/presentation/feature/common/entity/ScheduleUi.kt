@@ -2,7 +2,7 @@ package com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity
 
 import androidx.annotation.ColorInt
 import com.senyk.volodymyr.schedulesapp.R
-import com.senyk.volodymyr.schedulesapp.domain.entity.ScheduleInfo
+import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule
 import com.senyk.volodymyr.schedulesapp.presentation.core.provider.ResourcesProvider
 import com.senyk.volodymyr.schedulesapp.presentation.core.recyclerview.listitem.ListItem
 import com.senyk.volodymyr.schedulesapp.presentation.core.util.DateFormatterUtil
@@ -23,7 +23,7 @@ data class ScheduleUi(
     override val listId: String = System.currentTimeMillis().toString()
 }
 
-internal fun ScheduleInfo.toScheduleUi(resourcesProvider: ResourcesProvider): ScheduleUi =
+internal fun Schedule.toScheduleUi(resourcesProvider: ResourcesProvider): ScheduleUi =
     ScheduleUi(
         id = id,
         name = name,
@@ -47,7 +47,7 @@ internal fun ScheduleInfo.toScheduleUi(resourcesProvider: ResourcesProvider): Sc
         )
     )
 
-internal fun ScheduleUi.toScheduleInfo(): ScheduleInfo = ScheduleInfo(
+internal fun ScheduleUi.toScheduleInfo(): Schedule = Schedule(
     id = id,
     name = name,
     createdAtInMillis = createdAtInMillis,

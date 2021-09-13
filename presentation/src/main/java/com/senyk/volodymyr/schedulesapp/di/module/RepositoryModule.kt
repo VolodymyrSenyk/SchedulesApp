@@ -1,9 +1,9 @@
 package com.senyk.volodymyr.schedulesapp.di.module
 
+import com.senyk.volodymyr.schedulesapp.data.repository.PairRoomRepository
 import com.senyk.volodymyr.schedulesapp.data.repository.ScheduleRoomRepository
-import com.senyk.volodymyr.schedulesapp.data.repository.UserSettingsSharedPreferencesRepository
+import com.senyk.volodymyr.schedulesapp.domain.repository.PairRepository
 import com.senyk.volodymyr.schedulesapp.domain.repository.ScheduleRepository
-import com.senyk.volodymyr.schedulesapp.domain.repository.UserSettingsRepository
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -17,5 +17,5 @@ interface RepositoryModule {
 
     @Singleton
     @Binds
-    fun bindUserSettingsRepository(repository: UserSettingsSharedPreferencesRepository): UserSettingsRepository
+    fun bindPairRepository(repository: PairRoomRepository): PairRepository
 }

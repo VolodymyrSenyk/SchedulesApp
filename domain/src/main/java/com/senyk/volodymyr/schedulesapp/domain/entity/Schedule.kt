@@ -1,6 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.domain.entity
 
-data class ScheduleInfo(
+data class Schedule(
     val id: String,
     val name: String,
     val createdAtInMillis: Long,

@@ -18,7 +18,6 @@ class OneDayScheduleFragment : BaseFragment<FragmentOneDayScheduleBinding>() {
 
     override val layoutRes = R.layout.fragment_one_day_schedule
     override val viewModel by viewModels<OneDayScheduleViewModel>(factoryProducer = { viewModelFactory })
-   // private val sharedViewModel by activityViewModels<SchedulesNavigationSharedViewModel> { viewModelFactory }
 
     private lateinit var showPairsAdapter: BaseDataBindingDelegationAdapter
     private lateinit var editPairsAdapter: BaseDataBindingDelegationAdapter

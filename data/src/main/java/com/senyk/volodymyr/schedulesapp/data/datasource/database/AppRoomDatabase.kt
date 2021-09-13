@@ -7,6 +7,7 @@ import com.senyk.volodymyr.schedulesapp.data.datasource.database.converter.Boole
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.converter.DayTypeConverter
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.converter.PairTypeConverter
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.converter.WeekTypeConverter
+import com.senyk.volodymyr.schedulesapp.data.datasource.database.dao.PairDao
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.dao.ScheduleDao
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.PairDbo
 import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.ScheduleDbo
@@ -25,4 +26,6 @@ import com.senyk.volodymyr.schedulesapp.data.datasource.database.entity.Schedule
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun getScheduleDao(): ScheduleDao
+
+    abstract fun getPairDao(): PairDao
 }

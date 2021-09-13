@@ -113,14 +113,6 @@ allprojects {
                 includeGroup("xml-apis")
             }
         }
-        jcenter {
-            content {
-                includeGroupByRegex("com.google.*")
-                includeGroup("com.squareup")
-                includeGroup("org.xerial")
-                includeGroup("me.eugeniomarletti.kotlin.metadata")
-            }
-        }
     }
 }
 

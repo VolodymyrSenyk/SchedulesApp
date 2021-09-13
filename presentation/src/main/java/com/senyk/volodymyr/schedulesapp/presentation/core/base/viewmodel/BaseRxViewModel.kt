@@ -98,6 +98,22 @@ abstract class BaseRxViewModel constructor(
             .apply(this::addDisposable)
     }
 
+    protected fun <T : Any> subscribeWithProgress(
+        upstream: Maybe<T>,
+        onSuccess: (T) -> Unit,
+        onComplete: () -> Unit,
+        showProgress: (Disposable) -> Unit = { showProgress() },
+        hideProgress: () -> Unit = this::hideProgress
+    ) {
+        upstream
+            .subscribeOn(backgroundScheduler)
+            .observeOn(foregroundScheduler)
+            .doOnSubscribe(showProgress)
+            .doAfterTerminate(hideProgress)
+            .subscribeBy(this::onError, onSuccess = onSuccess, onComplete = onComplete)
+            .apply(this::addDisposable)
+    }
+
     private fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }

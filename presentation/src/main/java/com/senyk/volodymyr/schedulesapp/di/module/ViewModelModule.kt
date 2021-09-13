@@ -3,10 +3,11 @@ package com.senyk.volodymyr.schedulesapp.di.module
 import androidx.lifecycle.ViewModel
 import com.senyk.volodymyr.presentation.di.annotation.mapkey.ViewModelKey
 import com.senyk.volodymyr.schedulesapp.presentation.core.viewmodel.ExitViewModel
+import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.NumeratorDenominatorScheduleViewModel
 import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel
-import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.SchedulesNavigationSharedViewModel
 import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.StudyWeekViewModel
 import com.senyk.volodymyr.schedulesapp.presentation.feature.schedulesmanager.SchedulesManagerViewModel
+import com.senyk.volodymyr.schedulesapp.presentation.feature.wholeschedule.WholeScheduleViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -21,11 +22,6 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SchedulesNavigationSharedViewModel::class)
-    fun bindSchedulesNavigationSharedViewModel(viewModel: SchedulesNavigationSharedViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(SchedulesManagerViewModel::class)
     fun bindSchedulesManagerViewModel(viewModel: SchedulesManagerViewModel): ViewModel
 
@@ -36,6 +32,16 @@ interface ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(NumeratorDenominatorScheduleViewModel::class)
+    fun bindNumeratorDenominatorScheduleViewModel(viewModel: NumeratorDenominatorScheduleViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(OneDayScheduleViewModel::class)
     fun bindOneDayScheduleViewModel(viewModel: OneDayScheduleViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WholeScheduleViewModel::class)
+    fun bindWholeScheduleViewModel(viewModel: WholeScheduleViewModel): ViewModel
 }
