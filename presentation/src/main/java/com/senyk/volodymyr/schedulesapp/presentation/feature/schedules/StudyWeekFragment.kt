@@ -1,6 +1,7 @@
 package com.senyk.volodymyr.schedulesapp.presentation.feature.schedules
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.senyk.volodymyr.schedulesapp.R
@@ -14,7 +15,8 @@ import com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.toDay
 class StudyWeekFragment : BaseFragment<FragmentStudyWeekBinding>() {
 
     override val layoutRes = R.layout.fragment_study_week
-    override val viewModel by viewModels<StudyWeekViewModel>(factoryProducer = { viewModelFactory })
+
+    override val viewModel by viewModels<StudyWeekViewModel> { viewModelFactory }
 
     private lateinit var adapter: SimpleTabAdapter
 
@@ -26,6 +28,7 @@ class StudyWeekFragment : BaseFragment<FragmentStudyWeekBinding>() {
         //     binding.weekPager.currentItem = sharedViewModel.currentDayIndex
 
         viewModel.currentSchedule.observe(viewLifecycleOwner, { schedule ->
+            Log.e("StudyWeekFragment", "received $schedule")
             val daysCount = if (schedule.isSaturdayWorkingDay) 6 else 5
             for (ordinal in 0 until daysCount) {
                 val scheduleId = schedule.id

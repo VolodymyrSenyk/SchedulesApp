@@ -1,5 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.presentation.core.base.viewmodel
 
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LiveData
@@ -37,6 +38,8 @@ abstract class BaseViewModel : ViewModel() {
     protected var _navigationEvent = NavigationEventLiveData()
     val navigationEvent: LiveData<HandledEvent<NavigationEvent>>
         get() = _navigationEvent
+
+    open fun onDialogResultReceived(result: Parcelable) {}
 
     protected open fun onError(throwable: Throwable) {
         hideProgress()

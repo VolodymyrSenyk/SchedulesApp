@@ -15,9 +15,8 @@ import com.senyk.volodymyr.schedulesapp.presentation.feature.common.SimpleTabAda
 class NumeratorDenominatorScheduleFragment : BaseFragment<FragmentNumDenomScheduleBinding>() {
 
     override val layoutRes = R.layout.fragment_num_denom_schedule
-    override val viewModel by viewModels<NumeratorDenominatorScheduleViewModel>(
-        factoryProducer = { viewModelFactory }
-    )
+
+    override val viewModel by viewModels<NumeratorDenominatorScheduleViewModel> { viewModelFactory }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

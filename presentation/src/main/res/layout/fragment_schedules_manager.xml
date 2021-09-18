@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.lifecycle.LiveData" />
+
+        <variable
+            name="showProgress"
+            type="LiveData&lt;Boolean>" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/schedules_manager_toolbar"
-            style="@style/StandartToolbarStyle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:title="@string/main_screen_title">
+        <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/item_toolbar_simple"
+            bind:navigationIcon="@{null}"
+            bind:title="@{@string/screen_schedules_management}" />
 
-        </androidx.appcompat.widget.Toolbar>
+        <include layout="@layout/item_toolbar_drop_shadow" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/all_schedules_list"
-            style="@style/StandartRecyclerViewStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/schedules_manager_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_new_schedule_button"
@@ -35,10 +44,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/schedules_manager_toolbar"
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_add"
+            app:srcCompat="?attr/iconAdd"
             tools:ignore="ContentDescription" />
+
+        <include
+            android:id="@+id/layout_progress"
+            layout="@layout/item_progress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar"
+            bind:isBlocking="@{true}"
+            bind:showProgress="@{showProgress}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

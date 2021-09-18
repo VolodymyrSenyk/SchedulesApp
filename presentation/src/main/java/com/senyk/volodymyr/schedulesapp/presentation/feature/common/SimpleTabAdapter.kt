@@ -16,6 +16,7 @@ class SimpleTabAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAda
     fun addFragment(fragment: Fragment, title: String) {
         fragments.add(fragment)
         titles.add(title)
+        notifyDataSetChanged()
     }
 
     override fun getItem(position: Int): Fragment = fragments[position]

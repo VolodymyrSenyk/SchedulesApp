@@ -6,14 +6,14 @@ import com.senyk.volodymyr.schedulesapp.presentation.core.base.dialog.GeneralDia
 import com.senyk.volodymyr.schedulesapp.presentation.core.extensions.setFragmentResult
 import kotlinx.parcelize.Parcelize
 
-class ExitWithoutSaveDialogFragment : GeneralDialogFragment() {
+class SwapSchedulesDialogFragment : GeneralDialogFragment() {
 
     override val dialogFragmentContentInitializer = GeneralDialogFragmentContent(
-        title = getString(R.string.dialog_exit_without_save_title),
-        message = getString(R.string.dialog_exit_without_save_message),
+        title = getString(R.string.dialog_swap_schedules_title),
+        message = getString(R.string.dialog_swap_schedules_message),
         dialogIconData = GeneralDialogFragmentIconData(
-            drawableAttrRes = R.attr.iconWarning,
-            tintColorAttrRes = R.attr.colorWarning
+            drawableAttrRes = R.attr.iconInfo,
+            tintColorAttrRes = R.attr.colorContentPrimary
         ),
         filledButtonData = GeneralDialogFragmentButtonData(
             text = getString(R.string.dialog_answer_continue),
@@ -28,6 +28,6 @@ class ExitWithoutSaveDialogFragment : GeneralDialogFragment() {
     @Parcelize object Confirm : Parcelable
 
     companion object {
-        fun newInstance(): ExitWithoutSaveDialogFragment = ExitWithoutSaveDialogFragment()
+        fun newInstance(): SwapSchedulesDialogFragment = SwapSchedulesDialogFragment()
     }
 }

@@ -30,12 +30,13 @@ internal fun Schedule.toScheduleUi(resourcesProvider: ResourcesProvider): Schedu
         createdAtInMillis = createdAtInMillis,
         updatedAtInMillis = updatedAtInMillis,
         createdAt = resourcesProvider.getString(
-            R.string.schedule_date_of_creation_output, DateFormatterUtil.getShortDateAndTime(
+            R.string.schedule_date_of_creation_output_pattern,
+            DateFormatterUtil.getShortDateAndTime(
                 createdAtInMillis, resourcesProvider.getCurrentLocale()
             )
         ),
         updatedAt = resourcesProvider.getString(
-            R.string.schedule_date_of_update_output, DateFormatterUtil.getShortDateAndTime(
+            R.string.schedule_date_of_update_output_pattern, DateFormatterUtil.getShortDateAndTime(
                 updatedAtInMillis, resourcesProvider.getCurrentLocale()
             )
         ),

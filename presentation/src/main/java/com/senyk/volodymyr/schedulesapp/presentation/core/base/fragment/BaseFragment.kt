@@ -2,7 +2,11 @@ package com.senyk.volodymyr.schedulesapp.presentation.core.base.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
@@ -20,8 +24,18 @@ import com.senyk.volodymyr.schedulesapp.presentation.core.base.activity.BaseActi
 import com.senyk.volodymyr.schedulesapp.presentation.core.base.viewmodel.BaseViewModel
 import com.senyk.volodymyr.schedulesapp.presentation.core.entity.MessageWithAction
 import com.senyk.volodymyr.schedulesapp.presentation.core.extensions.hideKeyboard
+import com.senyk.volodymyr.schedulesapp.presentation.core.extensions.requestKey
+import com.senyk.volodymyr.schedulesapp.presentation.core.extensions.setFragmentResultListener
 import com.senyk.volodymyr.schedulesapp.presentation.core.factory.ViewModelFactory
-import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.*
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.NavigateBackEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.NavigateBackToFragmentEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.NavigateToActivityEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.NavigateToFragmentEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.NavigationEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.RequestPermissionsEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.StartActivityEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.StartActivityForResultEvent
+import com.senyk.volodymyr.schedulesapp.presentation.core.livedata.event.navigation.StartServiceEvent
 import com.senyk.volodymyr.schedulesapp.presentation.core.util.ShowCustomToastUtil
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -159,11 +173,8 @@ abstract class BaseFragment<B : ViewDataBinding> : DaggerFragment() {
     }
 
     protected open fun showDialogFragment(dialogFragment: DialogFragment) {
-        dialogFragment.setTargetFragment(this, RC_DIALOG_FRAGMENT)
-        dialogFragment.show(parentFragmentManager, dialogFragment.tag)
-    }
-
-    companion object {
-        private const val RC_DIALOG_FRAGMENT = 1
+        val requestKey = dialogFragment.requestKey()
+        setFragmentResultListener(requestKey) { viewModel.onDialogResultReceived(it) }
+        dialogFragment.show(childFragmentManager, requestKey)
     }
 }

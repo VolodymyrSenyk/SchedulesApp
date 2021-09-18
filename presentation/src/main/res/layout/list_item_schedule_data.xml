@@ -45,25 +45,25 @@
                 android:id="@+id/schedule_date_of_creation"
                 style="@style/SimpleTextFieldStyle"
                 android:text="@{model.createdAt}"
-                tools:text="@string/schedule_date_of_creation_output" />
+                tools:text="@string/schedule_date_of_creation_output_pattern" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/schedule_date_of_update"
                 style="@style/SimpleTextFieldStyle"
                 android:text="@{model.updatedAt}"
-                tools:text="@string/schedule_date_of_update_output" />
+                tools:text="@string/schedule_date_of_update_output_pattern" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/schedule_is_sat_working"
                 style="@style/SimpleTextFieldStyle"
-                android:text="@string/schedule_is_saturday_working_output"
+                android:text="@string/saturday_is_working"
                 android:visibility="@{model.saturdayWorkingDay ? View.VISIBLE : View.GONE}"
                 tools:visibility="visible" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/schedule_is_num_denom_system"
                 style="@style/SimpleTextFieldStyle"
-                android:text="@string/schedule_is_num_denom_system_output"
+                android:text="@string/schedule_is_numerator_denominator_system"
                 android:visibility="@{model.numeratorDenominatorSystem ? View.VISIBLE : View.GONE}"
                 tools:visibility="visible" />
 

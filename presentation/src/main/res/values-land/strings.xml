@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Days of the week -->
-    <string-array name="days_of_the_week">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-    </string-array>
+
+    <string name="day_of_the_week_monday">Monday</string>
+    <string name="day_of_the_week_tuesday">Tuesday</string>
+    <string name="day_of_the_week_wednesday">Wednesday</string>
+    <string name="day_of_the_week_thursday">Thursday</string>
+    <string name="day_of_the_week_friday">Friday</string>
+    <string name="day_of_the_week_saturday">Saturday</string>
 
 </resources>

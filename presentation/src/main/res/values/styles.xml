@@ -29,6 +29,7 @@
         <item name="backgroundMain">@drawable/bg_gradient_radial</item>
         <item name="backgroundCustomToast">@drawable/bg_custom_toast</item>
 
+        <item name="iconAdd">@drawable/ic_add</item>
         <item name="iconInfo">@drawable/ic_info</item>
         <item name="iconWarning">@drawable/ic_warning</item>
     </style>
@@ -94,14 +95,6 @@
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:theme">?attr/actionBarTheme</item>
-    </style>
-
-    <style name="StandartRecyclerViewStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_marginRight">@dimen/margin_medium</item>
-        <item name="android:layout_marginLeft">@dimen/margin_medium</item>
-        <item name="android:overScrollMode">never</item>
     </style>
 
     <style name="StandartBottomButtonStyle">

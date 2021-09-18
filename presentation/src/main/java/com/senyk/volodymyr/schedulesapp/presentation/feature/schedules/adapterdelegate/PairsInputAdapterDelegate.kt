@@ -1,4 +1,4 @@
-package com.senyk.volodymyr.schedulesapp.presentation.feature.schedules
+package com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.adapterdelegate
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +8,7 @@ import com.senyk.volodymyr.schedulesapp.databinding.ListItemPairInputBinding
 import com.senyk.volodymyr.schedulesapp.presentation.core.recyclerview.listitem.ListItem
 import com.senyk.volodymyr.schedulesapp.presentation.core.recyclerview.viewholder.BaseDataBindingViewHolder
 import com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.PairUi
+import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel
 
 class PairsInputAdapterDelegate(
     private val viewModel: OneDayScheduleViewModel

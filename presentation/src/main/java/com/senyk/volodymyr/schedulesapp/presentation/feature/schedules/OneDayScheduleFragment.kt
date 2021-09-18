@@ -3,7 +3,6 @@ package com.senyk.volodymyr.schedulesapp.presentation.feature.schedules
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.senyk.volodymyr.schedulesapp.R
 import com.senyk.volodymyr.schedulesapp.databinding.FragmentOneDayScheduleBinding
@@ -13,6 +12,10 @@ import com.senyk.volodymyr.schedulesapp.presentation.core.base.fragment.BaseFrag
 import com.senyk.volodymyr.schedulesapp.presentation.core.extensions.toEnum
 import com.senyk.volodymyr.schedulesapp.presentation.core.extensions.toInt
 import com.senyk.volodymyr.schedulesapp.presentation.core.recyclerview.adapter.BaseDataBindingDelegationAdapter
+import com.senyk.volodymyr.schedulesapp.presentation.core.recyclerview.adapterdelegate.EmptyStateAdapterDelegate
+import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.adapterdelegate.AddPairAdapterDelegate
+import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.adapterdelegate.PairsInputAdapterDelegate
+import com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.adapterdelegate.PairsOutputAdapterDelegate
 
 class OneDayScheduleFragment : BaseFragment<FragmentOneDayScheduleBinding>() {
 
@@ -25,16 +28,10 @@ class OneDayScheduleFragment : BaseFragment<FragmentOneDayScheduleBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showPairsAdapter = BaseDataBindingDelegationAdapter(
-            listOf(
-                PairsOutputAdapterDelegate(viewModel)//,
-         //       EmptyStateAdapterDelegate()
-            )
+            listOf(PairsOutputAdapterDelegate(viewModel), EmptyStateAdapterDelegate())
         )
         editPairsAdapter = BaseDataBindingDelegationAdapter(
-            listOf(
-                PairsInputAdapterDelegate(viewModel),
-                AddPairAdapterDelegate(viewModel)
-            )
+            listOf(PairsInputAdapterDelegate(viewModel), AddPairAdapterDelegate(viewModel))
         )
 
         binding.pairsList.adapter = showPairsAdapter

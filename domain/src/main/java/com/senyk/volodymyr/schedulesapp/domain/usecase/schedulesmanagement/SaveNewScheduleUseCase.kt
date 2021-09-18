@@ -10,7 +10,7 @@ class SaveNewScheduleUseCase @Inject constructor(
 ) {
 
     operator fun invoke(schedule: Schedule): Single<List<Schedule>> =
-        scheduleRepository.saveNewSchedule(schedule)
+        scheduleRepository.saveNewSchedule(schedule.copy(id = "-1"))
             .flatMapCompletable { scheduleRepository.changeCurrentSchedule(it) }
             .andThen(scheduleRepository.getAllSchedules())
 }

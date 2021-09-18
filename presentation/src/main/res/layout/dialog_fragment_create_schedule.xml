@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,30 +13,17 @@
         android:paddingTop="@dimen/padding_big"
         android:paddingBottom="@dimen/padding_small">
 
-        <ImageView
-            android:id="@+id/icon_dialog_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_small"
-            app:layout_constraintBottom_toBottomOf="@id/output_dialog_title"
-            app:layout_constraintEnd_toStartOf="@+id/output_dialog_title"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintTop_toTopOf="@id/output_dialog_title"
-            tools:ignore="ContentDescription"
-            tools:src="?attr/iconWarning"
-            tools:tint="?attr/colorWarning" />
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/output_dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/screen_create_schedule"
             android:textColor="?attr/colorContentPrimary"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/dialog_delete_schedule_title" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/divider_dialog_title"
@@ -49,53 +35,76 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/output_dialog_title" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/output_dialog_message"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/input_schedule_name"
+            style="@style/PairDataInputFieldStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_medium"
-            android:layout_marginVertical="@dimen/margin_medium"
+            android:layout_marginVertical="@dimen/margin_small"
+            android:ems="14"
+            android:hint="@string/hint_schedule_name"
+            android:importantForAutofill="no"
+            android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider_dialog_title" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkbox_is_saturday_working"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foregroundTint="?attr/colorContentPrimary"
+            android:text="@string/saturday_is_working"
             android:textColor="?attr/colorContentPrimary"
             android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_dialog_title"
-            tools:text="@string/dialog_delete_schedule_message" />
+            app:layout_constraintTop_toBottomOf="@+id/input_schedule_name" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkbox_is_numerator_denominator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:foregroundTint="?attr/colorContentPrimary"
+            android:text="@string/schedule_is_numerator_denominator_system"
+            android:textColor="?attr/colorContentPrimary"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_is_saturday_working" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_dialog_unfilled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_small"
             android:backgroundTint="?attr/colorBackgroundOnSurface"
+            android:text="@string/dialog_answer_cancel"
             android:textAllCaps="false"
             android:textColor="?attr/colorContentPrimary"
             android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toStartOf="@+id/button_dialog_filled"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/output_dialog_message"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_is_numerator_denominator"
             app:strokeColor="?attr/colorBorders"
-            app:strokeWidth="1dp"
-            tools:text="@string/dialog_answer_cancel"
-            tools:visibility="visible" />
+            app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_dialog_filled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_small"
             android:backgroundTint="?attr/colorAccentLight"
+            android:text="@string/dialog_answer_create"
             android:textAllCaps="false"
             android:textColor="?attr/colorContentPrimary"
             android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_dialog_unfilled"
-            app:layout_constraintTop_toBottomOf="@+id/output_dialog_message"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_is_numerator_denominator"
             app:strokeColor="?attr/colorBorders"
-            app:strokeWidth="1dp"
-            tools:text="@string/dialog_answer_continue"
-            tools:visibility="visible" />
+            app:strokeWidth="1dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

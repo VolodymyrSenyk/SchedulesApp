@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Screen titles -->
-    <string name="app_name">SchedulesApp</string>
-    <string name="schedules_manager_screen_title">All Schedules</string>
-    <string name="new_schedule_creator_screen_title">New Schedule</string>
-    <string name="main_screen_title">Schedule</string>
-    <string name="whole_schedule_screen_title">Whole Schedule</string>
 
-    <!-- Main menu items -->
-    <string name="action_schedules_manager">Management</string>
-    <string name="action_one_day_schedule">Detailed</string>
-    <string name="action_whole_schedule">Whole</string>
+    <string name="app_name">Schedules</string>
+    <string name="screen_create_schedule">New Schedule</string>
+    <string name="screen_schedules_management">Schedules</string>
+    <string name="screen_pairs_management">Schedule</string>
+    <string name="screen_whole_schedule">Schedule</string>
 
-    <!-- Days of the week -->
-    <string-array name="days_of_the_week">
-        <item>Mon</item>
-        <item>Tue</item>
-        <item>Wed</item>
-        <item>Thu</item>
-        <item>Fri</item>
-        <item>Sat</item>
+    <string name="menu_item_schedules_management">Management</string>
+    <string name="menu_item_pairs_management">Detailed</string>
+    <string name="menu_item_whole_schedule">Whole</string>
+
+    <string name="dialog_answer_continue">Continue</string>
+    <string name="dialog_answer_cancel">Cancel</string>
+    <string name="dialog_answer_ok" translatable="false">OK</string>
+    <string name="dialog_answer_create">Create</string>
+
+    <string name="hint_schedule_name">Schedule name</string>
+    <string name="saturday_is_working">Saturday is working day</string>
+    <string name="schedule_is_numerator_denominator_system">Numerator/Denominator system</string>
+    <string name="schedule_date_of_creation_output_pattern">Created at %1$s</string>
+    <string name="schedule_date_of_update_output_pattern">Updated at %1$s</string>
+
+    <string name="week_name_numerator">Numerator</string>
+    <string name="week_name_denominator">Denominator</string>
+    <string-array name="weeks_names">
+        <item>@string/week_name_numerator</item>
+        <item>@string/week_name_denominator</item>
     </string-array>
 
     <string name="day_of_the_week_monday">Mon</string>
@@ -28,73 +35,49 @@
     <string name="day_of_the_week_thursday">Thu</string>
     <string name="day_of_the_week_friday">Fri</string>
     <string name="day_of_the_week_saturday">Sat</string>
-
-    <!-- Weeks -->
-    <string-array name="weeks_names">
-        <item>Numerator</item>
-        <item>Denominator</item>
+    <string-array name="days_of_the_week">
+        <item>@string/day_of_the_week_monday</item>
+        <item>@string/day_of_the_week_tuesday</item>
+        <item>@string/day_of_the_week_wednesday</item>
+        <item>@string/day_of_the_week_thursday</item>
+        <item>@string/day_of_the_week_friday</item>
+        <item>@string/day_of_the_week_saturday</item>
     </string-array>
 
-    <string name="week_name_numerator">Numerator</string>
-    <string name="week_name_denominator">Denominator</string>
-
-    <!-- Schedule data output -->
-    <string name="schedule_date_of_creation_output">Created at %1$s</string>
-    <string name="schedule_date_of_update_output">Updated at %1$s</string>
-    <string name="schedule_is_saturday_working_output">Saturday is working day</string>
-    <string name="schedule_is_num_denom_system_output">Numerator/Denominator schedule</string>
-
-    <!-- Schedule data input -->
-    <string name="schedule_name_input_hint">Schedule name</string>
-    <string name="schedule_is_saturday_working_input">Saturday is working day</string>
-    <string name="schedule_is_num_denom_system_input">Numerator/Denominator schedule</string>
-
-    <string-array name="pairs_types">
-        <item>Not stated</item>
-        <item>Lecture</item>
-        <item>Practice</item>
-        <item>Laboratory</item>
-        <item>Sport</item>
-    </string-array>
-
-    <!-- Pair data input -->
-    <string name="pair_time_input_hint">Time</string>
-    <string name="pair_name_input_hint">Name</string>
-    <string name="pair_teacher_input_hint">Teacher</string>
+    <string name="empty_state_pairs">No pairs at that day</string>
+    <string name="hint_pair_time_of_start">Start at</string>
+    <string name="hint_pair_time_of_end">End at</string>
+    <string name="hint_pair_name">Subject</string>
+    <string name="hint_pair_teacher">Teacher</string>
+    <string name="hint_pair_place">Place</string>
+    <string name="hint_pair_notes">Notes</string>
     <string name="pair_type_not_stated">Not stated</string>
     <string name="pair_type_lecture">Lecture</string>
     <string name="pair_type_practice">Practice</string>
     <string name="pair_type_laboratory">Laboratory</string>
     <string name="pair_type_sport">Sport</string>
-    <string name="pair_place_input_hint">Place</string>
-    <string name="pair_additional_info_input_hint">Additional information</string>
+    <string-array name="pairs_types">
+        <item>@string/pair_type_not_stated</item>
+        <item>@string/pair_type_lecture</item>
+        <item>@string/pair_type_practice</item>
+        <item>@string/pair_type_laboratory</item>
+        <item>@string/pair_type_sport</item>
+    </string-array>
 
-    <!-- Pair data output -->
-    <string name="pair_output_no_pairs">No pairs at that day</string>
+    <string name="dialog_swap_schedules_title">Swap schedules?</string>
+    <string name="dialog_swap_schedules_message">Selected schedule will be set as current</string>
 
-    <!-- Buttons -->
-    <string name="create_button">Create</string>
+    <string name="dialog_delete_schedule_title">Delete schedule?</string>
+    <string name="dialog_delete_schedule_message">Schedule "%1$s" will be deleted</string>
 
-    <!-- Dialogs -->
-    <string name="dialog_answer_cancel">Cancel</string>
-    <string name="dialog_answer_close">Close</string>
-    <string name="dialog_answer_continue">Continue</string>
-    <string name="dialog_answer_ok" translatable="false">OK</string>
+    <string name="dialog_schedule_exists_title">Already exists</string>
+    <string name="dialog_schedule_exists_message">Schedule with the same name is already exists</string>
 
-    <string name="answer_yes">Yes</string>
-    <string name="answer_no">No</string>
-    <string name="answer_ok">OK</string>
-    <string name="swap_schedules_dialog_title">Swap schedules?</string>
-    <string name="swap_schedules_dialog_message">Current schedule will be replaced by the selected one</string>
-    <string name="delete_schedule_dialog_title">Delete schedule?</string>
-    <string name="delete_schedule_dialog_message">Selected schedule will be deleted</string>
-    <string name="schedule_exists_dialog_title">Already exists</string>
-    <string name="schedule_exists_dialog_message">Schedule with the same name is already exists</string>
+    <string name="dialog_exit_without_save_title">Changes not saved</string>
+    <string name="dialog_exit_without_save_message">Continue without saving changes?</string>
 
-    <string name="application_error_message">An error occurred: $%1$s</string>
+    <string name="message_application_error">An error occurred: $%1$s</string>
+
     <string name="message_press_one_more_time_to_exit">Press one more time to exit</string>
-
-    <string name="create_schedule_title">Create schedule</string>
-    <string name="hint_schedule_name">Schedule name</string>
 
 </resources>

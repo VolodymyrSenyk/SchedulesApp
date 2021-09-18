@@ -1,5 +1,6 @@
 package com.senyk.volodymyr.schedulesapp.presentation.feature.schedulesmanager
 
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.senyk.volodymyr.schedulesapp.domain.entity.Schedule
@@ -9,6 +10,7 @@ import com.senyk.volodymyr.schedulesapp.domain.usecase.schedulesmanagement.GetAl
 import com.senyk.volodymyr.schedulesapp.domain.usecase.schedulesmanagement.SaveNewScheduleUseCase
 import com.senyk.volodymyr.schedulesapp.presentation.core.base.viewmodel.BaseRxViewModel
 import com.senyk.volodymyr.schedulesapp.presentation.core.provider.ResourcesProvider
+import com.senyk.volodymyr.schedulesapp.presentation.feature.common.dialog.CreateScheduleDialogFragment
 import com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.ScheduleUi
 import com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.toScheduleInfo
 import com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.toScheduleUi
@@ -46,6 +48,21 @@ class SchedulesManagerViewModel @Inject constructor(
             upstream = changeCurrentScheduleUseCase(schedule.toScheduleInfo()),
             onSuccess = { setSchedules(it) }
         )
+    }
+
+    override fun onDialogResultReceived(result: Parcelable) {
+        if (result is CreateScheduleDialogFragment.Create) {
+            val newSchedule = Schedule(
+                name = result.scheduleName,
+                isSaturdayWorkingDay = result.isSaturdayWorkingDay,
+                isNumeratorDenominatorSystem = result.isNumeratorDenominatorSystem,
+                isCurrent = true
+            )
+            subscribe(
+                upstream = saveNewScheduleUseCase(newSchedule),
+                onSuccess = { setSchedules(it) }
+            )
+        }
     }
 
     private fun setSchedules(schedules: List<Schedule>) {

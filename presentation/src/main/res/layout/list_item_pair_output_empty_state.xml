@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:padding="@dimen/padding_small"
-        android:text="@string/pair_output_no_pairs"
+        android:text="@string/empty_state_pairs"
         android:textColor="@color/colorPrimary" />
 
 </layout>

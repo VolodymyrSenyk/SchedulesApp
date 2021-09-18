@@ -43,7 +43,7 @@
                 android:id="@+id/pair_time_input"
                 style="@style/PairDataInputFieldStyle"
                 android:focusable="false"
-                android:hint="@string/pair_time_input_hint"
+                android:hint="@string/hint_pair_time_of_start"
                 android:inputType="time"
                 android:maxLines="2"
                 android:text="@{model.startTime}" />
@@ -63,7 +63,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pair_name_input"
                 style="@style/PairDataInputFieldStyle"
-                android:hint="@string/pair_name_input_hint"
+                android:hint="@string/hint_pair_name"
                 android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
                 android:maxLines="2"
                 android:text="@{model.name}" />
@@ -83,7 +83,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pair_place_input"
                 style="@style/PairDataInputFieldStyle"
-                android:hint="@string/pair_place_input_hint"
+                android:hint="@string/hint_pair_place"
                 android:inputType="textShortMessage|textMultiLine|textCapSentences"
                 android:maxLength="30"
                 android:maxLines="2"
@@ -105,7 +105,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pair_teacher_input"
                 style="@style/PairDataInputFieldStyle"
-                android:hint="@string/pair_teacher_input_hint"
+                android:hint="@string/hint_pair_teacher"
                 android:inputType="textMultiLine|textPersonName|textCapWords"
                 android:maxLines="2"
                 android:text="@{model.teacher}" />
@@ -137,7 +137,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pair_additional_info_input"
                 style="@style/PairDataInputFieldStyle"
-                android:hint="@string/pair_additional_info_input_hint"
+                android:hint="@string/hint_pair_notes"
                 android:inputType="textLongMessage|textMultiLine|textCapSentences"
                 android:maxLength="500"
                 android:maxLines="6"

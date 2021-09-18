@@ -1,8 +1,12 @@
 package com.senyk.volodymyr.schedulesapp.presentation.core.extensions
 
-import android.text.InputFilter
+import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,4 +35,20 @@ fun RecyclerView.getLastVisibleItemView(): View? {
     val layoutManager = layoutManager as? LinearLayoutManager ?: layoutManager as GridLayoutManager
     val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
     return getChildAt(lastVisiblePosition)
+}
+
+fun DialogFragment.requestKey(): String = this.javaClass.simpleName
+
+private const val DIALOG_FRAGMENT_RESULT_KEY = "DIALOG_FRAGMENT_RESULT_KEY"
+
+fun DialogFragment.setFragmentResult(result: Parcelable) {
+    setFragmentResult(requestKey(), Bundle().apply {
+        putParcelable(DIALOG_FRAGMENT_RESULT_KEY, result)
+    })
+}
+
+fun Fragment.setFragmentResultListener(requestKey: String, callback: (Parcelable) -> Unit) {
+    childFragmentManager.setFragmentResultListener(requestKey, viewLifecycleOwner) { _, bundle ->
+        bundle.getParcelable<Parcelable>(DIALOG_FRAGMENT_RESULT_KEY)?.let { callback(it) }
+    }
 }
