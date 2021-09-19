@@ -15,14 +15,13 @@
     <attr name="colorBorders" format="reference" />
     <attr name="colorSuccess" format="reference" />
     <attr name="colorWarning" format="reference" />
-    <attr name="colorWarningWithAlpha" format="reference" />
 
     <attr name="backgroundMain" format="reference" />
     <attr name="backgroundCustomToast" format="reference" />
 
     <attr name="iconAdd" format="reference" />
     <attr name="iconInfo" format="reference" />
-    <attr name="iconHelp" format="reference" />
+    <attr name="iconClear" format="reference" />
     <attr name="iconWarning" format="reference" />
 
 </resources>

@@ -23,7 +23,7 @@
             android:id="@+id/layout_toolbar"
             layout="@layout/item_toolbar_simple"
             bind:navigationIcon="@{null}"
-            bind:title="@{@string/screen_schedules_management}" />
+            bind:title="@{@string/screen_title_schedules_management}" />
 
         <include layout="@layout/item_toolbar_drop_shadow" />
 

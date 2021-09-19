@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">Расписания</string>
-    <string name="screen_create_schedule">Новое расписание</string>
-    <string name="screen_schedules_management">Расписания</string>
-    <string name="screen_pairs_management">Расписание</string>
-    <string name="screen_whole_schedule">Расписание</string>
+
+    <string name="screen_title_schedules_manager">Расписания</string>
+    <string name="screen_title_pairs_management">Расписание</string>
+    <string name="screen_title_whole_schedule">Расписание</string>
 
     <string name="menu_item_schedules_management">Переключение</string>
     <string name="menu_item_pairs_management">Подробное</string>
@@ -15,15 +15,15 @@
     <string name="dialog_answer_cancel">Отмена</string>
     <string name="dialog_answer_create">Создать</string>
 
-    <string name="hint_schedule_name">Название расписания</string>
-    <string name="saturday_is_working">Суббота является рабочим днём</string>
-    <string name="schedule_is_numerator_denominator_system">Расписание по системе \"числитель/знаменатель\"</string>
+    <string name="schedule_name_hint">Название расписания</string>
+    <string name="schedule_type_saturday_is_working">Суббота является рабочим днём</string>
+    <string name="schedule_type_numerator_denominator">Расписание по системе \"числитель/знаменатель\"</string>
     <string name="schedule_date_of_creation_output_pattern">Создано %1$s</string>
     <string name="schedule_date_of_update_output_pattern">Обновлено %1$s</string>
 
     <string name="week_name_numerator">Числитель</string>
     <string name="week_name_denominator">Знаменатель</string>
-    <string-array name="weeks_names">
+    <string-array name="week_names">
         <item>@string/week_name_numerator</item>
         <item>@string/week_name_denominator</item>
     </string-array>
@@ -43,25 +43,27 @@
         <item>@string/day_of_the_week_saturday</item>
     </string-array>
 
-    <string name="empty_state_pairs">Пар на этот день нет</string>
-    <string name="hint_pair_time_of_start">Начало</string>
-    <string name="hint_pair_time_of_end">Конец</string>
-    <string name="hint_pair_name">Предмет</string>
-    <string name="hint_pair_teacher">Преподаватель</string>
-    <string name="hint_pair_place">Аудитория</string>
-    <string name="hint_pair_notes">Заметки</string>
+    <string name="pair_time_of_start_hint">Начало</string>
+    <string name="pair_time_of_end_hint">Конец</string>
+    <string name="pair_name_hint">Предмет</string>
+    <string name="pair_teacher_hint">Преподаватель</string>
+    <string name="pair_place_hint">Аудитория</string>
+    <string name="pair_notes_hint">Заметки</string>
+
     <string name="pair_type_not_stated">Не установлено</string>
     <string name="pair_type_lecture">Лекция</string>
     <string name="pair_type_practice">Практика</string>
     <string name="pair_type_laboratory">Лабораторная</string>
     <string name="pair_type_sport">Физ.-ра</string>
-    <string-array name="pairs_types">
+    <string-array name="pair_types">
         <item>@string/pair_type_not_stated</item>
         <item>@string/pair_type_lecture</item>
         <item>@string/pair_type_practice</item>
         <item>@string/pair_type_laboratory</item>
         <item>@string/pair_type_sport</item>
     </string-array>
+
+    <string name="dialog_create_schedule_title">Новое расписание</string>
 
     <string name="dialog_swap_schedules_title">Заменить расписание?</string>
     <string name="dialog_swap_schedules_message">Выбранное расписание будет установлено в качестве текущего</string>
@@ -75,7 +77,15 @@
     <string name="dialog_exit_without_save_title">Изменения не сохранены</string>
     <string name="dialog_exit_without_save_message">Продолжить без сохранения изменений?</string>
 
+    <string name="empty_state_schedules">Расписания не найдены</string>
+
+    <string name="empty_state_pairs">Пар на этот день нет</string>
+
     <string name="message_application_error">Возникла ошибка: $%1$s</string>
+
+    <string name="message_edit_text_limit_reached">лимит символов</string>
+
+    <string name="message_empty_field">пустое поле</string>
 
     <string name="message_press_one_more_time_to_exit">Нажмите ещё раз для выхода</string>
 

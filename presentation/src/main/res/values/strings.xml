@@ -2,10 +2,10 @@
 <resources>
 
     <string name="app_name">Schedules</string>
-    <string name="screen_create_schedule">New Schedule</string>
-    <string name="screen_schedules_management">Schedules</string>
-    <string name="screen_pairs_management">Schedule</string>
-    <string name="screen_whole_schedule">Schedule</string>
+
+    <string name="screen_title_schedules_manager">Schedules</string>
+    <string name="screen_title_pairs_management">Schedule</string>
+    <string name="screen_title_whole_schedule">Schedule</string>
 
     <string name="menu_item_schedules_management">Management</string>
     <string name="menu_item_pairs_management">Detailed</string>
@@ -16,15 +16,15 @@
     <string name="dialog_answer_ok" translatable="false">OK</string>
     <string name="dialog_answer_create">Create</string>
 
-    <string name="hint_schedule_name">Schedule name</string>
-    <string name="saturday_is_working">Saturday is working day</string>
-    <string name="schedule_is_numerator_denominator_system">Numerator/Denominator system</string>
+    <string name="schedule_name_hint">Schedule name</string>
     <string name="schedule_date_of_creation_output_pattern">Created at %1$s</string>
     <string name="schedule_date_of_update_output_pattern">Updated at %1$s</string>
+    <string name="schedule_type_saturday_is_working">Saturday is working day</string>
+    <string name="schedule_type_numerator_denominator">Numerator/Denominator system</string>
 
     <string name="week_name_numerator">Numerator</string>
     <string name="week_name_denominator">Denominator</string>
-    <string-array name="weeks_names">
+    <string-array name="week_names">
         <item>@string/week_name_numerator</item>
         <item>@string/week_name_denominator</item>
     </string-array>
@@ -44,25 +44,27 @@
         <item>@string/day_of_the_week_saturday</item>
     </string-array>
 
-    <string name="empty_state_pairs">No pairs at that day</string>
-    <string name="hint_pair_time_of_start">Start at</string>
-    <string name="hint_pair_time_of_end">End at</string>
-    <string name="hint_pair_name">Subject</string>
-    <string name="hint_pair_teacher">Teacher</string>
-    <string name="hint_pair_place">Place</string>
-    <string name="hint_pair_notes">Notes</string>
+    <string name="pair_time_of_start_hint">Start at</string>
+    <string name="pair_time_of_end_hint">End at</string>
+    <string name="pair_name_hint">Subject</string>
+    <string name="pair_teacher_hint">Teacher</string>
+    <string name="pair_place_hint">Place</string>
+    <string name="pair_notes_hint">Notes</string>
+
     <string name="pair_type_not_stated">Not stated</string>
     <string name="pair_type_lecture">Lecture</string>
     <string name="pair_type_practice">Practice</string>
     <string name="pair_type_laboratory">Laboratory</string>
     <string name="pair_type_sport">Sport</string>
-    <string-array name="pairs_types">
+    <string-array name="pair_types">
         <item>@string/pair_type_not_stated</item>
         <item>@string/pair_type_lecture</item>
         <item>@string/pair_type_practice</item>
         <item>@string/pair_type_laboratory</item>
         <item>@string/pair_type_sport</item>
     </string-array>
+
+    <string name="dialog_create_schedule_title">New Schedule</string>
 
     <string name="dialog_swap_schedules_title">Swap schedules?</string>
     <string name="dialog_swap_schedules_message">Selected schedule will be set as current</string>
@@ -76,7 +78,15 @@
     <string name="dialog_exit_without_save_title">Changes not saved</string>
     <string name="dialog_exit_without_save_message">Continue without saving changes?</string>
 
+    <string name="empty_state_schedules">No schedules found</string>
+
+    <string name="empty_state_pairs">No pairs at that day</string>
+
     <string name="message_application_error">An error occurred: $%1$s</string>
+
+    <string name="message_edit_text_limit_reached">character limit</string>
+
+    <string name="message_empty_field">empty field</string>
 
     <string name="message_press_one_more_time_to_exit">Press one more time to exit</string>
 

@@ -20,7 +20,7 @@ class CreateScheduleDialogFragment : BaseDialogFragment<DialogFragmentCreateSche
         binding.buttonDialogFilled.setOnClickListener {
             setFragmentResult(
                 Create(
-                    scheduleName = binding.inputScheduleName.text.toString(),
+                    scheduleName = binding.inputScheduleName.getText(),
                     isSaturdayWorkingDay = binding.checkboxIsSaturdayWorking.isChecked,
                     isNumeratorDenominatorSystem = binding.checkboxIsNumeratorDenominator.isChecked
                 )
