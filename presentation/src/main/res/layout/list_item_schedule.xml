@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.senykvolodymyr.presentation.feature.common.entity.ScheduleUi" />
+
+        <import type="com.senykvolodymyr.presentation.feature.schedulesmanager.SchedulesManagerViewModel" />
+
+        <variable
+            name="model"
+            type="ScheduleUi" />
+
+        <variable
+            name="viewModel"
+            type="SchedulesManagerViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="?attr/marginSmall"
+        android:backgroundTint="@{model.tintColorInt}"
+        app:cardCornerRadius="?attr/cornerRadiusMedium"
+        tools:backgroundTint="@android:color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_schedule_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{model.name}"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="My first schedule" />
+
+            <View
+                android:id="@+id/divider_schedule_name"
+                style="@style/AppTheme.DividerHorizontal"
+                android:layout_width="0dp"
+                android:layout_marginTop="?attr/marginSmall"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_schedule_name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_schedule_date_of_creation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{model.createdAt}"
+                app:layout_constraintEnd_toStartOf="@+id/text_schedule_date_of_update"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_schedule_name"
+                tools:text="@string/schedule_date_of_creation_output_pattern" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_schedule_date_of_update"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{model.updatedAt}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_schedule_date_of_creation"
+                app:layout_constraintTop_toBottomOf="@+id/divider_schedule_name"
+                tools:text="@string/schedule_date_of_update_output_pattern" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_schedule_is_numerator_denominator_system"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_type_numerator_denominator"
+                android:visibility="@{model.numeratorDenominatorSystem ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_schedule_date_of_creation"
+                tools:visibility="visible" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_schedule_saturday_is_working"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule_type_saturday_is_working"
+                android:visibility="@{model.saturdayWorkingDay ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_schedule_is_numerator_denominator_system"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_delete_schedule"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="?attr/marginMedium"
+                android:layout_marginTop="?attr/marginSmall"
+                android:onClick="@{v -> viewModel.onDelete(model)}"
+                app:backgroundTint="?attr/colorSecondary"
+                app:icon="?attr/iconDelete"
+                app:iconGravity="textStart"
+                app:iconTint="?attr/colorContentOnSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_schedule_saturday_is_working" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

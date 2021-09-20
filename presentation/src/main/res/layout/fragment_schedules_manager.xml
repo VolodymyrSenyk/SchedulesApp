@@ -17,20 +17,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground">
+        android:background="?attr/colorBackgroundPrimary">
 
         <include
             android:id="@+id/layout_toolbar"
             layout="@layout/item_toolbar_simple"
             bind:navigationIcon="@{null}"
-            bind:title="@{@string/screen_title_schedules_management}" />
+            bind:title="@{@string/screen_title_schedules_manager}" />
 
         <include layout="@layout/item_toolbar_drop_shadow" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/all_schedules_list"
+            android:id="@+id/list_schedules"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:padding="?attr/paddingMedium"
+            tools:itemCount="4"
+            tools:listitem="@layout/list_item_schedule"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +41,10 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_new_schedule_button"
-            style="@style/StandartFABStyle"
+            android:id="@+id/fab_add_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="?attr/marginBig"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

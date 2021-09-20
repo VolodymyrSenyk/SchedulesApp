@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/schedulesManagerFragment"
-        android:name="com.senyk.volodymyr.schedulesapp.presentation.feature.schedulesmanager.SchedulesManagerFragment"
+        android:name="com.senykvolodymyr.presentation.feature.schedulesmanager.SchedulesManagerFragment"
         android:label="SchedulesManagerFragment"
         tools:layout="@layout/fragment_schedules_manager" />
 
     <fragment
         android:id="@+id/studyWeekFragment"
-        android:name="com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.StudyWeekFragment"
+        android:name="com.senykvolodymyr.presentation.feature.schedules.StudyWeekFragment"
         android:label="StudyWeekFragment"
         tools:layout="@layout/fragment_study_week" />
 
     <fragment
         android:id="@+id/wholeScheduleFragment"
-        android:name="com.senyk.volodymyr.schedulesapp.presentation.feature.wholeschedule.WholeScheduleFragment"
+        android:name="com.senykvolodymyr.presentation.feature.wholeschedule.WholeScheduleFragment"
         android:label="WholeScheduleFragment"
         tools:layout="@layout/fragment_whole_schedule" />
 

@@ -5,26 +5,26 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackground">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pairs_list"
+            android:id="@+id/list_pairs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="?attr/marginMedium"
             android:overScrollMode="never"
-            android:layout_marginStart="@dimen/margin_big"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginEnd="@dimen/margin_big"
+            android:padding="?attr/paddingMedium"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:padding="@dimen/borders_width" />
+            tools:itemCount="4"
+            tools:listitem="@layout/list_item_pair_output" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/edit_save_button"
-            style="@style/StandartFABStyle"
+            android:id="@+id/fab_edit_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:srcCompat="@drawable/ic_edit"
+            android:layout_margin="?attr/marginBig"
+            app:srcCompat="?attr/iconEdit"
             tools:ignore="ContentDescription" />
 
     </FrameLayout>

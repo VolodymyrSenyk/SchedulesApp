@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="colorPrimaryLight" format="color" />
+    <attr name="colorContentOnPrimary" format="color" />
+    <attr name="colorSecondaryDark" format="color" />
+    <attr name="colorSecondaryLight" format="color" />
+    <attr name="colorContentOnSecondary" format="color" />
+    <attr name="colorContentPrimary" format="color" />
+    <attr name="colorContentSecondary" format="color" />
+    <attr name="colorContentLinks" format="color" />
+    <attr name="colorDivider" format="color" />
+    <attr name="colorBorder" format="color" />
+    <attr name="colorSuccess" format="color" />
+    <attr name="colorWarning" format="color" />
+    <attr name="colorBackgroundPrimary" format="color" />
+    <attr name="colorBackgroundOnPrimary" format="color" />
+    <attr name="colorBackgroundOnSurface" format="color" />
+    <attr name="colorCustomToast" format="color" />
+
+    <attr name="backgroundDialog" format="reference" />
+    <attr name="backgroundListItem" format="reference" />
+    <attr name="backgroundInputField" format="reference" />
+    <attr name="backgroundCustomToast" format="reference" />
+
+    <attr name="marginBig" format="dimension" />
+    <attr name="marginMedium" format="dimension" />
+    <attr name="marginSmall" format="dimension" />
+    <attr name="paddingBig" format="dimension" />
+    <attr name="paddingMedium" format="dimension" />
+    <attr name="paddingSmall" format="dimension" />
+    <attr name="textSizeBig" format="dimension" />
+    <attr name="textSizeMedium" format="dimension" />
+    <attr name="textSizeSmall" format="dimension" />
+    <attr name="textSizeVerySmall" format="dimension" />
+    <attr name="sizeIcon" format="dimension" />
+    <attr name="sizeDivider" format="dimension" />
+    <attr name="sizeBorder" format="dimension" />
+    <attr name="sizeDialogWidth" format="dimension" />
+    <attr name="cornerRadiusBig" format="dimension" />
+    <attr name="cornerRadiusMedium" format="dimension" />
+    <attr name="cornerRadiusSmall" format="dimension" />
+    <attr name="elevationBig" format="dimension" />
+    <attr name="elevationMedium" format="dimension" />
+    <attr name="elevationSmall" format="dimension" />
+
+    <attr name="iconClear" format="reference" />
+
+</resources>

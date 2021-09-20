@@ -6,9 +6,9 @@
 
         <import type="android.view.View" />
 
-        <import type="com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.PairUi" />
+        <import type="com.senykvolodymyr.presentation.feature.common.entity.PairUi" />
 
-        <import type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel" />
+        <import type="com.senykvolodymyr.presentation.feature.schedules.OneDayScheduleViewModel" />
 
         <variable
             name="model"
@@ -16,151 +16,165 @@
 
         <variable
             name="viewModel"
-            type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel" />
+            type="OneDayScheduleViewModel" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/list_item_simple"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:padding="@dimen/padding_small"
-        android:theme="@style/PairDataInputFieldTheme">
+        android:layout_marginVertical="?attr/marginSmall"
+        android:backgroundTint="@color/colorNotSelected"
+        android:onClick="@{v -> viewModel.onPairClick(model)}">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pair_time_input_layout"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/pair_place_input_layout"
-            app:layout_constraintEnd_toStartOf="@id/pair_name_input_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="?attr/paddingSmall">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pair_time_input"
-                style="@style/PairDataInputFieldStyle"
-                android:focusable="false"
+            <EditText
+                android:id="@+id/input_pair_start_time"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center"
                 android:hint="@string/pair_time_of_start_hint"
+                android:importantForAutofill="no"
                 android:inputType="time"
-                android:maxLines="2"
-                android:text="@{model.startTime}" />
+                android:maxLength="?attr/maxLengthPairTime"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.startTime}"
+                app:layout_constraintBottom_toTopOf="@+id/input_pair_end_time"
+                app:layout_constraintEnd_toStartOf="@+id/input_pair_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/input_pair_end_time"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/marginSmall"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center"
+                android:hint="@string/pair_time_of_end_hint"
+                android:importantForAutofill="no"
+                android:inputType="time"
+                android:maxLength="?attr/maxLengthPairTime"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.endTime}"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_pair_type"
+                app:layout_constraintEnd_toStartOf="@+id/input_pair_teacher"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_pair_start_time"
+                app:layout_constraintWidth_percent="0.2" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pair_name_input_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/pair_teacher_input_layout"
-            app:layout_constraintEnd_toStartOf="@id/delete_pair_button"
-            app:layout_constraintStart_toEndOf="@id/pair_time_input_layout"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".6">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pair_name_input"
-                style="@style/PairDataInputFieldStyle"
+            <EditText
+                android:id="@+id/input_pair_name"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|start"
                 android:hint="@string/pair_name_hint"
+                android:importantForAutofill="no"
                 android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
-                android:maxLines="2"
-                android:text="@{model.name}" />
+                android:maxLength="?attr/maxLengthPairName"
+                android:paddingHorizontal="?attr/paddingMedium"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.name}"
+                app:layout_constraintBottom_toTopOf="@+id/input_pair_teacher"
+                app:layout_constraintEnd_toStartOf="@+id/button_delete_pair"
+                app:layout_constraintStart_toEndOf="@+id/input_pair_start_time"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pair_place_input_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_small"
-            app:layout_constraintBottom_toTopOf="@+id/pair_type_input_spinner"
-            app:layout_constraintEnd_toStartOf="@id/pair_teacher_input_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pair_time_input_layout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pair_place_input"
-                style="@style/PairDataInputFieldStyle"
-                android:hint="@string/pair_place_hint"
-                android:inputType="textShortMessage|textMultiLine|textCapSentences"
-                android:maxLength="30"
-                android:maxLines="2"
-                android:text="@{model.place}"
-                android:textColor="@color/colorPrimary" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pair_teacher_input_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/pair_type_input_spinner"
-            app:layout_constraintEnd_toStartOf="@id/delete_pair_button"
-            app:layout_constraintStart_toEndOf="@+id/pair_place_input_layout"
-            app:layout_constraintTop_toBottomOf="@+id/pair_name_input_layout"
-            app:layout_constraintWidth_percent=".6">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pair_teacher_input"
-                style="@style/PairDataInputFieldStyle"
+            <EditText
+                android:id="@+id/input_pair_teacher"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/marginSmall"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center_horizontal|start"
                 android:hint="@string/pair_teacher_hint"
+                android:importantForAutofill="no"
                 android:inputType="textMultiLine|textPersonName|textCapWords"
-                android:maxLines="2"
-                android:text="@{model.teacher}" />
+                android:maxLength="?attr/maxLengthPairTeacher"
+                android:paddingHorizontal="?attr/paddingMedium"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.teacher}"
+                app:layout_constraintBottom_toTopOf="@+id/input_pair_place"
+                app:layout_constraintEnd_toStartOf="@+id/button_delete_pair"
+                app:layout_constraintStart_toEndOf="@+id/input_pair_end_time"
+                app:layout_constraintTop_toBottomOf="@+id/input_pair_name" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <Spinner
+                android:id="@+id/spinner_pair_type"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/paddingSmall"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:layout_marginBottom="?attr/marginSmall"
+                android:entries="@array/pair_types"
+                android:paddingHorizontal="?attr/paddingMedium"
+                android:paddingVertical="?attr/paddingSmall"
+                app:layout_constraintBottom_toTopOf="@+id/input_pair_notes"
+                app:layout_constraintEnd_toStartOf="@id/input_pair_place"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_pair_end_time" />
 
-        <Spinner
-            android:id="@+id/pair_type_input_spinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_small"
-            android:background="@android:drawable/btn_dropdown"
-            android:backgroundTint="@color/colorPrimaryInversed"
-            android:entries="@array/pair_types"
-            app:layout_constraintBottom_toTopOf="@+id/pair_additional_info_input_layout"
-            app:layout_constraintEnd_toStartOf="@id/delete_pair_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pair_teacher_input_layout" />
+            <EditText
+                android:id="@+id/input_pair_place"
+                style="@style/AppTheme.PairText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="?attr/marginSmall"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:layout_marginBottom="?attr/marginSmall"
+                android:gravity="center"
+                android:hint="@string/pair_place_hint"
+                android:importantForAutofill="no"
+                android:inputType="textShortMessage|textMultiLine|textCapSentences"
+                android:maxLength="?attr/maxLengthPairPlace"
+                android:text="@{model.place}"
+                app:layout_constraintBottom_toTopOf="@+id/input_pair_notes"
+                app:layout_constraintEnd_toStartOf="@+id/button_delete_pair"
+                app:layout_constraintStart_toEndOf="@+id/spinner_pair_type"
+                app:layout_constraintTop_toBottomOf="@+id/input_pair_teacher"
+                app:layout_constraintWidth_percent="0.2" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pair_additional_info_input_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/delete_pair_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pair_type_input_spinner">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pair_additional_info_input"
-                style="@style/PairDataInputFieldStyle"
+            <EditText
+                android:id="@+id/input_pair_notes"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center_horizontal|start"
                 android:hint="@string/pair_notes_hint"
+                android:importantForAutofill="no"
                 android:inputType="textLongMessage|textMultiLine|textCapSentences"
-                android:maxLength="500"
-                android:maxLines="6"
-                android:text="@{model.additionalInfo}" />
+                android:maxLength="?attr/maxLengthPairNotes"
+                android:paddingHorizontal="?attr/paddingMedium"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.place}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_delete_pair"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_pair_type" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_delete_pair"
+                style="@style/AppTheme.ButtonFilled"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:onClick="@{v-> viewModel.onDeleteClick(model)}"
+                app:icon="?attr/iconDelete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/input_pair_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintWidth_percent="0.12" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/delete_pair_button"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/margin_small"
-            android:background="@drawable/button_rounded"
-            android:onClick="@{v-> viewModel.onDeleteClick(model)}"
-            android:padding="@dimen/padding_small"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_delete" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

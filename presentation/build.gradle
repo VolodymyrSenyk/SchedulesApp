@@ -1,8 +1,10 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'kotlin-parcelize'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
+}
 
 android {
     compileSdkVersion versions.application.targetSdk
@@ -14,8 +16,6 @@ android {
         targetSdkVersion versions.application.targetSdk
         versionName "$versions.application.versionName (${getVersion()})"
         versionCode versions.application.versionCode
-
-        multiDexEnabled true
     }
 
     signingConfigs {
@@ -80,9 +80,11 @@ String getKeystoreProperty(String propertyName) {
 }
 
 dependencies {
+
     // modules
     implementation project(":data")
     implementation project(":domain")
+    implementation project(":core")
 
     // kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin.language"

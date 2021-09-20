@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="android.view.View" />
 
-        <import type="com.senyk.volodymyr.schedulesapp.presentation.feature.common.entity.PairUi" />
+        <import type="com.senykvolodymyr.presentation.feature.common.entity.PairUi" />
 
-        <import type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel" />
+        <import type="com.senykvolodymyr.presentation.feature.schedules.OneDayScheduleViewModel" />
 
         <variable
             name="model"
@@ -16,69 +17,99 @@
 
         <variable
             name="viewModel"
-            type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel" />
+            type="OneDayScheduleViewModel" />
 
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="?attr/marginSmall"
         android:backgroundTint="@{model.typeColorInt}"
         android:onClick="@{v -> viewModel.onPairClick(model)}"
-        android:padding="@dimen/padding_small"
         tools:backgroundTint="@color/colorLecture">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:paddingVertical="?attr/paddingSmall">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/pair_time_output"
-                style="@style/PairDataOutputFieldStyle"
-                android:layout_weight="1"
+                android:id="@+id/text_pair_start_time"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center"
+                android:paddingVertical="?attr/paddingSmall"
                 android:text="@{model.startTime}"
+                app:layout_constraintBottom_toTopOf="@+id/text_pair_end_time"
+                app:layout_constraintEnd_toStartOf="@+id/text_pair_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2"
                 tools:text="08:30" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_pair_end_time"
+                style="@style/AppTheme.PairText"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/pair_name_output"
-                    style="@style/PairDataOutputFieldStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{model.name}"
-                    tools:text="OOP" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/pair_teacher_output"
-                    style="@style/PairDataOutputFieldStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{model.teacher}"
-                    tools:text="Ivanov" />
-
-            </LinearLayout>
+                android:layout_marginTop="?attr/marginSmall"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.endTime}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/text_pair_teacher"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_pair_start_time"
+                app:layout_constraintWidth_percent="0.2"
+                tools:text="10:00" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/pair_type_output"
-                style="@style/PairDataOutputFieldStyle"
-                android:text="@{model.type}"
-                android:visibility="gone"
-                tools:text="@string/pair_type_lecture" />
+                android:id="@+id/text_pair_name"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center_horizontal|start"
+                android:paddingHorizontal="?attr/paddingMedium"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.name}"
+                app:layout_constraintBottom_toTopOf="@+id/text_pair_teacher"
+                app:layout_constraintEnd_toStartOf="@+id/text_pair_place"
+                app:layout_constraintStart_toEndOf="@+id/text_pair_start_time"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="OOP" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/pair_place_output"
-                style="@style/PairDataOutputFieldStyle"
-                android:layout_weight="1"
+                android:id="@+id/text_pair_teacher"
+                style="@style/AppTheme.PairText"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/marginSmall"
+                android:layout_marginEnd="?attr/marginSmall"
+                android:gravity="center_horizontal|start"
+                android:paddingHorizontal="?attr/paddingMedium"
+                android:paddingVertical="?attr/paddingSmall"
+                android:text="@{model.teacher}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/text_pair_place"
+                app:layout_constraintStart_toEndOf="@+id/text_pair_end_time"
+                app:layout_constraintTop_toBottomOf="@+id/text_pair_name"
+                tools:text="Ivanov" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_pair_place"
+                style="@style/AppTheme.PairText"
+                android:gravity="center"
                 android:text="@{model.place}"
-                tools:text="Y2 719" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/text_pair_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2"
+                tools:text="У2 719" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

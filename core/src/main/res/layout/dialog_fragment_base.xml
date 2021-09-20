@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundDialog"
+        android:backgroundTint="?attr/colorBackgroundOnPrimary"
+        android:minWidth="?attr/sizeDialogWidth"
+        android:orientation="vertical"
+        android:paddingHorizontal="?attr/paddingSmall"
+        android:paddingTop="?attr/paddingBig"
+        android:paddingBottom="?attr/paddingSmall">
+
+        <ImageView
+            android:id="@+id/icon_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="?attr/marginSmall"
+            app:layout_constraintBottom_toBottomOf="@id/text_dialog_title"
+            app:layout_constraintEnd_toStartOf="@+id/text_dialog_title"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@id/text_dialog_title"
+            tools:ignore="ContentDescription"
+            tools:src="@android:drawable/stat_sys_warning"
+            tools:tint="@android:color/black" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="?attr/textSizeMedium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Some Warning" />
+
+        <View
+            android:id="@+id/divider_dialog_title"
+            style="@style/AppTheme.DividerHorizontal"
+            android:layout_width="0dp"
+            android:layout_marginTop="?attr/marginSmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_dialog_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="?attr/marginMedium"
+            android:layout_marginVertical="?attr/marginMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider_dialog_title"
+            tools:text="You are warned about something. Are you want to continue?" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_dialog_unfilled"
+            style="@style/AppTheme.ButtonUnfilled"
+            android:layout_marginTop="?attr/marginMedium"
+            android:layout_marginEnd="?attr/marginMedium"
+            app:layout_constraintEnd_toStartOf="@+id/button_dialog_filled"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_dialog_message"
+            tools:text="Cancel"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_dialog_filled"
+            style="@style/AppTheme.ButtonFilled"
+            android:layout_marginTop="?attr/marginMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_dialog_unfilled"
+            app:layout_constraintTop_toBottomOf="@+id/text_dialog_message"
+            tools:text="Continue"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

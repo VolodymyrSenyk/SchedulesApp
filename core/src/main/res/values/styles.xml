@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="recyclerViewStyle">@style/AppTheme.RecyclerView</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.WindowAnimationTransition</item>
+        <item name="android:navigationBarColor">?attr/colorSecondaryDark</item>
+        <item name="android:itemTextAppearance">@style/AppTheme.Toolbar.MenuText</item>
+        <item name="android:textColor">?attr/colorContentPrimary</item>
+        <item name="android:textColorHint">?attr/colorContentSecondary</item>
+        <item name="android:textSize">?attr/textSizeMedium</item>
+    </style>
+
+    <style name="AppTheme.WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="AppTheme.AppBarLayoutStub">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">?attr/elevationBig</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="layout_scrollFlags">scroll|enterAlways</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.DayNight</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:elevation">?attr/elevationBig</item>
+        <item name="titleTextColor">?attr/colorContentOnPrimary</item>
+    </style>
+
+    <style name="AppTheme.Toolbar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">?attr/colorContentOnPrimary</item>
+    </style>
+
+    <style name="AppTheme.Toolbar.MenuText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">?attr/textSizeSmall</item>
+        <item name="android:textColor">?attr/colorContentOnPrimary</item>
+        <item name="android:iconTint">?attr/colorContentOnPrimary</item>
+    </style>
+
+    <style name="AppTheme.RecyclerView">
+        <item name="android:itemPadding">?attr/paddingSmall</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="AppTheme.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">?attr/marginBig</item>
+        <item name="android:backgroundTint">?attr/colorSecondary</item>
+        <item name="tint">?attr/colorContentOnSecondary</item>
+        <item name="maxImageSize">?attr/sizeIcon</item>
+    </style>
+
+    <style name="AppTheme.BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:background">?attr/colorSecondaryDark</item>
+        <item name="itemTextAppearanceActive">@style/AppTheme.BottomNavigationItemActive</item>
+        <item name="itemTextAppearanceInactive">@style/AppTheme.BottomNavigationItemInactive</item>
+    </style>
+
+    <style name="AppTheme.BottomNavigationItemActive" parent="Widget.Design.BottomNavigationView">
+        <item name="android:textColor">?attr/colorContentOnPrimary</item>
+        <item name="android:textSize">?attr/textSizeSmall</item>
+    </style>
+
+    <style name="AppTheme.BottomNavigationItemInactive" parent="Widget.Design.BottomNavigationView">
+        <item name="android:textColor">?attr/colorSecondaryLight</item>
+        <item name="android:textSize">?attr/textSizeVerySmall</item>
+    </style>
+
+    <style name="AppTheme.CustomToast" parent="Widget.Design.BottomNavigationView">
+        <item name="android:layout_gravity">center_horizontal|bottom</item>
+        <item name="android:layout_marginHorizontal">?attr/marginMedium</item>
+        <item name="android:layout_marginVertical">?attr/marginBig</item>
+        <item name="android:background">?attr/backgroundCustomToast</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingHorizontal">?attr/paddingBig</item>
+        <item name="android:paddingVertical">?attr/paddingSmall</item>
+        <item name="android:textColor">?attr/colorContentOnPrimary</item>
+        <item name="android:textSize">?attr/textSizeSmall</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="AppTheme.DividerHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/sizeDivider</item>
+        <item name="android:background">?attr/colorDivider</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">?attr/textSizeSmall</item>
+        <item name="android:paddingHorizontal">?attr/paddingSmall</item>
+        <item name="strokeColor">?attr/colorBorder</item>
+        <item name="strokeWidth">?attr/sizeBorder</item>
+        <item name="cornerRadius">?attr/cornerRadiusMedium</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="AppTheme.ButtonFilled" parent="AppTheme.Button">
+        <item name="android:backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">?attr/colorContentOnSecondary</item>
+        <item name="android:iconTint">?attr/colorContentOnSecondary</item>
+    </style>
+
+    <style name="AppTheme.ButtonUnfilled" parent="AppTheme.Button">
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">?attr/colorContentPrimary</item>
+        <item name="android:iconTint">?attr/colorContentPrimary</item>
+    </style>
+
+</resources>

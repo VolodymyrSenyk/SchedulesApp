@@ -5,6 +5,6 @@
     <item name="max_length_pair_name" type="integer">30</item>
     <item name="max_length_pair_teacher" type="integer">30</item>
     <item name="max_length_pair_place" type="integer">16</item>
-    <item name="max_length_pair_additional_info" type="integer">300</item>
+    <item name="max_length_pair_notes" type="integer">300</item>
 
 </resources>

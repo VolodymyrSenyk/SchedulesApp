@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/schedulesManagerFragment"
-        android:icon="@drawable/ic_swap_schedules"
+        android:icon="?attr/iconSwapSchedules"
         android:title="@string/menu_item_schedules_management" />
 
     <item
         android:id="@+id/studyWeekFragment"
-        android:icon="@drawable/ic_edit"
+        android:icon="?attr/iconScheduleDetails"
         android:title="@string/menu_item_pairs_management" />
 
     <item
         android:id="@+id/wholeScheduleFragment"
-        android:icon="@drawable/ic_show_whole_schedule"
+        android:icon="?attr/iconWholeSchedule"
         android:title="@string/menu_item_whole_schedule" />
 
 </menu>

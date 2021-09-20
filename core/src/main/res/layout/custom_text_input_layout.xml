@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="warningMessage"
+            type="String" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_text_input_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:elevation="?attr/elevationSmall"
+            android:importantForAutofill="no"
+            android:padding="?attr/paddingSmall"
+            app:layout_constraintEnd_toStartOf="@+id/button_clear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:hint="Input something"
+            tools:ignore="LabelFor,TextFields" />
+
+        <ImageView
+            android:id="@+id/button_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="?attr/elevationSmall"
+            android:paddingHorizontal="?attr/paddingSmall"
+            android:src="?attr/iconClear"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_text_input_field"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_input_field"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorContentPrimary"
+            tools:ignore="ContentDescription"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/view_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?attr/backgroundInputField"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_text_input_field"
+            app:layout_constraintEnd_toEndOf="@+id/button_clear"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_input_field"
+            app:layout_constraintTop_toTopOf="@+id/edit_text_input_field" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_input_field"
+            tools:itemCount="3"
+            tools:listitem="@layout/list_item_message" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

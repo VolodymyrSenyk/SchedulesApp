@@ -2,16 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:id="@+id/day_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/days_tabs"
+            android:id="@+id/tab_layout_days"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -23,8 +21,8 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <com.senyk.volodymyr.schedulesapp.presentation.feature.common.customview.NonSwipeableViewPager
-            android:id="@+id/days_pager"
+        <com.senykvolodymyr.presentation.feature.common.customview.NonSwipeableViewPager
+            android:id="@+id/view_pager_days"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

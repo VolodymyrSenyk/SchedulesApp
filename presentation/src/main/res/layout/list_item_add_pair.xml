@@ -6,22 +6,21 @@
 
         <import type="android.view.View" />
 
-        <import type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel" />
+        <import type="com.senykvolodymyr.presentation.feature.schedules.OneDayScheduleViewModel" />
 
         <variable
             name="viewModel"
-            type="com.senyk.volodymyr.schedulesapp.presentation.feature.schedules.OneDayScheduleViewModel" />
+            type="OneDayScheduleViewModel" />
 
     </data>
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/add_pair_button"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_add_pair"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
-        android:background="@drawable/button_rounded"
+        style="@style/AppTheme.ButtonFilled"
+        android:layout_marginTop="?attr/marginSmall"
         android:onClick="@{v -> viewModel.onAddClick()}"
-        android:padding="@dimen/padding_small"
-        app:srcCompat="@drawable/ic_add" />
+        app:icon="?attr/iconAdd" />
 
 </layout>

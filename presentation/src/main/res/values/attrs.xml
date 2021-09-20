@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="colorAccentDark" format="color" />
-    <attr name="colorAccentLight" format="color" />
-    <attr name="colorBackgroundPrimary" format="color" />
-    <attr name="colorBackgroundSurface" format="color" />
-    <attr name="colorBackgroundOnSurface" format="color" />
-    <attr name="colorContentOnPrimary" format="color" />
-    <attr name="colorContentPrimary" format="color" />
-    <attr name="colorContentSecondary" format="color" />
-    <attr name="colorContentLinks" format="color" />
-    <attr name="colorContentFaded" format="color" />
-    <attr name="colorDivider" format="reference" />
-    <attr name="colorBorders" format="reference" />
-    <attr name="colorSuccess" format="reference" />
-    <attr name="colorWarning" format="reference" />
+    <attr name="colorScheduleTypeNotSelected" format="color" />
+    <attr name="colorScheduleTypeSelected" format="color" />
 
-    <attr name="backgroundMain" format="reference" />
-    <attr name="backgroundCustomToast" format="reference" />
+    <attr name="colorPairTypeNotStated" format="color" />
+    <attr name="colorPairTypeLecture" format="color" />
+    <attr name="colorPairTypeLaboratory" format="color" />
+    <attr name="colorPairTypePractice" format="color" />
+    <attr name="colorPairTypeSport" format="color" />
 
     <attr name="iconAdd" format="reference" />
-    <attr name="iconInfo" format="reference" />
     <attr name="iconClear" format="reference" />
+    <attr name="iconDelete" format="reference" />
+    <attr name="iconEdit" format="reference" />
+    <attr name="iconSave" format="reference" />
+    <attr name="iconCancel" format="reference" />
+    <attr name="iconInfo" format="reference" />
     <attr name="iconWarning" format="reference" />
+
+    <attr name="iconSwapSchedules" format="reference" />
+    <attr name="iconScheduleDetails" format="reference" />
+    <attr name="iconWholeSchedule" format="reference" />
+
+    <attr name="textAutoSizeStep" format="dimension" />
+
+    <attr name="maxLengthScheduleName" format="integer" />
+    <attr name="maxLengthPairTime" format="integer" />
+    <attr name="maxLengthPairName" format="integer" />
+    <attr name="maxLengthPairTeacher" format="integer" />
+    <attr name="maxLengthPairPlace" format="integer" />
+    <attr name="maxLengthPairNotes" format="integer" />
+
+    <attr name="backgroundPairText" format="reference" />
 
 </resources>

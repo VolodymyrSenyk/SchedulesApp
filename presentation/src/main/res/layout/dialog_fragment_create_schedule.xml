@@ -5,21 +5,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_round_rect_borderless"
-        android:backgroundTint="?attr/colorBackgroundOnSurface"
-        android:minWidth="@dimen/size_dialog_width"
+        android:background="?attr/backgroundDialog"
+        android:backgroundTint="?attr/colorBackgroundOnPrimary"
+        android:minWidth="?attr/sizeDialogWidth"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/padding_small"
-        android:paddingTop="@dimen/padding_big"
-        android:paddingBottom="@dimen/padding_small">
+        android:paddingHorizontal="?attr/paddingSmall"
+        android:paddingTop="?attr/paddingBig"
+        android:paddingBottom="?attr/paddingSmall">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/output_dialog_title"
+            android:id="@+id/text_dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_create_schedule_title"
-            android:textColor="?attr/colorContentPrimary"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?attr/textSizeBig"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,24 +26,23 @@
 
         <View
             android:id="@+id/divider_dialog_title"
+            style="@style/AppTheme.DividerHorizontal"
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/margin_small"
-            android:background="?attr/colorDivider"
+            android:layout_marginTop="?attr/marginSmall"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/output_dialog_title" />
+            app:layout_constraintTop_toBottomOf="@+id/text_dialog_title" />
 
-        <com.senyk.volodymyr.schedulesapp.presentation.core.customview.CustomTextInputLayout
+        <com.senykvolodymyr.core.customview.CustomTextInputLayout
             android:id="@+id/input_schedule_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/margin_small"
-            android:maxLength="@integer/max_length_schedule_name"
-            app:clearButtonEnabled="true"
-            app:required="true"
+            android:layout_marginVertical="?attr/marginSmall"
             android:hint="@string/schedule_name_hint"
             android:inputType="textShortMessage|textAutoCorrect|textMultiLine|textCapSentences"
+            android:maxLength="?attr/maxLengthScheduleName"
+            app:clearButtonEnabled="true"
+            app:isRequired="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_dialog_title" />
@@ -55,8 +53,6 @@
             android:layout_height="wrap_content"
             android:foregroundTint="?attr/colorContentPrimary"
             android:text="@string/schedule_type_saturday_is_working"
-            android:textColor="?attr/colorContentPrimary"
-            android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/input_schedule_name" />
@@ -67,44 +63,28 @@
             android:layout_height="wrap_content"
             android:foregroundTint="?attr/colorContentPrimary"
             android:text="@string/schedule_type_numerator_denominator"
-            android:textColor="?attr/colorContentPrimary"
-            android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkbox_is_saturday_working" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_dialog_unfilled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:backgroundTint="?attr/colorBackgroundOnSurface"
+            style="@style/AppTheme.ButtonUnfilled"
+            android:layout_marginTop="?attr/marginSmall"
+            android:layout_marginEnd="?attr/marginSmall"
             android:text="@string/dialog_answer_cancel"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorContentPrimary"
-            android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toStartOf="@+id/button_dialog_filled"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkbox_is_numerator_denominator"
-            app:strokeColor="?attr/colorBorders"
-            app:strokeWidth="1dp" />
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_is_numerator_denominator" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_dialog_filled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:backgroundTint="?attr/colorAccentLight"
+            style="@style/AppTheme.ButtonFilled"
+            android:layout_marginTop="?attr/marginSmall"
             android:text="@string/dialog_answer_create"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorContentPrimary"
-            android:textSize="@dimen/text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_dialog_unfilled"
-            app:layout_constraintTop_toBottomOf="@+id/checkbox_is_numerator_denominator"
-            app:strokeColor="?attr/colorBorders"
-            app:strokeWidth="1dp" />
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_is_numerator_denominator" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

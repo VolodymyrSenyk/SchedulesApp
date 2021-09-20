@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="message_application_error">An error occurred: $%1$s</string>
+
+    <string name="message_edit_text_limit_reached">character limit</string>
+
+    <string name="message_empty_field">empty field</string>
+
+    <string name="message_press_one_more_time_to_exit">Press one more time to exit</string>
+
+</resources>

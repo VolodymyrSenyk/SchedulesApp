@@ -29,7 +29,7 @@
     <color name="colorError">#8B0000</color>
 
     <!-- Schedules list -->
-    <color name="colorNonSelected">#C0C0C0</color>
+    <color name="colorNotSelected">#C0C0C0</color>
     <color name="colorSelected">#FFD700</color>
 
     <!-- Pairs types -->
